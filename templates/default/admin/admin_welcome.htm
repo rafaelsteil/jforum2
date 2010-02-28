@@ -1,0 +1,118 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=${encoding};"  />
+<style type="text/css">@import url( ${contextPath}/templates/${templateName}/styles/style.css?${startupTime} );</style>
+
+<style type="text/css">
+h1 { font-size: 22px; font-family: arial, verdana; }
+p, td { font-size: 11px; }
+</style>
+</head>
+<body bgcolor="#E5E5E5" text="#000000">
+
+<a name="top"></a>
+
+<!--
+<a href="${contextPath}/jforum${extension}?module=admBase&action=fetchMail">Fetch mail</a><br>
+-->
+
+<h1>${I18n.getMessage("ForumListing.versionInformation")}</h1>
+
+<#if !upToDate?exists>
+	<p style="color:red">${I18n.getMessage("Admin.welcome.unknowVersion")}</p>
+<#elseif !upToDate>
+	<p style="color:red">
+		${I18n.getMessage("Admin.welcome.outdatedVersion")}
+		${I18n.getMessage("Admin.welcome.latestVersion")} <b>${latestVersion}</b>.
+		${I18n.getMessage("Admin.welcome.currentVersion")} <b>${currentVersion}</b>.
+	</p>
+
+	<p><b>${I18n.getMessage("Admin.welcome.releaseNotes")} ${latestVersion}:</b></p>
+
+	<p><i><span class="gen">${notes}</span></i></p>
+<#else>
+	<p style="color: green">${I18n.getMessage("Admin.welcome.upToDateVersion")}</p>
+</#if>
+
+<#if developmentVersion> <p style="color: red"><b>${I18n.getMessage("Admin.welcome.warning")}</b></p> </#if>
+
+<#if installModuleExists>
+	<h1>${I18n.getMessage("Admin.welcome.securityWarning")}</h1>
+	<p style="color:red">${I18n.getMessage("Admin.welcome.enabledInstallation")}</p>
+
+	<p>${I18n.getMessage("Admin.welcome.removeInstallation")}<br /></p>
+</#if>
+
+<h1>${I18n.getMessage("ForumListing.stats")}</h1>
+
+<table width="100%" cellpadding="4" cellspacing="1" border="0" class="forumline">
+  <tr>
+	<th width="25%" nowrap="nowrap" height="25" class="thcornerl">${I18n.getMessage("Admin.welcome.statistic")}</th>
+	<th width="25%" height="25" class="thtop">${I18n.getMessage("Admin.welcome.value")}</th>
+
+	<th width="25%" nowrap="nowrap" height="25" class="thtop">${I18n.getMessage("Admin.welcome.statistic")}</th>
+	<th width="25%" height="25" class="thcornerr">${I18n.getMessage("Admin.welcome.value")}</th>
+  </tr>
+  <tr>
+	<td class="row1" nowrap="nowrap">${I18n.getMessage("Admin.welcome.numPosts")}</td>
+	<td class="row1"><b>${stats.posts}</b></td>
+	<td class="row1" nowrap="nowrap">${I18n.getMessage("Admin.welcome.postsPerDay")}</td>
+
+	<td class="row2"><b>${stats.postsPerDay}</b></td>
+  </tr>
+  <tr>
+	<td class="row2" nowrap="nowrap">${I18n.getMessage("Admin.welcome.numTopics")}</td>
+	<td class="row2"><b>${stats.topics}</b></td>
+	<td class="row2" nowrap="nowrap">${I18n.getMessage("Admin.welcome.topicsPerDay")}</td>
+	<td class="row2"><b>${stats.topicsPerDay}</b></td>
+
+  </tr>
+  <tr>
+	<td class="row1" nowrap="nowrap">${I18n.getMessage("Admin.welcome.numUsers")}</td>
+	<td class="row1"><b>${stats.users}</b></td>
+	<td class="row1" nowrap="nowrap">${I18n.getMessage("Admin.welcome.usersPerDay")}</td>
+	<td class="row1"><b>${stats.usersPerDay}</b></td>
+  </tr>
+
+</table>
+<h1>${I18n.getMessage("ForumListing.whoIsOnline")}</h1>
+
+<div <#if (sessions.size() > 10)>style="overflow: auto; width: 100%; height: 280px;"</#if>>
+<table width="100%" cellpadding="4" cellspacing="1" border="0" class="forumline">
+	<tr>
+		<th width="20%" class="thcornerl" height="25">&nbsp;${I18n.getMessage("Login.user")}&nbsp;</th>
+		<th width="20%" height="25" class="thtop">&nbsp;${I18n.getMessage("Admin.welcome.logIn")}&nbsp;</th>
+		<th width="20%" class="thtop">&nbsp;${I18n.getMessage("Admin.welcome.lastUpdated")}&nbsp;</th>
+		<th width="20%" height="25" class="thcornerr">&nbsp;${I18n.getMessage("Admin.welcome.ipAddress")}&nbsp;</th>
+	</tr>
+
+	<#assign row = "row2"/>
+	<#list sessions as s>
+		<#if !s.isBot()>
+			<#if row == "row2">
+				<#assign row = "row1"/>
+			<#else>
+				<#assign row = "row2"/>
+			</#if>
+
+			<tr>
+				<td width="20%" class="${row}">&nbsp;<span class="gen"><a href="${contextPath}/jforum${extension}?module=adminUsers&action=edit&id=${s.userId}" class="gen">${s.username}</a></span>&nbsp;</td>
+				<td width="20%" align="center" class="${row}">&nbsp;<span class="gen">${s.startTime?time}</span>&nbsp;</td>
+				<td width="20%" align="center" nowrap="nowrap" class="${row}">&nbsp;<span class="gen">${s.sessionLastUpdate()?time}</span>&nbsp;</td>
+				<td width="20%" class="${row}">&nbsp;<span class="gen"><a href="http://whois.domaintools.com/${s.ip?default("Unknown")}" class="gen" target="_blank">${s.ip?default("Unknown")}</a></span>&nbsp;</td>
+			</tr>
+		</#if>
+	</#list>
+
+  <tr>
+	<td colspan="5" height="1" class="row3"><img src="${contextPath}/templates/${templateName}/images/spacer.gif" width="1" height="1" alt="." /></td>
+  </tr>
+</table>
+</div>
+
+<br />
+
+<center><span class="copyright">Copyright &copy; <a href="http://www.jforum.net">JForum Team</a>. All Rights Reserved.</span></center>
+
+</body>
+</html>

@@ -1,0 +1,79 @@
+ul {margin:0; padding:0; list-style:square; line-height:16px; padding-left:15px;}
+.ul {margin:0; padding:0; list-style:none; line-height:15px}
+li {left no-repeat;}
+.li {background:url(images/green_arrow.gif) left no-repeat;padding:0 0 0 10px;}
+
+.ul-orange {margin:0; padding:0; list-style:none; line-height:15px}
+.ul-orange li {background:url(images/orange_arrow.gif) left no-repeat;padding: 0 0 2px 15px;}
+
+body {margin:0px; padding:0px; background:URL(images/top_line.gif); background-repeat:repeat-x;background-color:#313131}
+
+a {font-family:Tahoma; font-size:11px;  color:#007A97;}
+.wiki-menu a {font-family:Tahoma; font-size:11px;  color:#FFFFFF;}
+
+.white{font-family:Tahoma; font-size:12px;  color:#FFFFFF;}
+.menu{font-family:Tahoma; font-size:12px;  color:#C2C2C2;}
+.policy{font-family:Tahoma; font-size:12px;  color:#9C9C9C;}
+.main{font-family:Tahoma; font-size:12px;  color:#412E41;}
+.blue{font-family:Tahoma; font-size:12px;  color:#007A97;}
+.text{font-family:Tahoma; font-size:11px;  color:#737373;}
+.th-header { font-weight: bold; background-color: #027398; color: #ffffff; }
+.fields { font-family: verdana; background-color: #ffffff; }
+img { border:0px; }
+
+div.donation {
+	background:orange none repeat scroll 0% 50%;
+	border:5px solid #FFBF4F;
+	padding:10px;
+	text-align:center;
+	width:355px;
+}
+
+span.donation {
+	color:#8F0808;
+	font-family:"Arial Narrow",Arial;
+	font-size: 26px;
+	margin:0pt;
+	padding:0pt;
+	text-align:center;
+}
+
+.blue-title {
+	color: #027398;
+	font-size: 14px;
+	padding: 10px 0 2px 0;
+}
+
+.input{
+	width:112px; height:18px;
+	border-width:1px;
+	border-style:solid;
+	background-color:#FFFFFF;
+	border-color:#42423D;
+	font-family:Tahoma; font-size:11px;  color:#412E41; line-height:13px;
+	padding-top:0px;
+	padding-left:4px;
+}
+		
+ .input1{
+	width:172px; height:18px;
+	border-width:1px;
+	border-style:solid;
+	background-color:#FFFFFF;
+	border-color:#42423D;
+	font-family:Tahoma; font-size:11px;  color:#412E41; line-height:13px; 
+	padding-top:0px;
+	padding-left:5px;
+}
+
+.textarea{
+	width:172px; height:119px;
+	border-width:1px;
+	border-style:solid;
+	background-color:#FFFFFF;
+	border-color:#42423D;
+	font-family:Tahoma; font-size:11px;  color:#412E41; line-height:13px; 
+	padding-top:0px;
+	padding-left:5px;
+	overflow:auto;
+}

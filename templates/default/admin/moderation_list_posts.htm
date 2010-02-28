@@ -1,0 +1,96 @@
+<#setting number_format = "#"/>
+<style type="text/css">@import url( ${contextPath}/templates/${templateName}/styles/style.css?${startupTime} );</style>
+
+<form action="${contextPath}/jforum${extension}" method="post" name="form" id="form" accept-charset="${encoding}">
+<input type="hidden" name="action" value="save" />
+<input type="hidden" name="module" value="${moduleName}" />
+<input type="hidden" name="forum_id" value="${forum.id}"/>
+
+<table border="0" cellpadding="3" cellspacing="1" width="100%" class="forumline">
+	<tr>
+		<th class="thhead" align="center" height="28">${I18n.getMessage("Moderation.Admin.pendingPosts")}</td>
+	</tr>
+
+	<#if topics.size() == 0>
+		<tr>
+			<td align="center"><span class="gensmall">${I18n.getMessage("Moderation.Admin.noneToModerate")}</span></td>
+		</tr>
+	<#else>
+		<#list topics.values() as info>
+			<tr>
+				<td class="row1">
+					<table width="100%" align="center" cellpadding="0" cellspacing="1">
+						<tr>
+							<td colspan="2" class="catleft">&nbsp;<span class="gen"><b>${info.topicTitle}</b></span></td>
+						</tr>
+
+						<tr>
+							<td>
+								<table width="95%" align="center">
+
+									<tr>
+										<th class="thcornerl" width="150" height="26">${I18n.getMessage("PostShow.author")}</th>
+										<th class="thcornerr">${I18n.getMessage("PostShow.messageTitle")}</th>
+									</tr>
+
+									<#list info.posts as post>
+										<#if post_index % 2 == 0>
+											<#assign rowColor = "row1">
+										<#else>
+											<#assign rowColor = "row2">
+										</#if>
+
+										<tr>
+											<td align="left" valign="top" class="row1">
+												<span class="name"><a name=""></a><b>${post.postUsername}</b></span>
+											</td>
+											
+											<td class="row1" height="28" valign="top">
+												<table width="100%" border="0" cellspacing="0" cellpadding="0">
+													<tr>
+														<td width="100%">
+															<span class="gensmall">${I18n.getMessage("PostShow.subject")}: ${post.subject?default("")?html} </span>
+														</td>
+													</tr>
+													<tr>
+														<td colspan="2"><hr /></td>
+													</tr>
+													<tr>
+														<td colspan="2">
+															<span class="postbody">${post.text}</span>
+														</td>
+													</tr>
+												</table>
+											</td>
+										</tr>
+
+										<tr>
+											<td colspan="2" align="right">
+												<span class="gensmall">
+													<input type="radio" name="status_${post.id}" value="aprove">${I18n.getMessage("Moderation.Admin.aprove")}&nbsp;
+													<input type="radio" name="status_${post.id}" value="defer" checked>${I18n.getMessage("Moderation.Admin.defer")}&nbsp;
+													<input type="radio" name="status_${post.id}" value="reject">${I18n.getMessage("Moderation.Admin.reject")}&nbsp;
+													<input type="hidden" name="post_id" value="${post.id}">
+												</span>
+											</td>
+										</tr>
+										
+										<tr>
+											<td colspan="2" height="1" class="spacerow"><img src="${contextPath}/templates/${templateName}/images/spacer.gif" alt="" width="1" height="1" /></td>
+										</tr>
+									</#list>
+								</table>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</tr>
+		</#list>
+
+		<tr>
+			<td align="center" class="catleft"><input class="mainoption" type="submit" value="${I18n.getMessage("Moderation.Admin.submit")}"></td>
+		</tr>
+	</#if>
+</table>
+</form>

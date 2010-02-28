@@ -1,0 +1,4 @@
+!!! JForum 3 - Commiting
+There are no special rules about commiting code. Usually, we require that only code that's at least compiling should be commited to the [CVS], but, as at the momment there are a lot of refactoring code being done, evertyhing can be sent. 
+
+Just don't forget to cover your code with unit testing.

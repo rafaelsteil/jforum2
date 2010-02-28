@@ -1,0 +1,9 @@
+!!! Smilies
+Smilies, or ''emoticons'', are defined at Admin Panel -> Smilies, where it is possible to add, edit or delete them. 
+
+!! Add a new smilie
+Go to Admin Panel -> Smilies, and click in the "Insert new" button. In the next page, the "Emoticon" field refer to the smilie code, like :), :D, :mrgreen: etc... Next, choose the image file and click "Update". 
+
+! Smilie conflits
+Please note that conflicts may occur sometimes. For example, if you first register the smilie :) and then create another with the code >:), JForum will understand both of them as being only :). 
+

@@ -1,0 +1,34 @@
+<style type="text/css">@import url( ${contextPath}/templates/${templateName}/styles/style.css?${startupTime} );</style>
+
+<table class="forumline" cellspacing="1" cellpadding="3" width="100%" border="0">
+	<tr>
+		<th class="thhead" valign="middle" colspan="6" height="25">${I18n.getMessage("User.adminTitle")}</th>
+	</tr>
+
+	<form accept-charset="${encoding}" name="form" action="${JForumContext.encodeURL("/jforum")}" method="post">
+	<input type="hidden" name="action" value="activateAccount" />
+	<input type="hidden" name="module" value="${moduleName}" />
+  
+	<tr>
+		<td class="row2 gen" width="10%" align="center"><b>${I18n.getMessage("User.id")}</b></td>
+		<td class="row2 gen"><b>${I18n.getMessage("User.username")}</b></td>
+		<td class="row2 gen"><b>${I18n.getMessage("User.registrationDate")}</b></td>
+		<td class="row2 gen" width="10%" align="center"><b>${I18n.getMessage("User.activate")}</b></td>
+	</tr>
+
+	<#list users as user>
+		<tr>
+			<td class="row1" align="center"><span class="gen">${user.id}</span></td>
+			<td class="row1"><span class="gen">${user.username}</span></td>
+			<td class="row1"><span class="gen">${user.registrationDate}</span></td>
+			<td class="row1" align="center"><input type="checkbox" name="user_id" value="${user.id}"></td>
+		</tr>
+	</#list>
+
+	<tr align="center">
+		<td class="catbottom" colspan="4">
+			<input class="mainoption" type="submit" value="${I18n.getMessage("User.activate")}" />
+		</td>
+	</tr>
+</table>
+</form>

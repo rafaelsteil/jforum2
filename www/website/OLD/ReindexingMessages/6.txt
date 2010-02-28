@@ -1,0 +1,43 @@
+!!! Reindexing messages
+JForum uses the [Lucene|http://lucene.apache.org] library, which provides an excellent platform for fast content search and indexing. Versions of JForum previous to 2.1.8 used a database-driven approach, which included several tables for word indexing and search.
+
+Lucene stores its index in the filesystem using a [special|http://lucene.apache.org/java/docs/fileformats.html] document format. On a regular development machine, JForum indexes about 1000 messages per second, value that can be higher on powerful machines. 
+
+!! How to reindex 
+There are two possible ways to reindex the messages: using a command-line tool, or using JForum's Admin Panel (web interface). It is up to you to choose which one to use, although there are some considerations. 
+
+First, if you're migrating from JForum 2.1.7 of previous to JForum2.1.8 or newer, you will have to reindex the entire database, as the old search mechanism is no longer supported. This operation is fast and painless, and it is better to use the command-line tool for this task. Secondly, JForum's Admin Panel has a section that provides information about Lucene's index status and other general information, like index size and last modification date, as well a tool to reindex messages using the same parameters available to the command-line tool. You can reindex from a range of Post IDs or message date. 
+
+!! Before you start: setting up index configuration
+As a part of JForum configuration, you may want to take a look at the default settings used for indexing - that are OK for most environments. 
+
+Open your ''SystemGlobals.properties'' file and look for the "SEARCH" search. There you will find a set of properties, as described in the following table:
+
+||Property name||Default value||Description
+|search.indexing.enabled|true|Enable or disable search indexing. Set it to ''false'' to disable.
+|lucene.index.write.path |${resource.dir}/jforumLuceneIndex|The complete path to where the index will be written. The default value will write it to the directory ''WEB-INF/jforumLuceneIndex'' of your application. \\Please note that the directory must be writable by the user who runs the application server instance. 
+|lucene.indexer.ram.numdocs|10000|used only for reindexation. It is the number of documents to keep in memory before flushing them to the disk. Keep in mind that a higher number means a higher memory usage. \\This value also affects a little bit how long the entire process will take. 
+|lucene.indexer.db.fetch.count|50|Also used only for reindexation. It is the number of records to fetch from the database on each read
+
+[{Note title='Index store directory permissions'
+
+The directory specified in the property ''lucene.index.write.path'' __must__ be writable by the user who runs the web server. Not doing so will cause errors when trying to index any message
+}]
+
+!! Using the command-line tool
+JForum comes with a tool named "Lucene Indexer", located in the directory ''tools/luceneIndexer''. It is a command-line interface, and can be used to reindex the entire database or just part of it. In the tool's directory there are two files - ''LuceneCommandLineReindexer.sh'' and ''LuceneCommandLineReindexer.bat'' -, being the first destined for Unix like systems and the second for Windows machines. 
+
+Invoking the tool without any arguments will provide you with a list of available options, like shown below: 
+
+[{Highlight
+
+Usage: LuceneCommandLineReindexer \\
+    --path __full_path_to_JForum_root_directory__ \\
+    --type __{date|message}__ \\
+    --firstPostId __a_id__ \\
+    --lastPostId __a_id__ \\
+    --fromDate __dd/MM/yyyy__ \\
+    --toDate __dd/MM/yyyy__ \\
+    \[--recreateIndex\] \\
+    \[--avoidDuplicatedRecords\] \\
+}]

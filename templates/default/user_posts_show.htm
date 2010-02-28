@@ -1,0 +1,138 @@
+<#include "header.htm"/>
+<#import "../macros/pagination.ftl" as pagination/>
+<#import "../macros/presentation.ftl" as presentation/>
+
+<script type="text/javascript" src="${contextPath}/templates/${templateName}/js/post_show.js?${startupTime}"></script>
+<script type="text/javascript" src="${contextPath}/templates/${templateName}/js/post.js?${startupTime}"></script>
+<script type="text/javascript" src="${contextPath}/templates/${templateName}/js/pagination.js?${startupTime}"></script>
+<script type="text/javascript">
+<!--
+<#include "js/karma.js">
+<#include "js/utils.js">
+-->
+</script>
+
+<table cellspacing="0" cellpadding="10" width="100%" align="center" border="0">
+	<tr>
+		<td class="bodyline">
+			<table cellspacing="2" cellpadding="2" width="100%" border="0">
+				<tr>
+					<td valign="middle" align="left" colspan="2">
+						<span class="maintitle"><a href="${JForumContext.encodeURL("/posts/listByUser/${u.id}")}" name="top" class="maintitle" id="top">${I18n.getMessage("PostShow.userPosts")}: ${u.username?html}</a></span>
+					</td>
+				</tr>
+			</table>
+			
+			<table cellspacing="2" cellpadding="2" width="100%" border="0">
+				<tr>
+					
+					<td valign="middle" align="left" colspan="${colspan?default("0")}">
+						<#assign breadCrumb>
+							<a class="nav" href="${JForumContext.encodeURL("/forums/list")}">${I18n.getMessage("ForumListing.forumIndex")}</a> &raquo;
+							<a class="nav" href="${JForumContext.encodeURL("/user/profile/${u.id}")}">${I18n.getMessage("UserProfile.profileFor")} ${u.username}</a> 
+							&raquo;
+            				<a class="nav" href="${JForumContext.encodeURL("/posts/listByUser/${u.id}")}">${I18n.getMessage("PostShow.userPosts")} ${u.username}</a>
+						</#assign>
+						${breadCrumb}						
+						</span>
+					</td>
+										
+					<td valign="middle" align="right">
+						<#assign paginationData>	
+							<@pagination.doPagination "listByUser", u.id/>
+						</#assign>
+						${paginationData}
+					</td>
+				</tr>
+			</table>
+
+			<table class="forumline" cellspacing="1" cellpadding="3" width="100%" border="0">
+				<tr>
+					<th class="thleft" nowrap="nowrap" width="150" height="26">${I18n.getMessage("PostShow.author")}</th>
+					<th class="thright" nowrap="nowrap" width="100%">${I18n.getMessage("PostShow.messageTitle")}</th>
+				</tr>
+
+				<!-- POST LISTING --> 
+				<#assign rowColor = ""/>
+				<#list posts as post>
+					<#if post_index % 2 == 0>
+						<#assign rowColor = "row1">
+					<#else>
+						<#assign rowColor = "row2">
+					</#if>
+	
+					<#assign topic = topics.get(post.topicId) />
+					<#assign forum = forums.get(post.forumId) />
+					
+					<tr>
+						<td class="postInfo" colspan="2">
+							<table width="100%">
+								<tr>
+									<td>
+										<span class="gen">
+											<a href="${JForumContext.encodeURL("/forums/show/${forum.id}")}">${forum.name?html}</a> 
+											&raquo; <a href="${JForumContext.encodeURL("/posts/list/${post.topicId}")}">${topic.title?default("Empty")?html}</a>
+											&raquo; <a href="${JForumContext.encodeURL("/posts/preList/${post.topicId}/${post.id}${extension}#${post.id}", "")}">${I18n.getMessage("PostShow.goToMessage")}</a>
+										</span>
+									</td>
+									<td align="right">
+										<script type="text/javascript">writeStars(${post.karma.karmaPoints}, ${post.id});</script>
+									</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+
+					<tr>
+						<!-- Message -->
+						<td class="${rowColor}" valign="top" colspan="2">
+							<span class="postbody">${post.text}</span>
+
+							<!-- Attachments -->
+							<#if post.hasAttachments() && (canDownloadAttachments || attachmentsEnabled)>
+								<#assign attachments = am.getAttachments(post.id, post.forumId)/>
+							</#if>
+						</td>
+					</tr>
+		
+					<tr>
+						<td class="spacerow" colspan="2" height="1"><img src="${contextPath}/templates/${templateName}/images/spacer.gif" alt="" width="1" height="1" /></td>
+					</tr>
+				</#list>
+				<!-- END OF POST LISTING -->
+			
+				<tr align="center">
+					<td class="catbottom" colspan="2" height="28">
+						<table cellspacing="0" cellpadding="0" border="0">
+							<tr>
+								<td align="center"><span class="gensmall">&nbsp;</span></td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+		
+			<table cellspacing="2" cellpadding="2" width="100%" align="center" border="0">
+				<tr>					
+					
+					<td valign="middle" align="left" colspan="${colspan?default("0")}">
+						${breadCrumb}
+					</td>
+
+					<td valign="middle" align="right">${paginationData}</td>
+				</tr>
+				
+				<tr>
+					<td colspan="3"><img src="${contextPath}/templates/${templateName}/images/spacer.gif" alt="" width="1" height="1" /></td>
+				</tr>			
+			</table>
+
+			<table cellspacing="0" cellpadding="0" width="100%" border="0">
+				<tr>
+					<td align="right"><@presentation.forumsComboTable/></td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+</table>
+<#include "bottom.htm"/>

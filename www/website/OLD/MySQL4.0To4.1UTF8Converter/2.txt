@@ -1,0 +1,130 @@
+[Guy Katz|http://www.jforum.net/user/profile/134.page] wrote a small utility program to convert UTF-8 data from MySQL 4.0 and previous to MySQL 4.1 and newer, based on [http://dev.mysql.com/doc/refman/4.1/en/charset-conversion.html]. 
+
+The original message can be found at [upgrading UTF data from mysql 4.0 to 4.1 script|http://www.jforum.net/posts/list/1750.page]. 
+
+Below you'll find the program itself. If you need help with it, please post any questions to the previous mentioned thread, in the forum.
+
+[{Java2HtmlPlugin
+
+import java.io.File;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DatabaseMetaData;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Types;
+
+/**
+ * @author Guy Katz
+ */
+public class MySQL40To41 {
+
+	private static String dbName = "<your DB name>";
+	private static String driverName = "com.mysql.jdbc.Driver";
+	private static String username = "<your username>";
+	private static String password = "<your password>";
+	private static String url = "jdbc:mysql://localhost:3306/" + dbName
+			+ "?autoReconnect=true&useUnicode=true&characterEncoding=utf-8";
+
+	public static void main(String[] args) {
+		// TODO get dbName, password, driverName,userName,URL from args
+		try {
+			Class.forName(driverName);
+		}
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		new MySQL40To41().migrateUTF();
+	}
+
+	public MySQL40To41() {
+	}
+
+	public void migrateUTF() {
+		try {
+			File sqlCommandsOutputFile = new File("./utf.sql");
+			PrintWriter write = new PrintWriter(sqlCommandsOutputFile);
+			Connection con = DriverManager.getConnection(url, username, password);
+			DatabaseMetaData dbmd = con.getMetaData();
+
+			// Specify the type of object; in this case we want tables
+			String[] types = { "TABLE" };
+			ResultSet resultSet = dbmd.getTables(null, null, "%", types);
+
+			// Get the table names
+			while (resultSet.next()) {
+				// Get the table name
+				String tableName = resultSet.getString("TABLE_NAME");
+				// Get the table's catalog and schema names (if any)
+				System.out.println();
+				System.out.println("TABLE=" + tableName);
+
+				ResultSet columnsResultSet = dbmd.getColumns(null, null, tableName, "%");
+				while (columnsResultSet.next()) {
+					String colName = columnsResultSet.getString("COLUMN_NAME");
+					String colType = columnsResultSet.getString("DATA_TYPE");
+					String colSize = columnsResultSet.getString("COLUMN_SIZE");
+					int colIntType = Integer.valueOf(colType).intValue();
+					int colIntSize = Integer.valueOf(colSize).intValue();
+
+					if (colIntType == java.sql.Types.CHAR || colIntType == java.sql.Types.VARCHAR
+							|| colIntType == java.sql.Types.LONGVARCHAR) {
+						System.out.println("COLUMN: name=" + colName + " type=" + colType + " size=" + colSize);
+						changeToUtf(write, tableName, colName, colIntSize, colIntType);
+					}
+
+				}
+				System.out.println();
+			}
+
+			write.flush();
+			write.close();
+			con.close();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void changeToUtf(PrintWriter write, String tableName, String colName, int colSize, int colIntType) {
+		System.out.println("CHANGING TABLE=" + tableName + " COLUMN=" + colName);
+		try {
+			String alterSQL = "ALTER TABLE " + tableName + " MODIFY " + colName + " BINARY(" + colSize + ")";
+			write.println(alterSQL + ';');
+			System.out.println("WRITING EXECUTE COMMAND=" + alterSQL);
+			String utfSQL = "ALTER TABLE " + tableName + " MODIFY " + colName + " " + mapColType(colIntType, colSize)
+					+ " CHARACTER SET utf8";
+			write.println(utfSQL + ';');
+			System.out.println("WRITING EXECUTE COMMAND=" + utfSQL);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	private String mapColType(int colType, int colSize) {
+		String result = null;
+		if (colType == Types.CHAR) {
+			result = "CHAR(" + Integer.toString(colSize * 1) + ")";
+		}
+		else if (colType == Types.VARCHAR) {
+			result = "VARCHAR(" + Integer.toString(colSize * 1) + ")";
+		}
+		else if (colType == Types.LONGVARCHAR) {
+			result = "TEXT";
+		}
+		else {
+			System.out.println("ERROR!! COULD NOT MAP SQL TYPE WITH VALUE=" + colType);
+		}
+		return result;
+	}
+}
+
+/*
+ * private String getDoubleColSize(int colType, int colSize) { String result = null;
+ * if(colType==Types.CHAR){ result = Integer.toString(colSize*2); }else if(colType==Types.VARCHAR){
+ * result = Integer.toString(colSize*2); }else if(colType==Types.LONGVARCHAR){ result =
+ * Integer.toString(colSize); }else{ System.out.println("COULD NOT MAP SQL TYPE WITH
+ * VALUE="+colType); } return result; }
+ */
+}]

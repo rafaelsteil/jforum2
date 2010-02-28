@@ -1,0 +1,93 @@
+!!! Upgradig from version 2.1.4 to 2.1.6
+
+Upgrading from JForum version ''2.1.4'' to version ''2.1.6'' is very simple. 
+
+First, make a backup of the database and the current directory where JForum is installed. Backup everything (templates, images etc). The suggested approach to use is to unpack JForum 2.1.6 into some directory, made the changes there and then, when all is finished, copy it over the directory where the previous vesrion is located.
+
+You'll like to take special care for ''SystemGlobals.properties'' and ''jforum-custom.conf'', as these are the main configuration files.
+
+!! Merging ''SystemGlobals.properties''
+Most changes were made to the database structure and main board configuration files. ''SystemGlobals.properties'' has changed a lot - most of the changes were made to organize the file. 
+You can use a diff tool, like [WinMerge|http://winmerge.sf.net] to check the differences. Special care is necessary for the following keys:
+
+||Key name
+|forum.link
+|homepage.link
+|forum.name
+|forum.page.title
+|user.hash.sequence
+|encoding
+|database.driver.name
+|database.connection.implementation
+|i18n.board.default
+|mail.sender
+|mail.smtp.auth
+|mail.smtp.host
+|mail.smtp.port
+|mail.smtp.username
+|mail.smtp.password
+
+!! Merging Database settings
+Open the file _WEB-INF/config/<DBNAME>/<DBNAME>.properties_ and check the username, password and host to connect. 
+
+[{Info title='MySQL 4.1+'
+
+If you're going to use MySQL 4.1 or more recent, please set the value of the keys _mysql.encoding_ and _mysql.unicode_ to empty, as shown below:
+
+__mysql.unicode=__
+__mysql.encoding=__
+}]
+ 
+Also for MySQL 4.1+ users: Open ''WEB-INF/config/database/mysql/mysql.sql'' and __remove all data__ from the file - yes, __the file should be empty__.
+
+!! Checking ''jforum-custom.conf''
+Now, open ''WEB-INF/config/jforum-custom.conf'' and make sure that the configuration options values are as expected. It may sound like an unnecessary step, since your forum is working already, but even that, just to be sure that none of the keys you changes in SystemGlobals.properties are being overwritten by this file.
+
+!! Upgrading the database
+Now, import the SQL file named "&lt;DBNAME&gt;_2.1.4_to_2.1.6.sql" (like ''mysql_2.1.4_to_2.1.6.sql'') into your database. This script will convert the tables and create the new ones.
+
+__Optional step__: If you're going to keep your current ''&lt;DBNAME&gt;.properties'', you'll have to change the value of the key ''dao.driver'', according to the following table:
+
+||Database||Old value||New value
+|MySQL|net.jforum.drivers.mysql.DataAccessDriver|net.jforum.dao.mysql.MysqlDataAccessDriver
+|HSQLDB|net.jforum.drivers.hsqldb.DataAccessDriver|net.jforum.dao.hsqldb.HsqldbDataAccessDriver
+|PostgreSQL|net.jforum.drivers.postgresql.DataAccessDriver|net.jforum.dao.postgresql.PostgresqlDataAccessDriver
+
+Also, please ensure that your ''jforum-custom.conf'' - if you are going to keep the old one - has the updated value as well.
+
+!! About permissions
+You'll have to re-save the permissions from all groups again. The step is simple: just to _Admin Panel -> Groups -> Permissions_, check the options and then click ''Save''.
+
+Starting from version 2.1.6, it is only possible to set permissions for ''Groups''. User Permissions were removed because they were confusing and hard to maintain. 
+
+!! Removing installation files
+Now, do this:
+
+* Rename the file ''index.redirect'' to ''index.htm'' (you can remove the existing ''index.htm'')
+* Open ''SystemGlobals.properties'' and add the following line:
+
+[{Highlight
+installed = true
+}]
+ 
+Open ''WEB-INF/config/modulesMapping.properties'' and remove from it the following line:
+
+[{Highlight
+install = net.jforum.view.install.InstallAction
+}]
+
+!! Testing
+Now, if possible, test JForum 2.1.6 before copying it over 2.1.4. The easier way is to put it under some another ''Context''. If the system starts without problems, then you can proceed to the final step. 
+As mentioned in the previous section, you may experience some issues with access rights. If the user you use in JForum 2.1.4 for the administrative tasks does not have access to the '' Panel'', please do this:
+
+* Find the user id of your user by executing the query
+
+[{Highlight
+SELECT user_id FROM jforum_users WHERE username = 'YOUR USERNAME HERE';
+}]
+
+* Go to your database console (or any administration tool use may use) and run the following SQL query:
+
+[{Highlight
+INSERT INTO jforum_roles (name, user_id, role_type) VALUES ('perm_administration', YOUR_USER_ID, 1);
+}]

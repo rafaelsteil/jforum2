@@ -1,0 +1,120 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=${encoding}">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<title>JForum ${version} Installation - Congratulations</title>
+<link rel="stylesheet" href="${contextPath}/templates/default/styles/style.css" type="text/css">
+<style type="text/css">
+th			{ background-image: url('${contextPath}/templates/default/images/cellpic3.gif') }
+td.cat		{ background-image: url('${contextPath}/templates/default/images/cellpic1.gif') }
+td.rowpic	{ background-image: url('${contextPath}/templates/default/images/cellpic2.jpg'); background-repeat: repeat-y }
+td.cathead,td.catsides,td.catleft,td.catright,td.catbottom { background-image: url('${contextPath}/templates/default/images/cellpic1.gif') }
+</style>
+</head>
+<body text="#000000" link="#006699" vlink="#5584AA">
+
+<table width="70%" height="100%" align="center">
+<tr>
+<td valign="middle" align="center">
+
+<table width="100%" border="0" cellspacing="0" cellpadding="10" align="center"> 
+	<tr>
+		<td class="bodyline" width="100%"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+
+			<tr>
+				<td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+					<tr>
+						<td><img src="${contextPath}/templates/default/images/logo.jpg" border="0" alt="JForum" vspace="1" /></td>
+						<td width="100%" valign="middle">
+							<span class="maintitle">JForum ${version} ${I18n.getMessage("${lang}", "Install.installation")}<br/>
+							${I18n.getMessage("${lang}", "Install.finished")}
+							</span>
+						</td>
+					</tr>
+				</table></td>
+			</tr>
+
+			<tr>
+				<td width="100%"><table width="100%" cellpadding="2" cellspacing="1" border="0" class="forumline">
+					<tr>
+						<th colspan="2">${I18n.getMessage("${lang}", "Install.congratulations")}</th>
+					</tr>
+
+					<tr>
+						<td class="row2" align="center">
+						<span class="gen">
+						<p>
+						${I18n.getMessage("${lang}", "Install.congratsMessage")}
+						</p>
+						<br/>
+
+						<#if mappingFixed?default("false") == "false">
+							<#assign mappingFixed = false/>
+						<#else>
+							<#assign mappingFixed = true/>
+						</#if>
+
+						<#if !mappingFixed>
+							<p>
+							<b>
+							${I18n.getMessage("${lang}", "Install.cleanFiles")}:<br/>
+							</b>
+
+							<table width="80%" align="center">
+								<tr><td>&nbsp;</td></tr>
+								<tr>
+									<td>
+										<span class="gen">
+										<#if !mappingFixed>
+											<img src="${contextPath}/images/smilies/d6741711aa045b812616853b5507fd2a.gif" border="0" align="middle"> 
+											${I18n.getMessage("${lang}", "Install.removeMapping")}:<br/>
+											<div align="center"><b>install = net.jforum.view.install.InstallAction</b></div>
+											<br/>
+										</#if>
+										</span>
+									</td>
+								</tr>
+							</table>
+							</p>
+
+							<form name="f">
+							<script language="javascript">
+							function changeStatus()
+							{
+								document.f.click.disabled = !document.f.c.checked;
+
+								if (document.f.c.checked) {
+									document.f.click.style.color = "#000000";
+									document.f.click.style.fontWeight = "bold";
+								}
+								else {
+									document.f.click.style.color = "gray";
+									document.f.click.style.fontWeight = "";
+								}
+							}
+							</script>
+							<br/>
+							<font color="#ff0000"><b><input type="checkbox" name="c" id="c" onClick="changeStatus()"><label for="c">&nbsp;${I18n.getMessage("${lang}", "Install.IdidTheSteps")}</label></b></font>
+							<br/>
+						</#if>
+
+						<p><input type="button" class="mainoption" name="click" value="${clickHere}" onClick="document.location = '${forumLink}';" <#if !mappingFixed>disabled style="color: gray;"</#if>></p>
+						</form>
+						<br/>
+						</span>
+						</td>
+					</tr>
+				</table>
+			</form>
+		</td>
+	</tr>
+</table></td>
+	</tr>
+</table>
+
+</td>
+</tr>
+</table>
+
+</body>
+</html>

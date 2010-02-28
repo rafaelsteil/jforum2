@@ -1,0 +1,40 @@
+<#setting number_format = "#"/>
+<style type="text/css">@import url( ${contextPath}/templates/${templateName}/styles/style.css?${startupTime} );</style>
+
+<table width="100%" align="center" cellpadding="4" cellspacing="1" border="0" class="forumline">
+	<tr>
+		<th class="thhead" align="center" height="28">${I18n.getMessage("Moderation.Admin.pendingListCategory")}</td>
+	</tr>
+
+	<#if infoList.size() == 0>
+		<tr>
+			<td align="center"><span class="gensmall">${I18n.getMessage("Moderation.Admin.noneToModerate")}</span></td>
+		</tr>
+	<#else>
+		<#list infoList as info>
+			<tr>
+				<td class="catleft"><span class="cattitle">${info.categoryName}</span></td>
+			</tr>
+
+			<tr>
+				<td class="row1">
+					<table width="100%" align="center" cellpadding="0" cellspacing="0">
+						<tr>
+							<td class="catleft">&nbsp;<span class="gen"><b>${I18n.getMessage("Moderation.Admin.forumName")}</b></span></td>
+							<td class="catleft" align="center"><span class="gen"><b>${I18n.getMessage("Moderation.Admin.postsToModerate")}</b></span></td>
+							<td class="catleft" align="center"><span class="gen"><b>${I18n.getMessage("Moderation.Admin.action")}</b></span></td>
+						</tr>
+
+						<#list info.forums as f>
+							<tr>
+								<td>&nbsp;<span class="gen">${f.forumName}</span></td>
+								<td align="center"><span class="gen">${f.postsToModerate}</span></td>
+								<td align="center"><a class="gen" href="${contextPath}/adminModeration/view/${f.forumId}${extension}">${I18n.getMessage("Moderation.Admin.view")}</a></td>
+							</tr>
+						</#list>
+					</table>
+				</td>
+			</tr>
+		</#list>
+	</#if>
+</table>

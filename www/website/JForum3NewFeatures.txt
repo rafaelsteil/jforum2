@@ -1,0 +1,2 @@
+!!! JForum 3 - New features
+New features, altough going to exist for sure, are not the main focus of development at the momment. We're working hard to port JForum 2.x to the new technologies used in JForum 3, and so, after that, we can focus on new and exciting features. 

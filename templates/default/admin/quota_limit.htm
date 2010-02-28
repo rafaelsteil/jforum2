@@ -1,0 +1,131 @@
+<#setting number_format = "#"/>
+<#import "macros/group_macros.ftl" as lib>
+<style type="text/css">@import url( ${contextPath}/templates/${templateName}/styles/style.css?${startupTime} );</style>
+
+
+
+<table width="99%" align="center" cellpadding="4" cellspacing="1" border="0" class="forumline">
+	<form accept-charset="${encoding}" name="form" action="${contextPath}/jforum${extension}" method="post">
+	<input type="hidden" name="action" value="quotaLimitSave" />
+	<input type="hidden" name="module" value="${moduleName}" />
+	<tr>
+	  <th class="thead" colspan="5" align="center" height="28">${I18n.getMessage("AdminAttachments.quotaTitle")}</th>
+	</tr>
+
+	<!-- Enter a new quota -->
+	<tr>
+		<th class="thcornerl">${I18n.getMessage("AdminAttachments.quotaDescription")}</th>
+		<th class="thtop" colspan="2">${I18n.getMessage("AdminAttachments.quotaFilesize")}</th>
+	</tr>
+
+	<tr>
+		<td class="row1" align="center" valign="middle"><input type="text" size="20" maxlength="25" name="quota_description" value=""/></td>
+		<td class="row2" align="center" valign="middle" colspan="2">
+			<input type="text" size="8" maxlength="15" name="max_filesize"/> 
+			<select name="type">
+				<option value="1">KB</option>
+				<option value="2" selected>MB</option>
+			</select>
+		</td>
+	</tr>
+
+	<tr align="right">
+	  <td class="catbottom" colspan="5" height="29">  <input type="submit" name="submit" class="liteoption" value="${I18n.getMessage("submit")}" /></td>
+	</tr>
+	</form>
+
+	<!-- List existing entries -->
+	<#if (quotas.size() > 0)>
+	<form accept-charset="${encoding}" name="form" action="${contextPath}/jforum${extension}" method="post">
+	<input type="hidden" name="action" value="quotaLimitUpdate" />
+	<input type="hidden" name="module" value="${moduleName}" />
+	<input type="hidden" name="total_records" value="${quotas.size()}"/>
+		<tr>
+			<th class="thcornerl">${I18n.getMessage("AdminAttachments.quotaDescription")}</th>
+			<th class="thtop">${I18n.getMessage("AdminAttachments.quotaFilesize")}</th>
+
+			<th class="thcornerr">${I18n.getMessage("AdminAttachments.quotaDelete")}</th>
+		</tr>
+
+		<#assign count = 0/>
+		<#list quotas as q>
+			<input type="hidden" name="id_${count}" value="${q.id}">
+			<tr>
+				<td class="row1" align="center" valign="middle">
+					<table width="100%" align="center" cellpadding="0" cellspacing="0" border="0">
+						<tr>
+							<td class="row1" align="center" valign="middle" width="10%" wrap="nowrap">&nbsp;</td>
+
+							<td class="row1" align="left" valign="middle">
+								<input type="text" size="20" maxlength="25" name="quota_desc_${count}" value="${q.description}" />
+							</td>
+						</tr>
+					</table>
+				</td>
+
+				<td class="row2" align="center" valign="middle">
+					<input type="text" size="8" maxlength="15" name="max_filesize_${count}" value="${q.size}"/> 
+					<select name="type_${count}">
+						<option value="1" <#if q.type == 1>selected</#if>>KB</option>
+						<option value="2" <#if q.type == 2>selected</#if>>MB</option>
+					</select>
+				</td>
+				<td class="row1" align="center" valign="middle"><input type="checkbox" name="delete" value="${q.id}" /></td>
+			</tr>
+			<#assign count = count + 1/>
+		</#list>
+
+		<tr align="right">
+		  <td class="catbottom" colspan="5" height="29"> <input type="submit" name="submit" class="liteoption" value="${I18n.getMessage("submit")}" /></td>
+		</tr>
+	</#if>
+    </form>
+</table>
+<br />
+
+<#macro quotaCombo n quotaId>
+	<select name="limit_${n}"/>
+	<option value="">-- ${I18n.getMessage("AdminAttachments.quotaChooseLimit")} --</option>
+	<#list quotas as q>
+		<option value="${q.id}" <#if q.id == quotaId>selected</#if>>${q.description}</option>
+	</#list>
+	</select>
+</#macro>
+
+<form accept-charset="${encoding}" name="form" action="${contextPath}/jforum${extension}" method="post">
+<input type="hidden" name="action" value="quotaGroupsSave" />
+<input type="hidden" name="module" value="${moduleName}" />
+<input type="hidden" name="total_groups" value="${groups.size()}">
+<table width="60%" align="center" cellpadding="4" cellspacing="1" border="0" class="forumline">
+	<tr>
+	  <th class="thead" colspan="5" align="center" height="28">${I18n.getMessage("AdminAttachments.groupPermission")}</th>
+	</tr>
+
+	<tr>
+		<th class="thcornerl" width="50%">${I18n.getMessage("AdminAttachments.groupName")}</th>
+		<th class="thtop">${I18n.getMessage("AdminAttachments.quotaType")}</th>
+	</tr>
+
+	<#assign row = 1/>
+	<#assign counter = 0/>
+	<#list groups as g>
+		<tr>
+			<#assign x = selectedList.clear()/>
+			<#if groupQuotas.get(g.id)?exists>
+				<#assign x = selectedList.add(g.id)/>
+			</#if>
+
+			<td class="row${row}" align="center"><@lib.selectFieldGroups "group_" + counter, groups, 0, false, selectedList/></td>
+			<td class="row${row}" align="center"><@quotaCombo counter, groupQuotas.get(g.id)?default(0)/></td>
+		</tr>
+
+		<#if row == 2><#assign row = 1/></#if>
+		<#assign row = row + 1/>
+		<#assign counter = counter + 1/>
+	</#list>
+
+	<tr align="right">
+	  <td class="catbottom" colspan="5" height="29" align="center"> <input type="submit" name="submit" class="liteoption" value="${I18n.getMessage("submit")}" /></td>
+	</tr>
+</table>
+</form>

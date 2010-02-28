@@ -1,0 +1,97 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=${encoding}">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<title>JForum ${version} Installation - Error</title>
+<link rel="stylesheet" href="${contextPath}/templates/default/styles/style.css" type="text/css">
+<style type="text/css">
+th			{ background-image: url('${contextPath}/templates/default/images/cellpic3.gif') }
+td.cat		{ background-image: url('${contextPath}/templates/default/images/cellpic1.gif') }
+td.rowpic	{ background-image: url('${contextPath}/templates/default/images/cellpic2.jpg'); background-repeat: repeat-y }
+td.cathead,td.catsides,td.catleft,td.catright,td.catbottom { background-image: url('${contextPath}/templates/default/images/cellpic1.gif') }
+</style>
+</head>
+<body text="#000000" link="#006699" vlink="#5584AA">
+
+<table width="70%" height="100%" align="center">
+<tr>
+<td valign="middle" align="center">
+
+<table width="100%" border="0" cellspacing="0" cellpadding="10" align="center"> 
+	<tr>
+		<td class="bodyline" width="100%"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+
+			<tr>
+				<td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+					<tr>
+						<td><img src="${contextPath}/templates/default/images/logo.jpg" border="0" alt="JForum" vspace="1" /></td>
+						<td align="center" width="100%" valign="middle">
+							<span class="maintitle">JForum ${version} ${I18n.getMessage("Install.installation")}<br/>
+							<font color="#ff0000">${I18n.getMessage("Install.stepError")}</font>
+							</span>
+							<br /><br />
+							<span class="gen">
+							<font color="#ff0000"><b>${I18n.getMessage("Install.forHelpAccess")} <a href="http://www.jforum.net/install.htm">http://www.jforum.net/install.htm</a></b></font>
+							</span>
+						</td>
+					</tr>
+				</table></td>
+			</tr>
+
+			<tr>
+				<td align="center"><br /><br /></td>
+			</tr>
+
+			<tr>
+				<td width="100%"><table width="100%" cellpadding="2" cellspacing="1" border="0" class="forumline">
+					<tr>
+						<th colspan="2">${I18n.getMessage("Install.stepError")}</th>
+					</tr>
+
+					<tr>
+						<td class="row2">
+							<p>
+							<img src="${contextPath}/images/smilies/d6741711aa045b812616853b5507fd2a.gif" border="0" align="middle"> 
+							<span class="gen">${message}</span><br />
+							</p>
+
+							<#if exceptionMessage?exists>
+							<p align="center">
+							<span class="gensmall">
+							<b>${I18n.getMessage("Install.errorRaised")}: </b><br>
+							<textarea readonly rows="6" cols="100" wrap="virtual">${exceptionMessage}</textarea>
+							</span>
+							</p>
+							</#if>
+						</td>
+					</tr>
+
+					<#if tryAgain?default(false) == true>
+						<form name="f" action="${contextPath}/install/install${extension}" method="post">
+						<input type="hidden" name="module" value="install">
+						<input type="hidden" name="action" value="doInstall">
+					</#if>
+
+					<tr> 
+					  <td class="catbottom" align="center" colspan="2">
+						<#if tryAgain?default(false) == true>
+							<input type="submit" name="tryagain" class="mainoption" value="${I18n.getMessage("Install.tryAgain")}">&nbsp;&nbsp;
+						</#if>
+						<input type="button" class="mainoption" value="${I18n.getMessage("Install.modifyConfiguration")}" onClick="document.location = '${contextPath}/install/install${extension}?module=install&action=welcome';">
+					</td>
+
+					<#if tryAgain?default(false) == true></form></#if>
+				</table>
+			</form>
+		</td>
+	</tr>
+</table></td>
+	</tr>
+</table>
+
+</td>
+</tr>
+</table>
+
+</body>
+</html>

@@ -1,0 +1,12 @@
+Hei, dette er denne ukens sammendrag fra forumet.
+
+<#list posts as post>
+
+Emne: ${post.subject}
+Lenke: ${url}posts/list/${post.topicId}.page
+Av: ${post.postUsername}
+Tekst:
+${post.text}
+-------------
+
+</#list>

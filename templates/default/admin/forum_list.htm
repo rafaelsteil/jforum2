@@ -1,0 +1,64 @@
+<#setting number_format = "#"/>
+<style type="text/css">@import url( ${contextPath}/templates/${templateName}/styles/style.css?${startupTime} );</style>
+
+<form action="${contextPath}/jforum${extension}" method="post" name="form" id="form" accept-charset="${encoding}">
+<input type="hidden" name="action" value="delete" />
+<input type="hidden" name="module" value="${moduleName}" />
+
+<table class="forumline" cellspacing="1" cellpadding="3" width="100%" border="0">
+	<tr>
+		<th class="thhead" valign="middle" colspan="6" height="25">${I18n.getMessage("Forums.List.Title")}</th>
+	</tr>
+	
+	<#list categories as category>
+		<#if repository.isCategoryAccessible(category.id)>
+			<tr>
+				<td colspan="6" class="catleft"><span class="catTitle">${category.name}</span></td>
+			</tr>
+
+			<#assign counter = 1/>
+
+			<#assign forums = repository.getCategory(category.id).getForums()/>
+			<#list forums as forum>
+				<tr>
+					<td width="10" class="row1">&nbsp;</td>
+					<td class="row1"><span class="forumLink">${forum.name}</span></td>
+					<td class="row1" align="center">
+						<span class="gen">
+							<a id="forumEdit" href="${contextPath}/${moduleName}/edit/${forum.id}${extension}">${I18n.getMessage("Forums.List.Edit")}</a>
+						</span>
+					</td>
+					<td class="row2" align="center" width="10%"><input type="checkbox" name="forum_id" value="${forum.id}" /></td>
+
+					<td class="row2" align="center" width="10%">
+						<#if (counter > 1)>
+							<input type="button" value="${I18n.getMessage("up")}" class="mainoption" onClick="document.location = '${contextPath}/${moduleName}/up/${forum.id}${extension}';">&nbsp;
+						<#else>	
+							&nbsp;
+						</#if>
+					</td>
+
+					<td class="row2" align="center" width="10%">
+						<#if (counter < forums.size())>
+							<input type="button" value="${I18n.getMessage("down")}" class="mainoption" onClick="document.location = '${contextPath}/${moduleName}/down/${forum.id}${extension}';">&nbsp;
+						<#else>	
+							&nbsp;
+						</#if>					
+					</td>
+				</tr>
+
+				<#assign counter = counter + 1/>
+			</#list>
+		</#if>
+	</#list>
+	
+
+	<tr align="center">
+		<td class="catbottom" colspan="6" height="28">
+			<input class="mainoption" type="button" value="${I18n.getMessage("Forums.List.ClickToNew")}" id="btn_insert" name="button" onclick="document.location = '${contextPath}/${moduleName}/insert${extension}';" />
+			&nbsp;&nbsp;
+			<input class="mainoption" type="submit" value="${I18n.getMessage("Forums.List.ClickToDelete")}" name="submit" />
+		</td>
+	</tr>
+</table>
+</form>

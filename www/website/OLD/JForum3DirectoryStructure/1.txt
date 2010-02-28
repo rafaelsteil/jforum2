@@ -1,0 +1,47 @@
+!!! Source code directory structure
+
+[{Info title='Discuss it'
+
+Please check the topic [Re-arrange JForum repository for version 3|http://www.jforum.net/posts/list/3362.page] for more information about the elaboration of these settings. 
+}]
+
+Below you can see an overview of JForum 3 directory structure:
+[{Image src='/wikifiles/jforum3_source_tree.jpg'}]
+
+
+!!! Explanation for each directory:
+!! /src
+Root directory for the source code
+
+!! /src/configfiles
+Configuration files for third-party libraries, usually. All files in this directory will be sent to __/webapp/WEB-INF/classess__ when building JForum
+
+!! /src/lib
+Auxiliar libraries not required to run the project, like JUnit and Servle-API. 
+
+!! /src/main
+JForum source code itself. 
+
+!! /src/tests
+Test cases
+
+!! /src/tools
+Each subdirectory is an auxiliar tool for JForum, like ''phpbb2jforum'' and ''searchIndexer''.
+
+!! /webapp
+The Web application. It includes all templates, images, styles, as well the WEB-INF directory. 
+
+!! /webapp/images
+General images, like user's avatar and smilies. 
+
+!! /webapp/templates
+HTML templates for JForum
+
+!! /webapp/WEB-INF
+The Servlet Container special directory. 
+
+!! /webapp/WEB-INF/config
+JForum configuration directory. 
+
+!! /target
+Output dir for testcases, tools and Ant builds. 

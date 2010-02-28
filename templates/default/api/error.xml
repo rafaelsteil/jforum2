@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jforum-api response-code="ERROR">
+	<message>
+		<![CDATA[
+		${exception.getMessage()}
+		]]>
+	</message>
+</jforum-api>

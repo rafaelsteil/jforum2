@@ -1,0 +1,54 @@
+<#setting number_format = "#"/>
+<style type="text/css">@import url( ${contextPath}/templates/${templateName}/styles/style.css?${startupTime} );</style>
+
+<form accept-charset="${encoding}" name="form" action="${contextPath}/jforum${extension}" method="post">
+<input type="hidden" name="action" value="insert" />
+<input type="hidden" name="module" value="${moduleName}" />
+
+<table class="forumline" cellspacing="1" cellpadding="3" width="100%" border="0">
+	<tr>
+		<th class="thhead" valign="middle" colspan="7" height="25">${I18n.getMessage("Banner.adminTitle")}</th>
+	</tr>
+	<#if errorMessage?exists>
+	<tr>
+		<td class="row2" colspan="7">&nbsp; <span class="nav"> <font
+			color="#ff0000"><b>${errorMessage}</b></font> </span></td>
+	</tr>
+	</#if>
+
+	<tr>
+		<td class="catleft"><span class="gen">${I18n.getMessage("Banner.comment")}</span></td>
+		<td class="catleft"><span class="gen">${I18n.getMessage("Banner.activated")}</span></td>
+		<td class="catleft"><span class="gen">${I18n.getMessage("Banner.clicks")}</span></td>
+		<td class="catleft"><span class="gen">${I18n.getMessage("Banner.views")}</span></td>
+		<td class="catleft"><span class="gen">${I18n.getMessage("Banner.placement")}</span></td>
+		<td class="catleft"><span class="gen">${I18n.getMessage("Edit")}</span></td>
+		<td class="catleft"><span class="gen">${I18n.getMessage("Delete")}</span></td>
+	</tr>
+
+	<#assign counter = 1/> <#list banners as banner>
+
+	<tr>
+		<td class="row2"><span class="gen">${banner.comment}</span></td>
+		<td class="row2"><span class="gen"><#if	banner.active>${I18n.getMessage("User.yes")}<#else>${I18n.getMessage("User.no")}</#if></span></td>
+		<td class="row2"><span class="gen">${banner.clicks}</span></td>
+		<td class="row2"><span class="gen">${banner.views}</span></td>
+		<td class="row2"><span class="gen"> <#switch banner.placement> <#case 1> ${I18n.getMessage("Banner.topLeft")}
+		<#break> <#case 2> ${I18n.getMessage("Banner.topCenter")} <#break>
+		<#case 3> ${I18n.getMessage("Banner.topRight")} <#break> <#case 4>
+		${I18n.getMessage("Banner.bottomLeft")} <#break> <#case 5>
+		${I18n.getMessage("Banner.bottomCenter")} <#break> <#case 6>
+		${I18n.getMessage("Banner.bottomRight")} <#break> </#switch> </span></td>
+		<td class="row2"><span class="gen"><a href="${contextPath}/${moduleName}/edit/${banner.id}${extension}">${I18n.getMessage("Edit")}</a></span></td>
+		<td class="row2"><span class="gen"><a href="${contextPath}/${moduleName}/delete/${banner.id}${extension}">${I18n.getMessage("Delete")}</a></span></td>
+	</tr>
+
+	<#assign counter = counter + 1/> </#list>
+
+	<tr align="center">
+		<td class="catbottom" colspan="7" height="28">
+		<input class="mainoption" type="submit" value="${I18n.getMessage("Banner.newBanner")}" name="submit" />
+		</td>
+	</tr>
+</table>
+</form>

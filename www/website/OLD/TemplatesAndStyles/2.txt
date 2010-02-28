@@ -1,0 +1,26 @@
+!!! Templates and styles
+All JForum templates are stored in the directory ''templates'', where each sub-directory is a template name, being the default template name callled ''default''. There you will find all HTML files, as well Javascripts, images and CSS files. 
+
+The table below describes the main templates: 
+
+||Filename||Description
+|header.htm|Header for all other templates
+|bottom.htm|Footer contents for all other templates
+|forum_list.htm|Used in forums/list.page
+|forum_show.htm|Used in forums/show.page
+|post_show.htm|used in posts/show.page
+|forum_login.htm|Used in forums/login.page
+|uset_new.htm|Used in user/insert.page
+|pm_list.htm|Used in pm/inbox.page
+|post_form.htm|Used in the Post insertion / editing pages
+|search.htm|Used in search/filters.page
+|search_result.htm|The search results page
+|user_profile.htm|Used in user/profile.page
+
+Note that there are lot more of templates, many of them being referenced by other templates - ''includes''. 
+
+!! The template engine
+JForum uses [Freemarker|http://freemarker.sf.net] as template engine. This means that you don't need to use any Java / JSP code to create the layouts for JForum. It is interesting to take a good look at the [freemarker manual|http://freemarker.sourceforge.net/docs/index.html] to learn more about it. In the following section you will find a brief overview of the most common used directives, which should be a good start for starters. 
+
+!!! a variable
+xx

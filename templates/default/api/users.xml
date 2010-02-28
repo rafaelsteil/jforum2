@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jforum-api response-code="OK">
+	<users total="${users.size()}">
+		<#list users as u>
+			<user id="${u.id}" username="${u.username?html}" email="${u.email}"/>
+		</#list>
+	</users>
+</jforum-api>

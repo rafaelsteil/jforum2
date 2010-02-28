@@ -1,0 +1,73 @@
+<#include "header.htm"/>
+<form action="${JForumContext.encodeURL("/jforum")}" method="post" name="loginform" id="loginform" accept-charset="${encoding}">
+  <input type="hidden" name="module" value="user" />
+  <input type="hidden" name="action" value="validateLogin" />
+  
+  <#if returnPath?exists>
+  	<input type="hidden" name="returnPath" value="${returnPath?html}" />
+  </#if>
+  
+<table cellspacing="2" cellpadding="2" width="100%" align="center" border="0">
+	<tr>
+		<td class="nav" align="left"><a class="nav" href="${JForumContext.encodeURL("/forums/list")}">${I18n.getMessage("ForumListing.forumIndex")}</a></td>
+	</tr>
+</table>
+
+<table class="forumline" cellspacing="1" cellpadding="4" width="100%" align="center" border="0">
+	<tr>
+		<th class="thhead" nowrap="nowrap" height="25">${I18n.getMessage("Login.enterUsername")}</th>
+	</tr>
+
+	<tr>
+		<td class="row1">
+			<table cellspacing="1" cellpadding="3" width="100%" border="0">
+				<tr>
+					<td align="center" colspan="2">&nbsp;</td>
+				</tr>
+				
+				<#if invalidLogin?exists>
+				<tr>
+					<td align="center" width="100%" colspan="2">
+						<span class="gen" id="invalidlogin">
+  							<font color="red">${I18n.getMessage("Login.invalidLogin")}</font>
+  						</span>
+  					</td>
+  				</tr>
+				</#if>
+				
+				<tr>
+					<td align="right" width="45%"><span class="gen">${I18n.getMessage("Login.user")}:</span></td>
+					<td><input class="post" maxlength="40" size="25" name="username" type="text"/> </td>
+				</tr>
+				
+				<tr>
+					<td align="right"><span class="gen">${I18n.getMessage("Login.password")}:</span></td>
+					<td><input class="post" type="password" maxlength="25" size="25" name="password" /> </td>
+				</tr>
+
+				<#if autoLoginEnabled>
+					<tr align="center">
+						<td colspan="2"><span class="gen"><label for="autologin">${I18n.getMessage("Login.autoLogon")}: </a><input type="checkbox" id="autologin" name="autologin" /></span></td>
+					</tr>
+				</#if>
+
+				<tr align="center">
+					<td colspan="2">
+						<input type="hidden" name="redirect" />
+						<input class="mainoption" type="submit" value="${I18n.getMessage("Login.enter")}" name="login" />
+					</td>
+				</tr>
+
+				<tr align="center">
+					<td colspan="2" class="gensmall">
+						<a href="${JForumContext.encodeURL("/user/lostPassword")}">${I18n.getMessage("Login.lostPassword")}</a>
+						 | 
+						<a href="${JForumContext.encodeURL("/user/activateManual")}">${I18n.getMessage("ActivateAccount.activate")}</a>
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+</table>
+</form>
+<#include "bottom.htm"/>

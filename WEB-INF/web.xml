@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE web-app
+    PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+    "http://java.sun.com/dtd/web-app_2_3.dtd">
+
+<web-app>
+    <display-name>JForum - Powering Communities</display-name>
+    <description>Open Source Java Forum Software</description>
+
+	<!-- Clickstream -->
+	<filter>
+		<filter-name>clickstream-jforum</filter-name>
+		<filter-class>net.jforum.util.legacy.clickstream.ClickstreamFilter</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>clickstream-jforum</filter-name>
+		<url-pattern>*.page</url-pattern>
+	</filter-mapping>
+    
+    <listener>
+    	<listener-class>net.jforum.ForumSessionListener</listener-class>
+    </listener>
+
+	<!-- JForum Controller -->
+    <servlet>
+		<servlet-name>jforum</servlet-name>
+		<servlet-class>net.jforum.JForum</servlet-class>
+		
+		<init-param>
+			<param-name>development</param-name>
+			<param-value>true</param-value>
+		</init-param>
+    </servlet>
+
+	<!-- Installer -->
+    <servlet>
+    	<servlet-name>install</servlet-name>
+    	<servlet-class>net.jforum.InstallServlet</servlet-class>
+    	
+    	<init-param>
+			<param-name>development</param-name>
+			<param-value>true</param-value>
+		</init-param>
+    </servlet>
+
+    <!-- Mapping -->
+    <servlet-mapping>
+    	<servlet-name>install</servlet-name>
+    	<url-pattern>/install/install.page</url-pattern>
+    </servlet-mapping>
+
+	<servlet-mapping>
+    	<servlet-name>jforum</servlet-name>
+    	<url-pattern>*.page</url-pattern>
+    </servlet-mapping>
+    
+    <!-- SESSION -->
+    <session-config>
+    	<session-timeout>10</session-timeout>
+    </session-config>
+    
+	<welcome-file-list>
+		<welcome-file>index.htm</welcome-file>
+	</welcome-file-list>
+
+	<!-- SSO -->
+	<!-- Example of SSO configuration -->
+	<!--
+	<security-role> 
+		<role-name>user</role-name> 
+	</security-role>
+
+	<security-constraint>
+      <web-resource-collection>
+         <web-resource-name>Restricted Area</web-resource-name>
+         <url-pattern>/*</url-pattern>
+      </web-resource-collection>
+     
+      <auth-constraint>
+         <role-name>user</role-name>
+      </auth-constraint>
+   </security-constraint>
+
+   <login-config>
+      <auth-method>BASIC</auth-method>
+      <realm-name>REALM NAME HERE</realm-name>
+   </login-config>
+   -->
+</web-app>

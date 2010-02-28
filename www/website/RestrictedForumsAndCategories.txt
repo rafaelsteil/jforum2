@@ -1,0 +1,13 @@
+!!! How to make a Forum or Category private for some Groups? 
+If you want to allow only a set of users to access a determined Category or Forum, you have to setup the proper [access rights|Permissions] for the [Groups] you want. 
+
+# First, create a [group|Groups] to put users into
+# Then, go to ''Admin Panel -> Groups -> Permissions'' and set the [access rights|Permissions] according to the following table:
+
+||If you want to ...||Then ...
+|... prevent a group of accessing some __Category__|... on the ''Category -> Restricted Categories'' section, select the Categories you want to __restrict access__ for the current group
+|... prevent a group of accessing some *Forum*|... on the ''Forums -> Restricted Forums'' section, select the Forums you want to __restrict access__ tot he current group
+
+[{Tip 
+Please note that if you restrict a Category, all Forums related to the respective record will also have his access restricted to only allowed groups. 
+}]

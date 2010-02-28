@@ -1,0 +1,103 @@
+<#setting number_format = "#"/>
+<style type="text/css">@import url( ${contextPath}/templates/${templateName}/styles/style.css?${startupTime} );</style>
+
+<form action="${contextPath}/jforum${extension}" method="post" name="form" id="form" accept-charset="${encoding}">
+<#assign edit = banner?exists/>
+<#if edit>
+	<input type="hidden" name="banner_id" value="${banner.id}" />
+</#if>
+
+<input type="hidden" name="action" value="${action}" />
+<input type="hidden" name="module" value="${moduleName}" />
+<input type="hidden" name="views" value="<#if edit>${banner.views}<#else>0</#if>" />
+<input type="hidden" name="clicks" value="<#if edit>${banner.clicks}<#else>0</#if>" />
+
+<table class="forumline" cellspacing="1" cellpadding="3" width="100%" border="0">
+	<tr>
+		<th class="thhead" valign="middle" colspan="2" height="25">${I18n.getMessage("Banner.adminTitle")}</th>
+	</tr>
+
+	<tr>
+		<td class="row1" width="38%"><span class="gen"><b>${I18n.getMessage("Banner.activateBanner")}</b></span></td>
+		<td class="row2">
+			<span class="gensmall">
+			<input type="radio" class="liteoption" name="active" value="1" <#if edit && banner.isActive()>checked</#if>/>&nbsp;${I18n.getMessage("User.yes")}&nbsp;&nbsp;
+			<input type="radio" class="liteoption" name="active" value="0" <#if edit><#if !banner.isActive()>checked</#if><#else>checked</#if>/>&nbsp;${I18n.getMessage("User.no")}
+			</span>
+		</td>
+	</tr>
+	<tr>
+		<td class="row1" width="38%"><span class="gen"><b>${I18n.getMessage("Banner.type")}</b></span></td>
+		<td class="row2">
+                  <select name="type" class="liteoption">
+                    <option value="0" <#if edit && banner.type == 0>selected</#if>>${I18n.getMessage("Banner.imageLink")}</option>
+                    <option value="2" <#if edit && banner.type == 2>selected</#if>>${I18n.getMessage("Banner.textLink")}</option>
+                    <option value="4" <#if edit && banner.type == 4>selected</#if>>${I18n.getMessage("Banner.customHTMLCode")}</option>
+                  </select>
+                </td>
+	</tr>
+	<tr>
+		<td class="row1" width="38%"><span class="gen"><b>${I18n.getMessage("Banner.imagePathTextCode")}</b></span><br />
+		<span class="gensmall">${I18n.getMessage("Banner.imagePathTextCodeDesc")}</span></td>
+		<td class="row2"><textarea name="name" rows="2" cols="35" wrap="virtual" style="width:450px" class="liteoption"><#if edit>${banner.name}</#if></textarea></td>
+	</tr>
+	<tr>
+		<td class="row1" width="38%"><span class="gen"><b>${I18n.getMessage("Banner.imageDesc")}</b></span><br />
+		<span class="gensmall">${I18n.getMessage("Banner.imageDescDesc")}</span></td>
+		<td class="row2"><input type="text" name="description" size="30" maxlength="30" value="<#if edit>${banner.description}</#if>" class="liteoption"/></td>
+	</tr>
+	<tr>
+		<td class="row1" width="38%"><span class="gen"><b>${I18n.getMessage("Banner.imageSize")}</b></span><br />
+		<span class="gensmall">${I18n.getMessage("Banner.imageSizeDesc")}</span></td>
+		<td class="row2"><span class="gensmall">
+				${I18n.getMessage("Banner.width")}&nbsp;:&nbsp;<input type="text" name="width" size="4" maxlength="4" class="liteoption" value="<#if edit>${banner.width}<#else>0</#if>"/>&nbsp;&nbsp;&nbsp;
+				${I18n.getMessage("Banner.height")}&nbsp;:&nbsp;<input type="text" name="height" size="4" maxlength="4" class="liteoption" value="<#if edit>${banner.height}<#else>0</#if>"/>
+		</span></td>
+	</tr>
+	<#if edit>
+	  <tr>
+	    <td class="row1" width="38%"><span class="gen"><b>${I18n.getMessage("Banner.views")}</b></span></td>
+	    <td class="row2"><span class="gen">${banner.views}</span></td>
+	  </tr>
+	  <tr>
+	    <td class="row1" width="38%"><span class="gen"><b>${I18n.getMessage("Banner.clicks")}</b></span><br />
+	      <span class="gensmall">${I18n.getMessage("Banner.clicksDesc")}</span></td>
+	      <td class="row2"><span class="gen">${banner.clicks}</span></td>
+	    </tr>
+	</#if>
+	<tr>
+		<td class="row1" width="38%"><span class="gen"><b>${I18n.getMessage("Banner.redirectUrl")}</b></span><br />
+		<span class="gensmall">${I18n.getMessage("Banner.redirectUrlDesc")}</span></td>
+		<td class="row2"><input type="text" name="url" size="50" maxlength="128" value="<#if edit>${banner.url}</#if>" class="liteoption"/></td>
+	</tr>
+	<tr>
+		<td class="row1" width="38%"><span class="gen"><b>${I18n.getMessage("Banner.placement")}</b></span><br />
+		<td class="row2">
+                  <select name="placement" class="liteoption">
+                    <option value="1" <#if edit && banner.placement == 1>selected</#if>>${I18n.getMessage("Banner.topLeft")}</option>
+                    <option value="2" <#if edit && banner.placement == 2>selected</#if>>${I18n.getMessage("Banner.topCenter")}</option>
+                    <option value="3" <#if edit && banner.placement == 3>selected</#if>>${I18n.getMessage("Banner.topRight")}</option>
+                    <option value="4" <#if edit && banner.placement == 4>selected</#if>>${I18n.getMessage("Banner.bottomLeft")}</option>
+                    <option value="5" <#if edit && banner.placement == 5>selected</#if>>${I18n.getMessage("Banner.bottomCenter")}</option>
+                    <option value="6" <#if edit && banner.placement == 6>selected</#if>>${I18n.getMessage("Banner.bottomRight")}</option>
+                  </select>
+                </td>
+	</tr>
+	<tr>
+		<td class="row1" width="38%"><span class="gen"><b>${I18n.getMessage("Banner.weightOfBanner")}</b></span><br />
+		<span class="gensmall">${I18n.getMessage("Banner.weightOfBannerDesc")}</span></td>
+		<td class="row2"><input type="text" name="weight" size="2" maxlength="2" value="<#if edit>${banner.weight}<#else>50</#if>" class="liteoption"/></td>
+	</tr>
+	<tr>
+		<td class="row1" width="38%"><span class="gen"><b>${I18n.getMessage("Banner.comment")}</b></span><br />
+		<span class="gensmall"></span></td>
+		<td class="row2"><input type="text" name="comment" size="50" maxlength="50" value="<#if edit>${banner.comment}</#if>" class="liteoption"/></td>
+	</tr>
+
+	<tr align="center">
+		<td class="catbottom" colspan="2" height="28">
+			<input class="mainoption" type="submit" value="${I18n.getMessage("Banner.update")}" name="submit" />
+		</td>
+	</tr>
+</table>
+</form>

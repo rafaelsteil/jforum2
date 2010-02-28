@@ -1,0 +1,20 @@
+!!! JForum 3 - Technologies
+In order to keep JForum growing and getting better, we decided to do a major refactoring in the core code, using the following technologies: 
+
+!! Java 5
+This one does not require an introduction. It is out there for some years now, being widely used and supported by almost all hosting companies and corporations. It provides more performance than Java 2, as well useful new language features. 
+
+!! Hibernate 3
+Will help a lot with multi database support.
+
+!! VRaptor
+[VRaptor|http://www.vraptor.org] it's a very nice and easy to use framework, going to help on the hardcore part of session management, action dispatching and request processing. 
+
+!! Lucene
+[Lucene|http://lucene.apache.org/] for Java-based indexing and search technology. The integration is being done via [Hibernate Search|http://www.hibernate.org/410.html]
+
+!! Spring
+[Spring Framework|http://www.springframework.org/] is used for [Dependency Injection|http://www.martinfowler.com/articles/injection.html] basically, as well module organization and integration with other frameworks.
+
+!! View engine
+JSP 2.0, with Custom Tags (extending SimpleTagSupport)

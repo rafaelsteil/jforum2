@@ -1,0 +1,49 @@
+<#setting number_format = "#"/>
+<style type="text/css">@import url( ${contextPath}/templates/${templateName}/styles/style.css?${startupTime} );</style>
+
+<#import "macros/group_macros.ftl" as lib>
+
+<form accept-charset="${encoding}" name="form" action="${contextPath}/jforum${extension}" method="post">
+<input type="hidden" name="action" value="delete" />
+<input type="hidden" name="module" value="${moduleName}" />
+
+<table class="forumline" cellspacing="1" cellpadding="3" width="100%" border="0">
+	<tr>
+		<th class="thhead" valign="middle" colspan="4" height="25">${I18n.getMessage("Groups.List.Title")}</th>
+	</tr>
+	<#if errorMessage?exists>
+	<tr>
+		<td class="row2" colspan="4">&nbsp; <span class="nav">
+		<center><font color="#ff0000"><b>${errorMessage}</b></font></center>
+		</span></td>
+	</tr>
+	</#if>
+
+	<tr>
+		<td class="row2" width="38%"><span class="gen"><b>${I18n.getMessage("Groups.List.groupName")}</b></span></td>
+		<td class="row2" align="center"><span class="gen"><b>${I18n.getMessage("Action")}</b></span></td>
+		<td class="row2" align="center" width="10%"><span class="gen"><b>${I18n.getMessage("Delete")}</b></span></td>
+		<td class="row2" align="center"><span class="gen"><b>${I18n.getMessage("Security")}</b></span></td>
+	</tr>
+
+	<#assign len = groups.size() - 1> <#if (len > -1)> <#list 0..len as i>
+	<#assign node = groups.get(i)> <#global level = 0>
+
+	<tr>
+		<td class="row1"><span class="gen">${node.name}</span></td>
+		<td class="row1" align="center"><span class="gen"><a href="${contextPath}/${moduleName}/edit/${node.id}${extension}">${I18n.getMessage("Groups.List.Edit")}</a></span></td>
+		<td class="row1" align="center"><input type="checkbox" name="group_id" value="${node.id}" /></td>
+		<td class="row1" align="center"><span class="gen"><a href="${contextPath}/${moduleName}/permissions/${node.id}${extension}">${I18n.getMessage("Permissions")}</a></span></td>
+	</tr>
+
+	<@lib.listGroups node/> </#list> </#if>
+
+	<tr align="center">
+		<td class="catbottom" colspan="4" height="28">
+		<input class="mainoption" type="button" value="${I18n.getMessage("Groups.List.ClickToNew")}" name="button" onclick="document.location = '${contextPath}/${moduleName}/insert${extension}';" />
+		&nbsp;&nbsp; 
+		<input class="mainoption" type="submit" value="${I18n.getMessage("Groups.List.ClickToDelete")}" /></td>
+	</tr>
+</table>
+</form>
+     

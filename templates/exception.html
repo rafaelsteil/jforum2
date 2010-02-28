@@ -1,0 +1,18 @@
+<!-- BEGIN ERROR STACK TRACE
+${stackTrace}
+END ERROR STACK TRACE-->
+<#assign message = "<p style=\"color:red; font-weight:bold\">An error has occurred.</p><p>For detailed error information, please see the HTML source code, and contact the forum Administrator.</p><pre class=\"pre-error\"><i>" + message + "</i></pre>"/>
+
+<#if templateName?exists && dateTimeFormat?exists>
+	<#include "${templateName}/message.htm"/>
+<#else>
+	<html>
+	<head>
+	<title>Error</title>
+	</head>
+	<body>
+	${message}
+	</body>
+	</html>
+</#if>
+

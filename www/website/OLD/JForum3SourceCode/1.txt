@@ -1,0 +1,4 @@
+!!! JForum 3 - Getting the source code
+To get the source code for JForum 3 and starting help developing it, please see the [CVS] section to obtain details of server and usernames. The difference is that instead of fetching the ''HEAD'' branch, you have to get ''__JForum3__''. 
+
+In order to be able to commit your changes back to the repository, please read the section [How to help|JForum3HowToHelp], sub-section ''Ask Developer role''.

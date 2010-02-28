@@ -1,0 +1,23 @@
+[{Tip title='dica'
+
+sei la
+}]
+
+[{Info 
+
+teste do conteudo de info
+}]
+
+[{Warning title='Cuidado com os parametros maus'
+
+teste
+
+[{Highlight
+''italico xxx'' e __negrito no conteudo__
+}]
+}]
+
+[{Highlight
+
+blalalal aldfj adfs 
+}]

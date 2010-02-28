@@ -1,0 +1,55 @@
+!!! JForum 3 - Development process
+
+[{TableOfContents }]
+
+!! Definining needs
+Forum currently is in a stage that does not support too much new features and integrations with legacy systems without hacking the code base. Problems like caching complexity, multi-database vendor and testability are real and make the developers day not so easy.
+
+In the last past two years, JForum has grown and enhanced a lot, and feedback has been really great, with entusiastics from all parts of the world. 
+
+!! Unit testing
+This one is simple: everything should be covered by unit tests. Yes, database code included. 
+As JForum has a large set of functionalities that must work on different databases, unit testing is completely essential to ensure that changes made in some part of the code won't affect the rest of the system. 
+
+So far, [JUnit 4|http://www.junit.org] is being used as unit testing framework without any problems. [TestNG|http://testng.org] is on the watch list, tough. 
+
+!! Structure of unit tests
+All tests are located at ''tests'' directory, usually following the main package structure with the ''TestCase'' postfixed to the class being tested. For example, the class ''net/jforum/dao/ForumDAO.java'' is covered by the tests located at ''test/core/net/jforum/dao/ForumDAOTestCase.java''. 
+
+Please note that, when using [Eclipse|http://www.eclipse.org], the output directory for the test classes is ''tests/WEB-INF/classes'' instead of the default output directory, which is ''WEB-INF/classes''
+
+!! What should be done first
+There are a lot of things to do. Really. As a rule of thumb, the following order of steps is adopted for development:
+
+# DAO (database code)
+# Configuration handling
+# Actions (now called ''Components'')
+# Utility stuff
+
+!! DAO (database code)
+! Before JForum 3
+Originally, JForum package structure for the database layer was:
+
+||Package||Description
+|net/jforum/dao|DAO interfaces
+|net/jforum/dao/generic|DAO implementation that runs on all databases
+|net/jforum/dao/<database-name>|Vendor specific code, that overrided the ''generic'' implementation when needed
+
+! Now
+For JForum 3, [Hibernate|http://www.hibernate.org] was adopted for the database layer, which means that we don't have to care about vendor specific code anymore. This also removes the need for interfaces, as Hibernate already handles the multi-database thing for us. The package table now look like:
+
+||Package|Description
+|net/jforum/dao|Hibernate code
+
+!! Configuration handling
+JForum has several configuration files that, usually, should be loaded and parsed on system startup. The old approach was to load all of them on the ''init()'' method of ''JForumBaseServlet'' and delegate to ''ConfigLoader'' the resposability of processing the keys. 
+
+All configuration options were available to the classes through the class ''SystemGlobals'', which has a series of static methods. 
+
+As of JForum 3 this process should be adapted to the new architecture. There are two main approaches regard access to the configuration settings: 
+
+! First approach
+Probably for the handling configuration files we'll use [Commons Configuration|http://jakarta.apache.org/commons/configuration/]
+
+! Second approach
+TODO

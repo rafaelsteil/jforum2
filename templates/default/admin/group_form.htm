@@ -1,0 +1,41 @@
+<#setting number_format = "#"/>
+<style type="text/css">@import url( ${contextPath}/templates/${templateName}/styles/style.css?${startupTime} );</style>
+<form accept-charset="${encoding}" name="form" action="${contextPath}/jforum${extension}" method="post">
+<input type="hidden" name="action" value="${action}" />
+<input type="hidden" name="module" value="${moduleName}" />
+
+<#if group?exists>
+  <input type="hidden" name="group_id" value="${group.id}">
+</#if>
+
+<#import "macros/group_macros.ftl" as lib>
+
+<table class="forumline" cellspacing="1" cellpadding="3" width="100%" border="0">
+	<tr>
+		<th class="thhead" valign="middle" colspan="2" height="25">${I18n.getMessage("Groups.Form.Title")}</th>
+	</tr>
+
+	<tr>
+		<td class="row1" width="38%"><span class="gen">${I18n.getMessage("Groups.Form.GroupName")}</span></td>
+		<td class="row2"><input type="text" name="group_name" value="<#if group?exists>${group.name}</#if>" /></td>
+	</tr>
+	<tr>
+		<td class="row1"><span class="gen">${I18n.getMessage("Groups.Form.ParentGroup")}</span></td>
+		<td class="row2">
+		    <#if group?exists> 
+		        <@lib.selectFieldGroups	"parent_id", groups, group.parentId, false, selectedList/> 
+		    <#else>
+		        <@lib.selectFieldGroups "parent_id", groups, 0, false, selectedList/>
+		    </#if>
+		</td>
+	</tr>
+	<tr>
+		<td class="row1"><span class="gen">${I18n.getMessage("Groups.Form.Description")}</span></td>
+		<td class="row2"><textarea rows="4" cols="30" wrap="virtual" name="group_description"><#if group?exists>${group.description?default("")}</#if></textarea></td>
+	</tr>
+	<tr align="center">
+		<td class="catbottom" colspan="2" height="28"><input class="mainoption" type="submit" value="${I18n.getMessage("Groups.Form.ClickToUpdate")}" name="submit" /></td>
+	</tr>
+</table>
+</form>
+  

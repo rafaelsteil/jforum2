@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" output="tools/bin" path="tools/phpbb2jforum/src"/>
+	<classpathentry kind="src" output="tools/bin" path="tools/luceneIndexer"/>
+	<classpathentry kind="src" output="tools/bin" path="tools/phpbb2jforum/resource"/>
+	<classpathentry kind="src" output="tests/bin" path="tests/core"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/activation.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/mail.jar"/>
+	<classpathentry kind="lib" path="lib/servlet-api.jar"/>
+	<classpathentry kind="lib" path="lib/junit.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/htmlparser-1.5.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/ojdbc14.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/jboss-common.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/jboss-jmx.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/jboss-system.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/postgresql-8.0-313.jdbc3.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/concurrent.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/jcaptcha-all-1.0-RC2.0.1.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/quartz-1.5.1.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/commons-io-1.1.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/log4j-1.2.12.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/ehcache-1.1.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/jboss-cache-1.2.4.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/jgroups-all-2.2.9-beta2.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/c3p0-0.9.1-pre9.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/mysql-connector-java-5.0.3-bin.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/freemarker-2.3.9.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/lucene-core-2.2.0.jar" sourcepath="E:/java/lucene-2.2.0/src/java"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/lucene-highlighter-2.2.0.jar" sourcepath="E:/java/lucene-2.2.0/contrib/highlighter/src/java"/>
+	<classpathentry kind="lib" path="lib/jargs-1.0.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/commons-lang-2.3.jar"/>
+	<classpathentry kind="output" path="WEB-INF/classes"/>
+</classpath>

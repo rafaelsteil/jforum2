@@ -1,0 +1,14 @@
+<p>
+Bár a fórum adminisztrátorai és moderátorai mindent megtesznek, hogy eltávolítsanak vagy átszerkesszenek bármiféle kifogásolható anyagot amilyen gyorsan csak lehet, lehetetlen az összes üzenetet átnézni. Ezért te elfogadod, hogy a fórum összes hozzászólása a hozzászólás szerzõjének véleményét és nézeteit tükrözi, nem a fórum adminisztrátoráét, moderátoráét vagy webmesteréét, kivéve az õ saját hozzászólásaikat, és ezért õket felelõsség nem terheli.
+</p>
+
+<p>
+Elfogadod, hogy nem küldesz a fórumra sértegetõ, obszcén, vulgáris, rágalmazó, gyûlölködõ, fenyegetõ, szexuálisan zaklató, vagy bármi más módon a törvénybe ütközõ anyagokat. Ha mégis ezt teszed, akkor azonnal és véglegesen törölhetünk a fórumról, a szolgáltatódat pedig értesítjük. Az IP címedet a fentiek betartásának érdekében rögzítjük. Beleegyezel, hogy a fórum webmestere, adminisztrátora vagy moderátorai bármikor elltávolíthatnak, szerkeszthetnek, átmozgathatnak vagy bezárhatnak bármely témát, ha úgy látják jónak. Mint felhasználó beleegyezel, hogy az információk, amelyeket megadtál, egy adatbázisban tárolódnak. Bár ez az információ engedélyed nélkül nem lesz kiadva harmadik félnek, a webmester, az adminisztrátor és a moderátorok nem vonhatóak felelõsségre, ha az adatokkal a szerver feltörése miatt visszaélnek.
+</p>
+
+<p>
+Ez a fórumrendszer sütiket használ, hogy információkat tároljon a számítógépeden. Ezek a sütik nem tartalmazzák a fent megadott adatokat. Csak a kényelmedet szolgálják. Az e-mail címed csak arra szolgál, hogy elküldjük neked a regisztrációd adatait és a jelszót (és hogy új jelszót küldhessünk, ha ezt elfelejtenéd)</p>
+
+<p>
+A Regisztráció gombra kattintva elfogadod a fenti feltételeket
+</p>

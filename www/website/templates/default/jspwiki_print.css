@@ -1,0 +1,34 @@
+/*
+ * CSS intended specificly for print media
+ * e.g: <link rel=stylesheet type="text/css" media="print" href="templates/default/jspwiki_print.css">
+ * This stylesheet mainly hides all the webspecific stuff.
+ * Shows content in a print friendly way.
+ * Author PhilipVanBogaert, Dirk Fredericx
+ */
+ 
+/* Webpage stuff */
+#applicationlogo,
+#companylogo,
+.searchbox,
+.breadcrumbs,
+#actionsTop,
+#actionsBottom,
+#favorites,
+.tabmenu       { display: none; }
+
+
+/* Wild guess */
+body           { font-size: 10pt; }
+
+/* Show links as normal text (maybe show urls at the bottom of the page) */
+
+a              { text-decoration: none; }
+
+/* Give the content what it deserves. */
+#header,
+.pagename,
+#footer,
+#page          { width: 100%; margin: 0; float: none; clear: both; position: static; }
+#footer        { margin-top: 1em; }
+
+/* More to come. */

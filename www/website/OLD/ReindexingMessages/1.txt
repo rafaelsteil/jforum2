@@ -1,0 +1,10 @@
+!!! Reindexing messages
+!! Introduction
+JForum uses [Lucene|http://lucene.apache.org] as search engine, which provides an excellent and fast platform for fast content search and indexing. Versions of JForum previous to 2.1.8 used a database-driven approach for searching, which included several tables for word indexing and search.
+
+Lucene stores its index in the filesystem using a [special|http://lucene.apache.org/java/docs/fileformats.html] document format, which provides great performance. On a regular development machine, JForum indexes about 1000 messages per second, value that can be higher on powerful machines. 
+
+!! How to reindex 
+There are two possible ways to reindex the messages: using a command-line tool, or using JForum's Admin Panel (web interface). It is up to you to choose which one to use, although there are some considerations. 
+
+First, 

@@ -1,0 +1,20 @@
+!!! Rankings
+A ''Ranking'' is a textual representation that belongs to each user, either by how many messages he has or via a special, fixed one, defined by the Administrator. A Ranking does not give the user any particular capability, nor makes him more or less special than other users. 
+
+In JForum, there are two types of Ranking: ''Special'', and ''By Messages''. 
+
+!! "By Messages" ranking
+This is the default and most commonly used kind of ranking. After created by the Administrator, it is automatically assigned to each user depending on how many messages he has posted in the forum - that's why it is called "By Message", as they are assigned and changed according to the number of messages the user has. 
+
+To create this kind of Ranking, go to Admin Panel -> Rankings, and click in the "Insert new" button. In the next page, fill "Ranking Name" with the ranking's name, leave "Special ranking" unchecked, and add the minimum number of message the user needs to have in order to get this ranking. 
+
+! Minimum number of posts should be at least 1
+Please note that the value for the field "Minimum number of Posts" __should never be _less than 1__. If setting it to 0 (zero), it may not work correctly. 
+
+!! "Special" ranking
+A Special ranking differs from the regular ("By Messages") ranking because it is manually set to an user by the Administrator, and never changes. Example of special rankings are "Administrator", "Support Team", "Documentation Team", "Moderator" etc... 
+
+To create a special ranking, go to Admin Panel -> Rankings, and click in the "Insert new" button. In the next page, fill "Ranking Name" and check the option "Special ranking". Note that the field "Minimum number of posts" will be disabled, as it is not used in this case. 
+
+! Assigning a special ranking to an user
+To assign a Special ranking to any particular user, go to Admin Panel -> [Users] and search for the user you want, and click in the "Edit" button. There, scroll the page to the end, and select the ranking from the "Define a special Ranking" combo, just above the "Avatar control panel" box. Click save, and you're done. 

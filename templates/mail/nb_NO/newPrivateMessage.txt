@@ -1,0 +1,6 @@
+<#setting number_format = "#"/>
+Hei ${user.username}, 
+
+Du har mottatt en ny personlig medling i ${forumName}. Du kan lese den ved å gå inn på følgende lenke:
+
+${path}

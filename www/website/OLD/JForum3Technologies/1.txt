@@ -1,0 +1,14 @@
+!!! JForum 3 - Technologies
+In order to keep JForum growing and getting better, we decided to do a major refactoring in the core code, using the following technologies: 
+
+!! Java 5
+This one does not require an introduction. It is out there for some years now, being widely used and supported by almost all hosting companies and corporations. It provides more performance than Java 2, as well useful new language features. 
+
+!! Hibernate 3
+Will help a lot with multi database support.
+
+!! VRaptor
+[VRaptor|http://www.vraptor.org] it's a very nice and easy to use framework, going to help on the hardcore part of session management, action dispatching and request processing. 
+
+!! Template engine
+Probably [Freemarker|http://freemarker.sf.net], which is already used in current versions of JForum. It is fast and easy. JSP 2 / JSTL are still considered, but we need good arguments on that. 

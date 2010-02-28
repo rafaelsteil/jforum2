@@ -1,0 +1,5 @@
+<#setting number_format = "#"/>
+${user.username} 你好,
+在${forumName}的论坛里有你一条新短信,你可以通过下面链接查看:
+
+${path}

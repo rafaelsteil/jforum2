@@ -1,0 +1,26 @@
+<p>
+Obwohl die Administratoren und Moderatoren versuchen, alle unerwünschten Beiträge/Nachrichten von diesem Forum 
+fernzuhalten, ist es unmöglich, alle Beiträge/Nachrichten zu überprüfen. Alle Beiträge/Nachrichten drücken die Ansichten des Autors aus und  
+die Administratoren, Moderatoren und Webmaster können nicht für den Inhalt jedes Beitrags verantwortlich gemacht werden(ausgenommen der 
+Beiträge, die tatsächlich von diesen stammen).
+</p>
+
+<p>
+Mit dem Vollenden der Registrierung erklären Sie Sich damit einverstanden, das Forum nicht für Obszönitäten, Vulgäres, Beleidigungen, 
+Propaganda (extremer) politischer Ansichten oder (verbaler) Verstöße gegen das Gesetz zu missbrauchen.
+Bei Verstößen kann ihr Account sofort und dauerhaft gesperrt werden. Die IP-Adresse aller Beiträge wird protokolliert und gegebenenfalls
+zur Sperrung eingesetzt. Als Nutzer erklären Sie sich damit einverstanden, dass die oben genannten Informationen in einer Datenbank abgespeichert 
+werden. Diese Daten werden ohne die Einwilligung des Webmasters nicht an Dritte weitergegeben. Administratoren und Moderatoren können nicht 
+dafür verantwortlich gemacht werden, falls sich jemand diese Daten durch so genanntes 'Hacking' beschafft.
+</p>
+
+<p>
+Dieses Forum benutzt Cookies um Informationen auf ihrem Computer zu speichern. Diese Cookies beinhalten nicht die oben genannten Informationen.
+Sie dienen nur dazu die Benutzung des Forums angenehmer für sie zu gestalten. Die E-Mail Adresse wird nur zur Bestätigung ihrer Registrierung
+sowie des Passwortes verwendet(oder um Ihnen ein neues Passwort zu senden, falls Sie Ihres vergessen haben sollten).
+</p>
+
+
+<p>
+Wenn Sie unten auf 'Registrieren' klicken, erklären Sie sich mit den Nutzungsbedingungen einverstanden. 
+</p>

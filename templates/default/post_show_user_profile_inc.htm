@@ -1,0 +1,46 @@
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+	<td valign="middle" nowrap="nowrap"> 
+		<a href="${JForumContext.encodeURL("/user/profile/${user.id}")}" class="icon_profile"><img src="${contextPath}/images/transp.gif" alt="" /></a>
+		<a href="${JForumContext.encodeURL("/pm/sendTo/${user.id}")}" class="icon_pm"><img src="${contextPath}/images/transp.gif" alt="" /></a>
+
+		<#if (user.isViewEmailEnabled() && user.email?exists && user.email?length > 0)>
+			<#assign e = user.email.split("@")/>
+
+			<#if e?size == 2>
+				<a href="javascript:sendEmail('${e[0]}', '${e[1]}');"><img src="${contextPath}/templates/${templateName}/images/icon_email.gif" alt="[Email]" /></a>
+			</#if>
+		</#if>
+		
+		<#if (user.webSite?exists && user.webSite?length > 0)>
+			<a href="${user.webSite?html}" target="_new"><img src="${contextPath}/templates/${templateName}/images/icon_www.gif" alt="[WWW]"/></a>
+		</#if>
+		
+		<#if (user.yim?exists && user.yim?length > 0)>
+			<a href="http://edit.yahoo.com/config/send_webmesg?.target=${user.yim?html}&amp;.src=pg"><img src="${contextPath}/templates/${templateName}/images/icon_yim.gif" alt="[Yahoo!]" /></a>
+		</#if>
+
+		<#if (user.aim?exists && user.aim?length > 0)>
+			<a target="_new" href="https://my.screenname.aol.com/_cqr/login/login.psp"><img src="${contextPath}/templates/${templateName}/images/icon_aim.gif" border="0" alt="aim icon"/></a>
+		</#if>
+		
+		<#if (user.msnm?exists && user.msnm?length > 0)>
+			<a href="${JForumContext.encodeURL("/user/profile/${user.id}")}"><img src="${contextPath}/templates/${templateName}/images/icon_msnm.gif" alt="[MSN]"  /></a>
+		</#if>
+		
+		<#if (user.icq?exists && user.icq?length > 0)>
+			<a href="http://wwp.icq.com/scripts/search.dll?to=${user.icq?html}"><img src="${contextPath}/templates/${templateName}/images/icon_icq_add.gif" alt="[ICQ]" /></a>
+		</#if>
+	</td>
+
+	<#if karmaEnabled && post.userId != session.userId && logged>
+		<td align="right">
+		<#if !karmaVotes.containsKey(post.id)>
+			<script type="text/javascript">karmaPointsCombo(${post.id})</script>
+		<#else>
+			<span class="gensmall">${I18n.getMessage("Karma.yourRate")}: ${karmaVotes.get(post.id)}</span>
+		</#if>
+		</td>
+	</#if>
+</tr>
+</table>

@@ -1,0 +1,23 @@
+!!! Forums
+Just like [Categories], forums listing in the admin shows them organized by category - that's just for organization purposes. Forum administration is available at Admin Panel -> Forums, where the following actions are available:
+
+# Create a new forum
+# Edit an existing forum
+# Delete one or more forums
+
+!! Create a new forum
+To create a new forum, click in the "Insert new" button. In the new page, there are several fields, as described in the following table: 
+
+||Field name||Description
+|Forum Name|The name of the forum itself
+|Moderate this forum?|This option, when set to "Yes", tells JForum that every new message posted in this forums will only appear to the users after a Moderator review and approve it. 
+|Description|A general purpose description of the forum, that will be shown to all users below the forum's name
+|Permissions|All values in the permissions section are optional, and they intend to give you a choice to set up some of the permissions for the forum right when creating it. 
+
+Please note that, after creating the forum, all roles should be managed from the [Permissions] section. 
+
+!! Edit an existing forum
+To edit a forum, click in the link "Edit" in the forum listing. There you will be able to change the forum's name, is moderation status, as well the description.
+
+!! Delete one or more forums
+To delete forums, just select them by clicking in the checkbox near to the edit button, and this "Delete selected".

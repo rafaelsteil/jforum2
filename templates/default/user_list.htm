@@ -1,0 +1,62 @@
+<#include "header.htm"/>
+<#import "../macros/pagination.ftl" as pagination/>
+
+<script type="text/javascript" src="${contextPath}/templates/${templateName}/js/pagination.js?${startupTime}"></script>
+<script type="text/javascript">
+<!--
+<#include "js/utils.js"/>
+
+-->
+</script>
+
+<#include "karma_search.inc.htm"> 
+
+<table class="forumline" cellspacing="1" cellpadding="3" width="100%" border="0">
+	<tr>
+	  <th class="thcornerl" nowrap="nowrap">#</th>
+	  <th class="thtop" nowrap="nowrap">&nbsp;${I18n.getMessage("User.username")}&nbsp;</th>
+	  <th class="thtop" nowrap="nowrap">&nbsp;${I18n.getMessage("UserProfile.privateMessage")}&nbsp;</th>	  
+	  <th class="thtop" nowrap="nowrap">&nbsp;${I18n.getMessage("email")}&nbsp;</th>
+	  <th class="thtop" nowrap="nowrap">&nbsp;${I18n.getMessage("UserProfile.from")}&nbsp;</th>
+	  <th class="thtop" nowrap="nowrap">&nbsp;${I18n.getMessage("UserProfile.registrationDate")}&nbsp;</th>
+	  <th class="thtop" nowrap="nowrap">&nbsp;${I18n.getMessage("User.numMessages")}&nbsp;</th>
+	</tr>
+
+	<#list users as user>
+		<#if (user.id > 1)>
+			<tr align="center">		  
+				<td class="row2"><span class="gen">${user.id}</span></td>			
+				<td class="row2"><span class="gen"><a href="${JForumContext.encodeURL("/user/profile/${user.id}")}">${user.username}</a></span></td>
+				<td class="row2"><span class="gen"><#if user.id != 1><a href="${JForumContext.encodeURL("/pm/sendTo/${user.id}")}" class="icon_pm"><img src="${contextPath}/images/transp.gif" alt="" /></a><#else>&nbsp;</#if></span></td>
+				<td class="row2"><span class="gen">
+					<#if (user.isViewEmailEnabled() && user.email?exists && user.email?length > 0)>
+						<#assign e = user.email.split("@")/>
+						<#if e?size == 2>
+							<a href="#" onclick="document.location = 'mailto:' + showEmail('${e[0]?default("")}', '${e[1]?default("")}');"><img src="${contextPath}/templates/${templateName}/images/icon_email.gif" alt="[Email]" /></a>
+						<#else>
+							&nbsp;
+						</#if>
+					<#else>
+						&nbsp;
+					</#if>
+					</span>
+				</td>
+				<td class="row2"><span class="gen">${user.from?default("&nbsp;")}</span></td>
+				<td class="row2"><span class="gen">${user.registrationDate}</span></td>
+				<td class="row2"><span class="gen">${user.totalPosts}</span></td>
+			</tr>
+		</#if>
+	</#list>
+
+	<tr align="center">
+		<td class="catbottom" colspan="11" height="28">&nbsp;
+		</td>
+	</tr>
+</table>
+
+<table width="100%">
+	<tr>
+		<td align="right"><#if thisPage?exists><@pagination.doPagination "${action}", -1/></#if></td>
+	</tr>
+</table>
+<#include "bottom.htm"/>

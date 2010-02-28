@@ -1,0 +1,69 @@
+<#setting number_format = "#"/>
+<style type="text/css">@import url( ${contextPath}/templates/${templateName}/styles/style.css?${startupTime} );</style>
+
+<form action="${contextPath}/jforum${extension}" method="post" name="form" id="form" accept-charset="${encoding}">
+<input type="hidden" name="action" value="delete" />
+<input type="hidden" name="module" value="${moduleName}" />
+
+<table class="forumline" cellspacing="0" cellpadding="3" width="100%" border="0">
+	<tr>
+		<th class="thhead" valign="middle" colspan="35 height="25">${I18n.getMessage("Category.List.Title")}</th>
+	</tr>
+
+	<#if errorMessage?exists>
+		<tr>
+			<td align="center" colspan="5"><span class="gensmall">${errorMessage}</span></td>
+		</tr>
+	</#if>
+
+	<#assign counter = 1/>
+	<#assign categories = repository.getAllCategories()/>
+	<#list categories as category>
+		<tr>
+			<td class="catleft" width="38%"><span class="cattitle">${category.name}</span></td>
+			<td class="catleft" align="center"><span class="gen"><a id="categoryEdit" href="${contextPath}/${moduleName}/edit/${category.id}${extension}">${I18n.getMessage("Category.List.Edit")}</a></span></td>
+			<td class="catleft" align="center" width="10%"><input type="checkbox" name="categories_id" value="${category.id}" /></td>
+			
+			<td class="catleft" align="center" width="10%">
+				<#if (counter > 1)>
+					<input type="button" value="${I18n.getMessage("up")}" class="mainoption" onClick="document.location = '${contextPath}/${moduleName}/up/${category.id}${extension}';">&nbsp;
+				<#else>	
+					&nbsp;
+				</#if>
+			</td>
+
+			<td class="catleft" align="center" width="10%">
+				<#if (counter < categories.size())>
+					<input type="button" value="${I18n.getMessage("down")}" class="mainoption" onClick="document.location = '${contextPath}/${moduleName}/down/${category.id}${extension}';">&nbsp;
+				<#else>
+					&nbsp;
+				</#if>
+			</td>
+		</tr>
+
+		<tr>
+			<td colspan="5" class="row1">
+				<table width="100%">
+				<#list repository.getCategory(category.id).getForums() as forum>
+					<tr>
+						<td>&nbsp;</td>
+						<td class="row1" width="100%"><span class="gen">${forum.name}</td>
+						<td>&nbsp;</td>
+					</tr>
+				</#list>
+				</table>
+			</td>
+		</tr>
+
+		<#assign counter = counter + 1/>
+	</#list>
+
+	<tr align="center">
+		<td class="catbottom" colspan="5" height="28">
+			<input class="mainoption" type="button" value="${I18n.getMessage("Category.List.ClickToNew")}" id="btn_insert" name="button" onclick="document.location = '${contextPath}/${moduleName}/insert${extension}';" />
+			&nbsp;&nbsp;
+			<input class="mainoption" type="submit" value="${I18n.getMessage("Category.List.ClickToDelete")}" name="submit" />
+		</td>
+	</tr>
+</table>
+</form>

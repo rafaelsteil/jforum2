@@ -1,0 +1,24 @@
+!!! Integrating your application to JForum
+
+By default JForum runs as a standalone web application, with its own user registration and login management.
+
+Each option below provides a solution to integrate JForum into an application environment where existing user management and security policies are implemented.
+
+!! Using Single Sign-On
+You should use SSO if:
+* your users already login to a website and you want JForum to be appear as part of that site.
+* your users are authenticated for a 'user realm' which provides an implementation for the ''request.getRemoteUser()'' method, e.g. tomcat security realm, JAAS etc.
+
+[Click here to read it|SSO]
+
+!! Delegating the Authentication
+If you have a centralised sign-on to facilitate the management of user credentials across multiple platforms and applications, you can configure JForum to delegate the authentication during the login process.
+
+A good example of this would be an intranet where users credentials are stored on an LDAP server or Windows Active Directory.
+
+[Click here to read it|Authenticators]
+
+!! Advanced Integration
+You can incorporte many JForum features directly into your application, including sign-on and login management. Other examples include displaying most recent posts on your web-site's main pages and accessing users Private Messages.
+
+[Click here to read it|AdvancedLoginAuthenticationIntegration]

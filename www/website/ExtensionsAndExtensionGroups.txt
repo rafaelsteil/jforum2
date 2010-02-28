@@ -1,0 +1,48 @@
+!!! Extensions and Extension Groups
+
+Within Attachments, ''Extensions'' and ''Extension Groups'' represents a set of configurations that allow the board Administrator to change the behaviour of attachments regarding the extension or the group the extension belongs to. 
+
+You can change Attachment options from ''Admin Panel -> Attachments'' page
+
+!! Extension Groups
+An ''Extension Group'' acts much like a regular group, with the only difference that it only holds extensions of files. For example, you can create an Extension Group named "Images" and then add extensions like "jpg", "jpeg", "gif", "png" and "bmp", and another Extension Group named "Bad Files", that holds "exe", "bat", "bin" and "pif". 
+
+[{Tip
+
+If you want to __deny__ uploading of any files that extension belongs to some Extension Group, leave the "Allowed" checkbox empty. This will instruct JForum to not accept any files related to that group. 
+
+On the other hand, if you want to __allow__ upload of files for some extension group, you should check the "Allowed" checkbox
+}]
+
+!! Extensions
+An ''Extension'' is any regular file extension you want to configure, like "exe", "jpg", "html" and so on. When you create a new extension, you have the choice to associate it to an existing Extension Group. 
+
+If you want to deny all extensions, insert an asterisk / star ( * ) in the ''extension'' field, and JForum will handle the rest for you. 
+
+[{Note
+Not every functionality is working. So far, only the "Allowed" option is being processed by JForum. In the future, it will be possible to change downloading options for each distinct Extension Group as well. 
+
+''Upload Icon'' and ''Download Mode'' (Inline / Phisical) are not supported at this momment)
+}]
+
+!! Examples
+Here's a real world scenario: you have a set of file types that should not be allowed in the board, for security reasons. Also, you want to allow image uploading only if they are JPG, GIF or PNG. 
+
+In order to achieve that, the following steps are necessary: 
+
+! First step: create the ''Extension Group''s
+For this sittuation, we'll have two ''Extension Group''s, said "Denied Files" and "Images". 
+
+Access ''Admin Panel -> Extension Groups'' and, in the "Add new Extension Group" box, enter "Denied Extensions" in the "Extension Group" column. Leave "Allowed" unchecked, and all other fields leave with the defaults, and then click "Submit". 
+
+For the "Images" ''Extension Group'', enter its name, but now __check__ the "Allowed" checkbox, as we want to allow uploading of files withing this group. 
+
+! Second step: adding ''Extensions''
+Once we have created the ''Extension Group''s, it's time to add the extensions. Go to ''Admin Panel -> Extensions'', and, in the "Add new Extension" box, insert "exe" in the "Extension" field, leave "Allowed" unchecked, and select "Denied Extensions" in the "Extension Group" combo. Click Submit.
+
+Do the same for the other extensions you want to deny. 
+
+!! Allowing JPG, GIF and PNG, but not BMP and TIFF
+To add jpg, gif and png as allowed files, do the same steps described before, but now check the "Allowed" checkbox, and select the "Images" group. To deny bmp and tiff, just leave the "Allowed" checkbox ''unchecked'' then adding them. 
+
+That's all. 

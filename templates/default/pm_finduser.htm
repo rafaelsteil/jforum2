@@ -1,0 +1,69 @@
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<title>${I18n.getMessage("PrivateMessage.findUser")}</title>
+<meta http-equiv="Content-Type" content="text/html; charset=${encoding}" />
+<style type="text/css">@import url( ${contextPath}/templates/${templateName}/styles/style.css );</style>
+</head>
+
+<body>
+
+<script type="text/javascript">
+<!--
+function refreshUsername()
+{
+	var u = document.search.selectedUsername;
+
+	opener.document.forms['post'].toUserId.value = u.value
+	opener.document.forms['post'].toUsername.value = u[u.selectedIndex].text;
+
+	opener.focus();
+	window.close();
+}
+-->
+</script>
+
+<form action="${contextPath}/jforum${extension}" method="post" name="search" id="search" accept-charset="${encoding}">
+<input type="hidden" name="action" value="${action}" />
+<input type="hidden" name="module" value="${moduleName}" />
+	<table cellspacing="0" cellpadding="10" width="100%" border="0">
+		<tr>
+			<td>
+				<table class="forumline" cellspacing="1" cellpadding="4" width="100%" border="0">
+					<tr>
+						<th class="thhead" height="25">${I18n.getMessage("PrivateMessage.findingUser")}</th>
+					</tr>
+					<tr>
+						<td class="row1" valign="top">
+							<span class="genmed"><br />
+							<input type="text" class="post" name="username" value="${username?default("")}"/>&nbsp; 
+							<input class="liteoption" type="submit" value="${I18n.getMessage("ForumBase.search")}" name="search" />
+							</span><br />
+							<span class="gensmall">${I18n.getMessage("PrivateMessage.searchTip")}</span><br />
+							<br />
+							<#if showResult>
+								<select name="selectedUsername">
+									<#list namesList as user>
+										<option value="${user.id}">${user.username}</option>
+									</#list>
+								</select>
+								&nbsp;<input type="button" value="${I18n.getMessage("PrivateMessage.select")}" class="liteoption" onclick="refreshUsername();" />
+							</#if>
+							<center><span class="genmed"><a class="genmed" href="javascript:window.close();">${I18n.getMessage("closeWindow")}</a></span></center>
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+		
+		<tr>
+			<td align="center">
+				<span class="copyright">Powered by <a class="copyright" href="http://www.jforum.net/" target="_blank">JForum ${version}</a> &copy; <a class="copyright" href="http://www.jforum.net/team.jsp" target="_blank">JForum Team</a></span>
+			</td>
+		</tr>
+	</table>
+</form>
+</body>
+</html>

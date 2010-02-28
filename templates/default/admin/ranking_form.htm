@@ -1,0 +1,62 @@
+<#setting number_format = "#"/>
+
+<script type="text/javascript">
+function turnSpecial() {
+	if (document.getElementById("rank_special").checked) {
+		var e = document.getElementById("rank_min");
+		e.disabled = true;
+		e.style.backgroundColor = "#cccccc";
+		e.value = "";
+	}
+	else {
+		var e = document.getElementById("rank_min");
+		e.disabled = false;
+		e.style.backgroundColor = "white";
+	}
+}
+</script>
+
+<style type="text/css">@import url( ${contextPath}/templates/${templateName}/styles/style.css?${startupTime} );</style>
+
+<form accept-charset="${encoding}" name="form" action="${contextPath}/jforum${extension}" method="post">
+<input type="hidden" name="action" value="${action}" />
+<input type="hidden" name="module" value="${moduleName}" />
+
+<#if rank?exists>
+	<input type="hidden" name="rank_id" value="${rank.id}" />
+</#if>
+
+<table class="forumline" cellspacing="1" cellpadding="3" width="100%"
+	border="0">
+	<tbody>
+		<tr>
+			<th class="thhead" valign="middle" colspan="2" height="25">${I18n.getMessage("Rank.Form.Title")}</th>
+		</tr>
+
+		<tr>
+			<td class="gen">${I18n.getMessage("Rank.Form.RankName")}</td>
+			<td class="row2"><input name="rank_title" type="text" id="rank_title" value="<#if rank?exists>${rank.title}</#if>" /></td>
+		</tr>
+
+		<tr>
+			<td class="row1" width="38%"><span class="gen">${I18n.getMessage("Rank.Form.Special")}</span></td>
+			<td class="row2"><input name="rank_special" value="1" type="checkbox" onClick="turnSpecial();" id="rank_special"<#if rank?exists && rank.special>checked</#if> /></td>
+		</tr>
+
+		<tr>
+			<td class="row1" width="38%"><span class="gen">${I18n.getMessage("Rank.Form.MinValue")}</span></td>
+			<td class="row2"><input name="rank_min" type="text" id="rank_min" value="<#if rank?exists>${rank.min}</#if>" size="6" maxlength="5" /></td>
+		</tr>
+
+		<tr align="center">
+			<td class="catbottom" colspan="2" height="28"><input class="mainoption" type="submit" value="${I18n.getMessage("Rank.Form.ClickToUpdate")}" name="submit" /></td>
+		</tr>
+	</tbody>
+</table>
+</form>
+
+<#if rank?exists && rank.special>
+<script type="text/javascript">
+turnSpecial();
+</script>
+</#if>

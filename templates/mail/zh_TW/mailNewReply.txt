@@ -1,0 +1,18 @@
+<#assign hasMessageContents = message?exists/>
+<#if hasMessageContents>
+	<#assign hasMessageContents = user?exists && user.notifyText()/>
+</#if>
+<#if !hasMessageContents>
+您好,
+
+您會收到這封信是因為 "${topic.title}" 這個主題從您上次拜訪後已經獲得回應了.
+您可使用下列的網址來閱讀該訊息. 在您閱讀該主題之前,您將不會再收到更多的通知信.
+
+${path}
+
+如果您不想再收到這個主題的通知信,請點選以下的網址
+
+${unwatch}
+<#else>
+<#include "mailNewReplyWithContents.txt"/>
+</#if>

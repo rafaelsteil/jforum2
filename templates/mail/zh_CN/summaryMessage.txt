@@ -1,0 +1,11 @@
+﻿您好,这是论坛每周自动订阅功能为您送来的贴子,如果您不想再收到订阅信息,可以到论坛版块里取消订阅.
+<#list posts as post>
+
+主题: ${post.subject}
+链接: ${url}posts/list/${post.topicId}${extension}
+发贴人: ${post.postUsername}
+内容:
+${post.text}
+-------------
+
+</#list>

@@ -1,0 +1,84 @@
+!!! Integrating JForum
+JForum uses [ThreadLocal|http://www.ibm.com/developerworks/java/library/j-threads3.html] for its execution contexts, which is where all the action occurs. In order to execute anything related to JForum, you have to setup the execution context, represented by the class ''net.jforum.JForumExecutionContext''. The most common used methods are:
+
+# ''get()''
+# ''set()''
+# ''setConnection()'',
+# ''setForumContext()''
+
+This last being an instance of ''net.jforum.context.ForumContext'', usually ''net.jforum.context.JForumContext''. 
+
+A ''ForumContext'' contains the HTTP Request and Response, as well the ''context path' and JForum's servlet extension. 
+
+!! Creating a ''complete'' execution context
+By ''complete'' we mean an execution context that has a request, response and JDBC connection. Not every time you will need all this information - it depends of what you are trying to do -, but it is very likely that at least the HTTP request will be necessary. 
+
+[{Java2HtmlPlugin 
+
+import net.jforum.JForumExecutionContext;
+import net.jforum.context.ForumContext;
+import net.jforum.context.JForumContext;
+import net.jforum.context.web.WebRequestContext;
+import net.jforum.context.web.WebResponseContext;
+
+// .....
+
+try {
+	// Retrieve an existing or create a new execution context
+	JForumExecutionContext executionContext = JForumExecutionContext.get();
+	
+	// Create a ForumContext
+	ForumContext forumContext = new JForumContext(request.getContextPath(), 
+		".page", 
+		new WebRequestContext(request), 
+		new WebResponseContext(response));
+	
+	executionContext.setForumContext(forumContext);
+	
+	// If you have a valid JDBC connection at this point, you can 
+	// set it as well
+	executionContext.setConnection(connection);
+	
+	// Set back the new execution context, so we can use it
+	JForumExecutionContext.set(executionContext);
+	
+	// ....
+	// Execute all your JForum code here
+	// ....
+}
+finally {
+	// Release the resources
+	JForumExecutionContext.finish();
+}
+}]
+
+In lines 16 and 17 we create  new instance of ''WebRequestContext'' and ''WebResponseContext'', passing a valid instance of a ''HttpServletRequest'' and ''HttpServletResponse'' respectively. It is supposed you already have such instances (e.g, from your Servlet / JSP). 
+
+!! A note about the JDBC Connection
+In line 23 we manually set a JDBC connection. If we don't do that, JForum will make a call to the method ''getConnection()'' of the class ''JForumExecutionContext'', trying to get a connection from JForum's configuration. 
+
+However, the example code doesn't tell the whole history. By calling ''JForumExecutionContext.finish()'', JForum will also try to release such connection, even if it was manually set. To prevent JForum of doing that - for example, if you have your own connection poll and / or want to use that connection besides JForum execution context, you have to set it to ''null'', as shown in the following code:
+
+[{Java2HtmlPlugin 
+
+// ....
+// By setting the connection to null, we prevent JForum of trying
+// to release it when finish() is called
+executionContext.setConnection(null);
+JForumExecutionContext.set(executionContext);
+
+// Now, when calling JForumExecutionContext.finish(), JForum will not try
+// to release that connection
+JForumExecutionContext.finish();
+}]
+
+!! Resuming
+To resume the steps:
+
+# Always use the execution context inside a try-finally block;
+# Never forget to fall ''JForumExecutionContext.finish()''
+# Retrieve the execution context by calling  'JForumExecutionContext.get()''
+# A ''ForumContext'' holds the request and response
+# The default implementation of ''ForumContext'' is ''JForumContext''
+# You can manually set a JDBC connection using the method ''setConnection()''
+# If not using ''setConnection()'', JForum will try to retrieve one from its connection poll

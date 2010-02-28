@@ -1,0 +1,28 @@
+<div class="postinfo">
+	<div class="date">
+		<#assign startStr = ""/>
+		<#if (start > 0)><#assign startStr = "${start}/"/></#if>
+		<a href="${JForumContext.encodeURL("/posts/list/${startStr}${post.topicId}")}#${post.id}">
+		<img src="${contextPath}/templates/${templateName}/images/icon_minipost_new.gif" alt="[Post New]" /></a>${post.formatedTime}
+	</div>
+	<div class="subject">&nbsp;&nbsp; &nbsp;<b>${I18n.getMessage("PostShow.subject")}:</b> <a name="${post.id}">${post.subject?default("")?html}</a></div>
+	<div class="action">
+		<#if karmaEnabled>
+			<script type="text/javascript">writeStars(${post.karma.karmaPoints}, ${post.id});</script>
+		</#if>
+
+		<#if topic.status != STATUS_LOCKED && !readonly>
+			<a href="${JForumContext.encodeURL("/posts/quote/${start}/${post.id}")}" rel="nofollow" class="icon_quote"><img src="${contextPath}/images/transp.gif" alt="" /></a>
+		</#if>
+
+		<#if (canEditCurrentMessage)>
+			<a href="${JForumContext.encodeURL("/jforum${extension}?module=${moduleName}&amp;action=edit&amp;post_id=${post.id}&amp;start=${start}","")}" rel="nofollow" class="icon_edit"><img src="${contextPath}/images/transp.gif" alt="" /></a>  
+		</#if>
+
+		<#if canRemove>
+			<a href="${JForumContext.encodeURL("/jforum${extension}?module=${moduleName}&amp;action=delete&amp;post_id=${post.id}&amp;start=${start}","")}" id="delete${post.id}" onclick="return confirmDelete(${post.id});"><img src="${contextPath}/templates/${templateName}/images/icon_delete.gif" alt="[Delete]" /></a>  
+		</#if>
+
+		<a class="nav" href="#top"><img src="${contextPath}/templates/${templateName}/images/icon_up.gif" alt="[Up]" /></a>
+	</div>
+</div>

@@ -1,0 +1,373 @@
+<style type="text/css">@import url( ${contextPath}/templates/${templateName}/styles/style.css?${startupTime} );</style>
+<script type="text/javascript" src="${contextPath}/templates/${templateName}/js/jquery.js?${startupTime}"></script>
+
+<script type="text/javascript">
+<#include "../js/utils.js"/>
+</script>
+
+<script language="javascript">
+function resize()
+{
+	var h = document.form.thumbH.value;
+	var w = document.form.thumbW.value;
+	
+	if ((h > 30 && h < 350) && (w > 30 && w < 350)){
+		document.getElementById("avatarPreview").style.width = w + "px";                   
+		document.getElementById("avatarPreview").style.height = h + "px";          
+	}
+}
+
+function changeValue(field, value)
+{
+	var f = eval("document.form." + field)
+	f.value = value;
+	resize();
+}
+
+function testEmail()
+{
+	if ($("#address").val()) {
+		$("#mailButton").val("${I18n.getMessage("Config.Form.SmtpTestSending")}...").attr("disabled", "disabled");
+
+		var params = {
+			sender: $("#sender").val(),
+			host: $("#host").val(),
+			port: $("#port").val(),
+			auth: $("#auth").val(),
+			ssl: $("#ssl").val(),
+			username: $("#username").val(),
+			password: $("#password").val(),
+			to: $("#address").val()
+		};
+
+		$.ajax({
+			type:"POST",
+			url:"$contextPath/jforum${extension}?module=ajax&action=sendTestMail",
+			data:params,
+			dataType:"script",
+			global:false
+		});
+	}
+}
+</script>
+
+<form accept-charset="${encoding}" name="form" action="${contextPath}/jforum${extension}" method="post">
+<input type="hidden" name="action" value="editSave" />
+<input type="hidden" name="module" value="${moduleName}" />
+
+<table class="forumline" cellspacing="1" cellpadding="3" width="100%" border="0">
+<tr>
+	<th class="thhead" valign="middle" colspan="2" height="25">${I18n.getMessage("AdminConfig.Title")}</th>
+</tr>
+
+<!-- General Settings -->
+<tr>
+	<td class="catsides" colspan="2"><span class="gen"><b>${I18n.getMessage("Config.Form.General")}</b></span></td>
+</tr>
+<tr>
+	<td class="row1" width="38%"><span class="gen">${I18n.getMessage("Config.Form.ForumURL")}</span></td>
+	<td class="row1" width="38%"><span class="gen"><input type="text" size="50" name="p_forum.link" value="${config.getProperty("forum.link")}" /></span></td>
+</tr>
+
+<tr>
+	<td class="row2" width="38%"><span class="gen">${I18n.getMessage("Config.Form.SiteURL")}</span></td>
+	<td class="row2" width="38%"><span class="gen"><input type="text" size="50" name="p_homepage.link" value="${config.getProperty("homepage.link")}" /></span></td>
+</tr>
+
+<tr>
+	<td class="row2" width="38%"><span class="gen">${I18n.getMessage("Config.Form.forumName")}</span></td>
+	<td class="row2" width="38%"><span class="gen"><input type="text" size="50" name="p_forum.name" value="${config.getProperty("forum.name")}" /></span></td>
+</tr>
+
+<tr>
+	<td class="row1" width="38%"><span class="gen">${I18n.getMessage("Config.Form.ForumPageTitle")}</span></td>
+	<td class="row1" width="38%"><span class="gen"><input type="text" size="50" name="p_forum.page.title" value="${config.getProperty("forum.page.title")}" /></span></td>
+</tr>
+
+<tr>
+	<td class="row1" width="38%"><span class="gen">${I18n.getMessage("Config.Form.MetaTag.description")}</span></td>
+	<td class="row1" width="38%"><span class="gen"><input type="text" size="50" name="p_forum.page.metatag.description" value="${config.getProperty("forum.page.metatag.description")}" /></span></td>
+</tr>
+
+<tr>
+	<td class="row2" width="38%"><span class="gen">${I18n.getMessage("Config.Form.MetaTag.keywords")}</span></td>
+	<td class="row2" width="38%"><span class="gen"><input type="text" size="50" name="p_forum.page.metatag.keywords" value="${config.getProperty("forum.page.metatag.keywords")}" /></span></td>
+</tr>
+
+<tr>
+	<td class="row1" width="38%"><span class="gen">${I18n.getMessage("Config.Form.encoding")}</span></td>
+	<td class="row1" width="38%"><span class="gen"><input type="text" size="10" name="p_encoding" value="${config.getProperty("encoding")}" /></span></td>
+</tr>
+
+<tr>
+	<td class="row1" width="38%"><span class="gen">${I18n.getMessage("Config.Form.I18n")}</span></td>
+	<td class="row1" width="38%">
+		<span class="gen">
+		<select name="p_i18n.board.default">
+		<#list locales as l>
+			<#assign selected = ""/>
+			<#if l == config.getProperty("i18n.board.default")>
+				<#assign selected = "selected"/>
+			</#if>
+
+			<option value="${l}" ${selected}>${l}</option>
+		</#list>
+		</select>
+		</span>
+	</td>
+</tr>
+
+<tr>
+	<td class="row1" width="38%"><span class="gen">${I18n.getMessage("Config.Form.TopicsPerPage")}</span></td>
+	<td class="row1" width="38%"><span class="gen"><input type="text" size="10" name="p_topicsPerPage" value="${config.getProperty("topicsPerPage")}" /></span></td>
+</tr>
+
+<tr>
+	<td class="row2" width="38%"><span class="gen">${I18n.getMessage("Config.Form.PostsPerPage")}</span></td>
+	<td class="row2" width="38%"><span class="gen"><input type="text" size="10" name="p_postsPerPage" value="${config.getProperty("postsPerPage")}" /></span></td>
+</tr>
+
+<tr>
+	<td class="row1" width="38%"><span class="gen">${I18n.getMessage("Config.Form.UsersPerPage")}</span></td>
+	<td class="row1" width="38%"><span class="gen"><input type="text" size="10" name="p_usersPerPage" value="${config.getProperty("usersPerPage")}" /></span></td>
+</tr>
+
+<tr>
+	<td class="row1" width="38%"><span class="gen">${I18n.getMessage("Config.Form.postsNewDelay")}</span></td>
+	<td class="row1" width="38%"><span class="gen"><input type="text" size="10" name="p_posts.new.delay" value="${config.getProperty("posts.new.delay")}" /></span></td>
+</tr>
+
+<tr>
+	<td class="row1" width="38%"><span class="gen">${I18n.getMessage("Config.Form.htmlTags")}</span></td>
+	<td class="row1" width="38%"><span class="gen"><input type="text" size="50" name="p_html.tags.welcome" value="${config.getProperty("html.tags.welcome")}" /></span></td>
+</tr>
+
+<tr>
+	<td class="row2" width="38%"><span class="gen">${I18n.getMessage("Config.Form.CaptchaDuringRegistration")}</span></td>
+	<td class="row2" width="38%">
+		<#assign o = config.getProperty("captcha.registration")/>
+		<span class="gen">
+			<select name="p_captcha.registration">
+				<option value="true" <#if o == "true">selected</#if>>${I18n.getMessage("True")}</option>
+				<option value="false" <#if o == "false">selected</#if>>${I18n.getMessage("False")}</option>
+			</select>
+		</span>
+	</td>
+</tr>
+
+<tr>
+	<td class="row1" width="38%"><span class="gen">${I18n.getMessage("Config.Form.DisableRegistraion")}</span></td>
+	<td class="row1" width="38%">
+		<#assign o = config.getProperty("registration.enabled")/>
+		<span class="gen">
+			<select name="p_registration.enabled">
+				<option value="true" <#if o == "true">selected</#if>>${I18n.getMessage("True")}</option>
+				<option value="false" <#if o == "false">selected</#if>>${I18n.getMessage("False")}</option>
+			</select>
+		</span>
+	</td>
+</tr>
+
+<tr>
+	<td class="row2" width="38%"><span class="gen">${I18n.getMessage("Config.Form.EnableRSS")}</span></td>
+	<td class="row2" width="38%">
+		<#assign o = config.getProperty("rss.enabled")/>
+		<span class="gen">
+			<select name="p_rss.enabled">
+				<option value="true" <#if o == "true">selected</#if>>${I18n.getMessage("True")}</option>
+				<option value="false" <#if o == "false">selected</#if>>${I18n.getMessage("False")}</option>
+			</select>
+		</span>
+	</td>
+</tr>
+
+<!-- Cache Settings -->
+<tr>
+	<td class="catsides" colspan="2"><span class="gen"><b>${I18n.getMessage("Config.Form.cacheSettings")}</b></span></td>
+</tr>
+
+<tr>
+	<td class="row2" width="38%"><span class="gen">${I18n.getMessage("Config.Form.postsCacheEnabled")}</span></td>
+	<td class="row2" width="38%">
+		<#assign o = config.getProperty("posts.cache.enabled")/>
+		<select name="p_posts.cache.enabled">
+			<option value="true" <#if o == "true">selected</#if>>${I18n.getMessage("True")}</option>
+			<option value="false" <#if o == "false">selected</#if>>${I18n.getMessage("False")}</option>
+		</select>
+	</td>
+</tr>
+
+<tr>
+	<td class="row2" width="38%"><span class="gen">${I18n.getMessage("Config.Form.postsCacheSize")}</span></td>
+	<td class="row2" width="38%"><span class="gen"><input type="text" size="10" name="p_posts.cache.size" value="${config.getProperty("posts.cache.size")}" /></span></td>
+</tr>
+
+<tr>
+	<td class="row2" width="38%"><span class="gen">${I18n.getMessage("Config.Form.HotTopicStart")}</span></td>
+	<td class="row2" width="38%"><span class="gen"><input type="text" size="10" name="p_hot.topic.begin" value="${config.getProperty("hot.topic.begin")}" /></span></td>
+</tr>
+
+<tr>
+	<td class="row1" width="38%"><span class="gen">${I18n.getMessage("Config.Form.RecentTopicsLimit")}</span></td>
+	<td class="row1" width="38%"><span class="gen"><input type="text" size="10" name="p_topic.recent" value="${config.getProperty("topic.recent")}" /></span></td>
+</tr>
+
+<!-- Avatar -->
+<tr>
+	<td class="catsides" colspan="2"><span class="gen"><b>${I18n.getMessage("Config.Form.avatar")}</b></span></td>
+</tr>
+
+<tr>
+	<td class="row2" width="38%"><span class="gen">${I18n.getMessage("Config.Form.avatarSize")}</span></td>
+	<td class="row2" width="38%"><span class="gen"><input type="text" size="10" name="p_avatarMaxKbSize" value="${config.getProperty("avatarMaxKbSize")}" /></span></td>
+</tr>
+<tr>
+	<td class="row1" width="38%"><span class="gen">${I18n.getMessage("Config.Form.avatarMaxWidth")}</span></td>
+	<td class="row1" width="38%"><span class="gen"><input type="text" size="10"name="p_avatar.maxWidth" value="${config.getProperty("avatar.maxWidth")}" onchange="changeValue('thumbW', this.value)"/></span></td>
+</tr>
+<tr>
+	<td class="row2" width="38%"><span class="gen">${I18n.getMessage("Config.Form.avatarMaxHeight")}</span></td>
+	<td class="row2" width="38%"><span class="gen"><input type="text" size="10"name="p_avatar.maxHeight" value="${config.getProperty("avatar.maxHeight")}" onchange="changeValue('thumbH', this.value)"/></span></td>
+</tr>
+<tr>
+	<td class="row2" width="38%"><span class="gen">${I18n.getMessage("Config.Form.avatarPreview")}</span></td>
+	<td class="row2" width="38%">
+		<input type="hidden" name="thumbH" value="${config.getProperty("avatar.maxHeight")}">	
+		<input type="hidden" name="thumbW" value="${config.getProperty("avatar.maxWidth")}">
+		<div id="avatarPreview" style="align:center; border:1px solid orange;">&nbsp;</div>
+	</td>
+</tr>
+
+<!-- Mail -->
+<tr>
+	<td class="catsides" colspan="2"><span class="gen"><b>${I18n.getMessage("Config.Form.Mail")}</b></span></td>
+</tr>
+
+<tr>
+	<td class="row1" width="38%"><span class="gen">${I18n.getMessage("Config.Form.Charset")}</span></td>
+	<td class="row1" width="38%"><span class="gen"><input type="text" size="10" name="p_mail.charset" value="${config.getProperty("mail.charset")}" /></span></td>
+</tr>
+<tr>
+	<td class="row2" width="38%"><span class="gen">${I18n.getMessage("Config.Form.Sender")}</span></td>
+	<td class="row2" width="38%"><span class="gen"><input type="text" size="50" name="p_mail.sender" id="sender" value="${config.getProperty("mail.sender")}" /></span></td>
+</tr>
+<tr>
+	<td class="row2" width="38%"><span class="gen">${I18n.getMessage("Config.Form.MailHost")}</span></td>
+	<td class="row2" width="38%"><span class="gen"><input type="text" size="50" name="p_mail.smtp.host" id="host" value="${config.getProperty("mail.smtp.host")}" /></span></td>
+</tr>
+<tr>
+	<td class="row2" width="38%"><span class="gen">${I18n.getMessage("Config.Form.MailPort")}</span></td>
+	<td class="row2" width="38%"><span class="gen"><input type="text" size="10" name="p_mail.smtp.port" id="port" value="${config.getProperty("mail.smtp.port")}" /></span></td>
+</tr>
+<tr>
+	<td class="row1" width="38%"><span class="gen">${I18n.getMessage("Config.Form.SmtpAuth")}</span></td>
+	<td class="row1" width="38%">
+		<select name="p_mail.smtp.auth" id="auth">
+			<option value="false" <#if config.getProperty("mail.smtp.auth") == "false">selected</#if>>${I18n.getMessage("False")}</option>
+			<option value="true" <#if config.getProperty("mail.smtp.auth") == "true">selected</#if>>${I18n.getMessage("True")}</option>
+		</select>
+	</td>
+</tr>
+<tr>
+	<td class="row1" width="38%"><span class="gen">${I18n.getMessage("Config.Form.MailSSL")}</span></td>
+	<td class="row1" width="38%">
+		<select name="p_mail.smtp.ssl" id="ssl">
+			<option value="false" <#if config.getProperty("mail.smtp.ssl") == "false">selected</#if>>${I18n.getMessage("False")}</option>
+			<option value="true" <#if config.getProperty("mail.smtp.ssl") == "true">selected</#if>>${I18n.getMessage("True")}</option>
+		</select>
+	</td>
+</tr>
+<tr>
+	<td class="row2" width="38%"><span class="gen">${I18n.getMessage("Config.Form.SmtpUsername")}</span></td>
+	<td class="row2" width="38%"><span class="gen"><input type="text" size="50" name="p_mail.smtp.username" id="username" value="${config.getProperty("mail.smtp.username")}" /></span></td>
+</tr>
+<tr>
+	<td class="row1" width="38%"><span class="gen">${I18n.getMessage("Config.Form.SmtpPassword")}</span></td>
+	<td class="row1" width="38%"><span class="gen"><input type="text" name="p_mail.smtp.password" id="password" value="${config.getProperty("mail.smtp.password")}" /></span></td>
+</tr>
+<tr>
+	<td class="row1" width="38%"><span class="gen"><font color="green">${I18n.getMessage("Config.Form.SmtpTest")}</font></span></td>
+	<td class="row1" width="38%">
+		<span class="gen">E-mail: </span> <input type="text" id="address">&nbsp;
+		<input type="button" value="${I18n.getMessage("Config.Form.SmtpTest")}" class="mainoption" id="mailButton" onClick="testEmail();">
+	</td>
+</tr>
+<!-- Topic answer -->
+
+<tr>
+	<td class="row1" width="38%"><span class="gen">${I18n.getMessage("Config.Form.AnswerFile")}</span></td>
+	<td class="row1" width="38%"><span class="gen"><input type="text" size="50" name="p_mail.newAnswer.messageFile" value="${config.getProperty("mail.newAnswer.messageFile")}" /></span></td>
+</tr>
+<tr>
+	<td class="row2" width="38%"><span class="gen">${I18n.getMessage("Config.Form.AnswerSubject")}</span></td>
+	<td class="row2" width="38%"><span class="gen"><input type="text" size="50" name="p_mail.newAnswer.subject" value="${config.getProperty("mail.newAnswer.subject")}" /></span></td>
+</tr>
+
+<!-- Private Message -->
+<tr>
+	<td class="row1" width="38%"><span class="gen">${I18n.getMessage("Config.Form.PmAnswerFile")}</span></td>
+	<td class="row1" width="38%"><span class="gen"><input type="text" size="50" name="p_mail.newPm.messageFile" value="${config.getProperty("mail.newPm.messageFile")}" /></span></td>
+</tr>
+<tr>
+	<td class="row2" width="38%"><span class="gen">${I18n.getMessage("Config.Form.PmAnswerSubject")}</span></td>
+	<td class="row2" width="38%"><span class="gen"><input type="text" size="50" name="p_mail.newPm.subject" value="${config.getProperty("mail.newPm.subject")}" /></span></td>
+</tr>
+
+<!-- Activation -->
+<tr>
+	<td class="row1" width="38%"><span class="gen">${I18n.getMessage("Config.Form.ActivationAnswerFile")}</span></td>
+	<td class="row1" width="38%"><span class="gen"><input type="text" size="50" name="p_mail.activationKey.messageFile" value="${config.getProperty("mail.activationKey.messageFile")}" /></span></td>
+</tr>
+<tr>
+	<td class="row2" width="38%"><span class="gen">${I18n.getMessage("Config.Form.ActivationAnswerSubject")}</span></td>
+	<td class="row2" width="38%"><span class="gen"><input type="text" size="50" name="p_mail.activationKey.subject" value="${config.getProperty("mail.activationKey.subject")}" /></span></td>
+</tr>
+
+<!-- Lost Password -->
+<tr>
+	<td class="row1" width="38%"><span class="gen">${I18n.getMessage("Config.Form.LostPasswordFile")}</span></td>
+	<td class="row1" width="38%"><span class="gen"><input type="text" size="50" name="p_mail.lostPassword.messageFile" value="${config.getProperty("mail.lostPassword.messageFile")}" /></span></td>
+</tr>
+<tr>
+	<td class="row2" width="38%"><span class="gen">${I18n.getMessage("Config.Form.LostPasswordSubject")}</span></td>
+	<td class="row2" width="38%"><span class="gen"><input type="text" size="50" name="p_mail.lostPassword.subject" value="${config.getProperty("mail.lostPassword.subject")}" /></span></td>
+</tr>
+
+<tr>
+	<td class="row1" width="38%"><span class="gen">${I18n.getMessage("Config.Form.MessageFormat")}</span></td>
+	<td class="row1" width="38%">
+		<select name="p_mail.messageFormat">
+			<option value="text" <#if config.getProperty("mail.messageFormat") == "text">selected</#if>>Text</option>
+			<option value="html" <#if config.getProperty("mail.messageFormat") == "html">selected</#if>>HTML</option>
+		</select>
+	</td>
+</tr>
+
+<tr>
+	<td class="row2" width="38%"><span class="gen">${I18n.getMessage("Config.Form.EmailNotifyAnswers")}</span></td>
+	<td class="row2" width="38%">
+		<select name="p_mail.notify.answers">
+			<option value="false" <#if config.getProperty("mail.notify.answers") == "false">selected</#if>>${I18n.getMessage("False")}</option>
+			<option value="true" <#if config.getProperty("mail.notify.answers") == "true">selected</#if>>${I18n.getMessage("True")}</option>
+		</select>
+	</td>
+</tr>
+<tr>
+	<td class="row1" width="38%"><span class="gen">${I18n.getMessage("Config.Form.UserEmailAuth")}</span></td>
+	<td class="row1" width="38%">
+		<select name="p_mail.user.email.auth">
+			<option value="false" <#if config.getProperty("mail.user.email.auth") == "false">selected</#if>>${I18n.getMessage("False")}</option>
+			<option value="true" <#if config.getProperty("mail.user.email.auth") == "true">selected</#if>>${I18n.getMessage("True")}</option>
+		</select>
+	</td>
+</tr>
+
+
+<tr>
+	<td class="catsides" colspan="2" align="center"><input type="submit" value="${I18n.getMessage("Update")}" class="mainoption" />
+	</td>
+</tr>
+
+</table>
+</form>
+<script language="javascript">resize();</script>

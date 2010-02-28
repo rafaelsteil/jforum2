@@ -1,0 +1,14 @@
+﻿${user.username} 您好
+
+有人, 應該是您, 在${forumName}註冊為會員.
+請利用以下的網址完成註冊程序.
+
+${url}
+
+如果您偏好手動輸入這些資訊, 請到 ${manualUrl} 並
+輸入下列資訊:
+
+會員ID: ${user.id}
+驗證碼: ${user.getActivationKey()}
+
+記住: 您的會員名稱是: ${user.username}

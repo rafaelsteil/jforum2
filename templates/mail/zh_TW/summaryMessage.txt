@@ -1,0 +1,12 @@
+﻿您好, 這是本週的討論區摘要.
+
+<#list posts as post>
+
+主題: ${post.subject}
+網址: ${url}posts/list/${post.topicId}${extension}
+發表人: ${post.postUsername}
+內容:
+${post.text}
+-------------
+
+</#list>

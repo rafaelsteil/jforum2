@@ -1,0 +1,9 @@
+!!! Upgrading your JForum installation
+Upgrading from an older version of JForum to the newest release is very straightforward, requiring only a bit of attention and the reading of the proper documentation. 
+
+* To upgrade from version __2.1.6 to 2.1.7__, check [Upgrading from 2.1.6 to 2.1.7]
+* To upgrade from version __2.1.4 to 2.1.6__, check [Upgrading from 2.1.4 to 2.1.6]
+
+[{Tip
+Please note that if you want to upgrade from 2.1.4 to 2.1.7, you have to first proceed with the instrictions of [2.1.4 to 2.1.6|UpgradingFrom2.1.4To2.1.6] to then [upgrade to 2.1.7|UpgradingFrom2.1.6To2.1.7]
+}]

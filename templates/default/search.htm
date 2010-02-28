@@ -1,0 +1,88 @@
+<#include "header.htm"/>
+<form accept-charset="${encoding}" action="${JForumContext.encodeURL("/jforum")}" method="get" id="formSearch" name="formSearch">
+	<input type="hidden" name="module" value="${moduleName}" />
+	<input type="hidden" name="action" value="search" />
+	
+	<table cellspacing="2" cellpadding="2" width="100%" align="center" border="0">
+		<tr>
+			<td align="left">
+				<span class="nav"><a class="nav" href="${contextPath}/forums/list${extension}">${I18n.getMessage("ForumListing.forumIndex")}</a></span>
+			</td>
+	    </tr>
+	</table>
+
+	<table class="forumline" cellspacing="1" cellpadding="4" width="100%" border="0">
+		<tr>
+			<th class="thhead" colspan="4" height="25">${I18n.getMessage("Search.terms")}</th>
+		</tr>
+		
+		<tr>
+			<td class="row1" width="50%" colspan="2"><span class="gen">${I18n.getMessage("Search.typeKeywords")}</span></td>
+			<td class="row2" valign="top" colspan="2">
+				<p><span class="genmed">
+				<input type="text" class="post" style="WIDTH: 300px" size="30" name="search_keywords" />
+				<br /><br />
+				<input name="match_type" type="radio" value="all" checked="checked" id="all_terms"/><label for="all_terms">${I18n.getMessage("Search.allTerms")}</label>
+				</span>
+				<br />
+				<span class="genmed"><input type="radio" value="any" name="match_type" id="any_term"/><label for="any_term">${I18n.getMessage("Search.anyTerm")}</label></span>
+				</p>
+			</td>
+        </tr>
+        <tr>
+			<th class="thhead" colspan="4" height="25">${I18n.getMessage("Search.options")}</th>
+        </tr>
+		
+        <tr>
+			<td class="row1" align="right" nowrap="nowrap"><span class="gen">${I18n.getMessage("Search.forum")}:&nbsp;</span></td>
+			<td class="row2">
+				<span class="genmed">
+				<select class="post" name="search_forum">
+					<option value="" selected="selected">${I18n.getMessage("Search.allAvailable")}</option>
+					<#list categories as c>
+						<optgroup label="${c.name}">
+							<#list c.getForums() as f>
+								<option value="${f.id}">${f.name}</option>
+							</#list>
+						</optgroup>
+					</#list>
+				</select>
+				</span>
+			</td>
+			<td class="row1" align="right"><span class="gen">${I18n.getMessage("Search.orderBy")}:&nbsp;</span></td>
+			<td class="row2" valign="middle" nowrap="nowrap">
+				<span class="genmed">
+				<select class="post" name="sort_by" onChange="enableDisableOrderBy(this.value);">
+					<option value="relevance" selected="selected">${I18n.getMessage("Search.relevance")}</option>
+					<option value="time">${I18n.getMessage("Search.postDate")}</option>
+				</select>
+				<br />
+				<input type="radio" value="ASC" name="sort_dir" id="sort_asc"/><label for="sort_asc">${I18n.getMessage("Search.ascending")}</label><br />
+				<input type="radio" checked="checked" value="DESC" name="sort_dir" id="sort_desc"/><label for="sort_desc">${I18n.getMessage("Search.descending")}</label>
+				</span>
+			</td>
+		</tr>
+		<tr>
+			<td class="catbottom" align="center" colspan="4" height="28"><input class="liteoption" type="submit" value="${I18n.getMessage("Search.search")}" /></td>
+		</tr>
+	</table>
+</form>
+<script type="text/javascript">
+<!--
+document.formSearch.search_keywords.focus();
+
+function enableDisableOrderBy(type)
+{
+	var isDisabled = type == "relevance";
+	document.formSearch.sort_dir[0].disabled = isDisabled;
+	document.formSearch.sort_dir[1].disabled = isDisabled;
+	
+	if (isDisabled) {
+		document.formSearch.sort_dir[1].checked = true;
+	}
+}
+
+enableDisableOrderBy("relevance");
+-->
+</script>
+<#include "bottom.htm"/>

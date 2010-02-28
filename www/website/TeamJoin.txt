@@ -1,0 +1,17 @@
+!!! Join the JForum Team
+Ok, so you want to help JForum, and are asking yourself how and where to start. Here's how:
+
+! First option: Are you a Java programmer?
+Most of the people who wants to participate on JForum are interested in developing it - it means, changing the source code to add new features, fix bugs or improve something. For those, a good experience with Java (the technology, not just the language) is a must-have. 
+You have to be able to understand and correctly write good Java code. Expect to work on a lot of different libraries and frameworks. 
+
+! Second option: Are you a web designer?
+People are visual. We love colors and usable things. An excellent and very welcome way to help JForum is to design images and / or templates (CSS included) to give users more options for their boards. And that's only one tiny part of the process. There are a lot of work to do, and help on this is very welcome. 
+
+!! How to join
+First of all, introduce yourself in the [General Development|http://www.jforum.net/forums/show/3.page] forum. Just create a new thread there telling us who you are and how you can help us. 
+
+That's all. Be prepared to answer some questions that may arrive. 
+
+! And how what? 
+We'll start a contact and, sometimes, you'll join the [JForum Team|Team]. 

@@ -1,0 +1,85 @@
+!!! Authentication type
+
+First, we must define ''authentication.type'' to __''sso''__:
+
+[{Highlight
+
+ # Defines the authentication method to sso\\
+authentication.type = sso
+}]
+
+!! SSO implementation
+Next, the must define which class will handle SSO. It should be an implementation of ''net.jforum.sso.SSO''. The default class, ''RemoteUserSSO'', just checks if a call to ''requset.getRemoteUser()'' does not return ''null''. This may be enough for most of the situations.
+
+[{Highlight
+sso.implementation = net.jforum.sso.RemoteUserSSO
+}]
+
+If you want to use your own SSO handler, just set this key. 
+
+[{Note title='Be careful'
+
+The class __must__ implement the interface __''net.jforum.sso.SSO''__, otherwise you'll get runtime errors when trying to use JForum
+}]
+
+!! Default email and password
+By default, JForum will set a dummy value for the email and password attributes. The settings are in ''SystemGlobals.properties'', as follow:
+
+[{Highlight
+ # The default email to use if sso.email.attribute is empty\\
+sso.default.email = sso@user\\
+\\
+ # The default password to use if sso.password.attribute is empty\\
+sso.default.password = sso \\
+}]
+
+If, for any reason, you would like to set another value for those properties, you can put the email and / or the password in the session, so JForum can have a chance of accessing it. The attribute's name you should set are also defined in ''SystemGlobals.properties''. The default setting is here listed:
+
+[{Highlight
+ # The attribute name to search in the session for the password.\\
+sso.password.attribute = password\\
+\\
+ # Same as above\\
+sso.email.attribute = email\\
+}]
+
+Using this logic, if you want to set a custom email or password, you must add it to the session before getting into JForum:
+
+[{Java2HtmlPlugin
+
+// Set the SSO password and email for the current user
+session.setAttribute("sso.password.attribute", "a secret");
+session.setAttribute("sso.email.attribute", "user@email.com");
+}]
+
+[{Tip title='Dont\' forget'
+
+Of course, the password and email attributes will only be used if the user who's authenticating is not registered yet. 
+}]
+
+!! web.xml example
+Much probably you will want / have to set up ''web.xml'' in order to get SSO working. Below is an example:
+
+[{Java2HtmlPlugin 
+
+<!-- Example of SSO configuration -->
+<security-role> 
+	<role-name>user</role-name> 
+</security-role>
+
+<security-constraint>
+  <web-resource-collection>
+	 <web-resource-name>Restricted Area</web-resource-name>
+	 <url-pattern>/*</url-pattern>
+  </web-resource-collection>
+ 
+  <auth-constraint>
+	 <role-name>user</role-name>
+  </auth-constraint>
+</security-constraint>
+
+<login-config>
+  <auth-method>BASIC</auth-method>
+  <realm-name>YOUR REAL NAME HERE</realm-name>
+</login-config>
+}]

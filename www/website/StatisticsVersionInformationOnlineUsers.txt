@@ -1,0 +1,14 @@
+!!! Forum statistics
+When you  access the [Admin Panel], the right frame displays a set of stats about your running board:
+
+!! Version information
+This box keeps you informed about updates in JForum, so you don't need to worry about manuall checking for fixes and news. If there is a new version available, a %%(color:red;)red message%% will be shown. Otherwise, a %%(color:green;)green OK message%% will appear. 
+
+!! Forum statistics
+Here we have some general usage about in our board. All values are measured starting from the first date you run the board. 
+
+!! Online users
+A complete list of who's online:
+
+||Username||Log in||Last Updated||IP Address
+|The user's login username|The login date and time|The last time the user did some action|His IP address

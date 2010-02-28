@@ -1,0 +1,39 @@
+<#setting number_format = "#"/>
+<style type="text/css">@import url( ${contextPath}/templates/${templateName}/styles/style.css?${startupTime} );</style>
+
+<form accept-charset="${encoding}" name="form" action="${contextPath}/jforum${extension}" method="post">
+<input type="hidden" name="action" value="delete" />
+<input type="hidden" name="module" value="${moduleName}" />
+
+<table class="forumline" cellspacing="1" cellpadding="3" width="100%" border="0">
+	<tr>
+		<th class="thhead" valign="middle" colspan="5" height="25">${I18n.getMessage("Rank.List.Title")}</th>
+	</tr>
+
+	<tr>
+		<td class="row2"><span class="gen"><b>${I18n.getMessage("Rank.List.rankName")}</b></span></td>
+		<td class="row2" align="center"><span class="gen"><b>${I18n.getMessage("Rank.List.minPosts")}</b></span></td>
+		<td class="row2" align="center"><span class="gen"><b>${I18n.getMessage("Rank.Form.Special")}</b></span></td>
+		<td class="row2" align="center"><span class="gen"><b>${I18n.getMessage("Action")}</b></span></td>
+		<td class="row2" align="center"><span class="gen"><b>${I18n.getMessage("Delete")}</b></span></td>
+	</tr>
+
+	<#list ranks as rank>
+	<tr>
+		<td class="row1" width="38%"><span class=gen>${rank.title}</span></td>
+		<td width="26%" class="row1" align="center"><span class="gen">${rank.min}</span></td>
+		<td width="26%" class="row1" align="center"><span class="gen">${rank.special?string}</span></td>
+		<td width="26%" class="row1" align="center"><span class="gen"><a href="${contextPath}/${moduleName}/edit/${rank.id}${extension}">${I18n.getMessage("Rank.List.Edit")}</a></span></td>
+		<td width="10%" class="row1" align="center"><input type="checkbox" name="rank_id" value="${rank.id}" /></td>
+	</tr>
+	</#list>
+
+	<tr align="center">
+		<td class="catbottom" colspan="5" height="28">
+		<input class="mainoption" type="button" value="${I18n.getMessage("Rank.List.ClickToNew")}" name="button" onclick="document.location = '${contextPath}/${moduleName}/insert${extension}';" />
+		&nbsp;&nbsp; 
+		<input class="mainoption" type="submit" value="${I18n.getMessage("Rank.List.ClickToDelete")}" name="submit" /></td>
+	</tr>
+</table>
+</form>
+   

@@ -1,0 +1,20 @@
+!!! Cache manipulation
+A lot of stuff is kept in memory in JForum - bb tags, online uses, categories, forums, latest topics, smilies and so on. Sometimes, due to any particular reason, you may want to clean up the cache. JForum provides an administration page at Admin Panel -> Cache, where the following information is shown:
+
+! BB Tags
+Shows how many bb tags are currently loaded, and provides a ''reload'' link to re-read the information from ''bb_config.xml''. 
+
+! Sessions
+How many user sessions - logged or anonymous - are currently active in the forum. It is possible to clear them all. Doing so will not hurt the forum at all, but it's not good to clear it without a very good motive. 
+
+! Modules
+All system modules, like "forums", "posts" and etc - all data from the file ''modulesMapping.properties''. It is possible to reload the file contents (although it is unlikely to need to so much)
+
+! Smilies
+The ''Reload'' link provides a way to read again the smilies from the database, as they are kept in memory. 
+
+! Topics
+Clicking in the ''More Info'' link leads to another page, where it is possible to clean the topic cache of any forum. 
+
+! Posts
+Clicking in the ''More Info'' link leads to another page, where it is possible to see all cached topics. 

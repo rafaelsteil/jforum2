@@ -1,0 +1,37 @@
+!!! The JForum Team - People behind JForum
+
+A project only evolves with feedback of users and contribution - be it programming, documenting, making graphics and so other many areas - of so many valuable people. Met some of the people who helped - or are still helping - JForum to grow.
+
+People come and go all the time. Many times we receive help because an user needs some feature more quickly, or then he / she got some free time to contribute for a while, and is that kind of contribution which makes the project grow up. You are welcome to [join us|TeamJoin]. 
+
+||Name||Description
+|Rafael Steil|Lead developer
+|James Yong|Did a lot of helping fixing bugs
+|Marc Wick|HSQLDB implementation and maintanance, as well de_DE translation
+|Dmitriy Kiriy|Base Oracle implementation
+|Per Johansson|Fixes for XTHML
+|Pieter Olivier|A lot of misc help in the very beggining
+|S&eacute;rgio Umlauf|Primary website layout
+|Pablo Marutto|The JForum Logo
+|Quan Nguyen|Vietnamese language support
+|David Almilli|Polls, Hibernate and Lucene
+|Jake Fear|Oracle Fixes, Hibernate and Lucene
+|Armando Ramos|es_ES translation
+|Vladislav Malyshkin|Lots of fixes / improvements
+|Marcin Nowacki|Polish (pl_PL) translation
+|Kamen Elenkov, Tzvetelin Vassilev|Fixes to the Configuration engine
+|Thomas Siegenthaler|Oracle fixes
+|David Haila|XML parsing fixes
+|Greg Wilkins|Italian (it_IT) translatin
+|Robert Peters|Oracle Fixes
+|Per Lindberg|LDAP and SSO
+|Andowson Chang|Traditional Chinese language support and bug fixing
+|Samuel Santos|pt_PT translations
+|Mark Page|JForum integration and additional SSO code
+|Alexander Sgibnev|Russian (ru_RU) translation
+|Vladimir Slaykovsky|Russian (ru_RU) translation
+
+[{Tip title='Aren\'t you here?'
+
+If we forgot to put your name in this list, please contact us and we'll add it immediately
+}]

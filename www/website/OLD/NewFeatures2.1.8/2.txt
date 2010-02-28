@@ -1,0 +1,38 @@
+!!! New and changed features in JForum 2.1.8
+Over 116 features have been added, changed or fixed in JForum 2.1.8, and that's only those reported to our [Issue Tracker|http://www.jforum.net/jira], Jira. Libraries changes, minor improvements and fxed, code refactorings and etc not even were registered in Jira, although we try to record most of the changes there. This means that the following list of changes does not include everything, but it's a very good approximation. 
+
+JForum is in constant development and improvement, and we always try to ship the best code possible. 
+
+!! New Features
+# __Lucene as search engine:__ JForum now uses the world famous [Lucene|http://lucene.apache.org] library for message indexing and search. This ensures high performance and result quality, taking place over the old table-oriented solution, used until JForum 2.1.7. 
+# __Replaced DWR with [JQuery|http://jquery.com] for all AJAX calls.__ JQuery is also used for DOM manipulation in some places.
+# __Inline message editing:__ now, with the proper rights, it is possible to double-click a message when reading it to edit its contents, instead of having to click in the "Edit" button and go to another page (which is still supported). This specially makes the Moderator's life much easier.
+# __New BB Tags:__ youtube, flash, rm, google and wmv
+# __Administrators can now manually approve an user account:__ In boards where new users are required to validate their email addresses, the Admin Panel interface now has a section where the Administrator can see all pending requests and, optionally, activate them. This is useful for situations where the user does not receive the registration email or is having problems with it. 
+# __Identification of Moved Topics:__ now, when moving a topic to another forum, JForum will add a visual tip, in the original forum, that that message was moved to someplace else. 
+# __"Search this forum" search:__ Each forum now has a "Search this forum" form, just right the "New topic" button, where users can search for messages in that specific forum without needing to go to the search page. 
+# __After login, redirect to the referrer page:__ after a successful login, the browser will be redirected to the page the user come from, instead of sending it to the main forum listing page. This improves navigation and user experience. 
+# __Record of how many times a message was edited:__ a textual information is shown above the message showing how many times it was changes since its creation. 
+# __Ask for user confirmation when subscribing to a forum or topic:__ A Javascript confirmation dialog is shown to the user when he tries to manually subscribe for notifications about changes to a forum or topic. This prevents for "unwanted" clicks. 
+# __Logging of Moderation Activity:__ Now it is possible to request any moderator to provide a reason for any kind of moderation activity, like message editing, deletion or moving. JForum will keep a log of every action then. 
+# __RSS now shows a snippet of the posted message__
+
+!! Changed Features
+
+!! Libraries
+Some libraries have changed from JForum 2.1.7 to version 2.1.8, and they are necessary to have the software running smoothly. Please make sure that no duplicated version of such exist in the WEB-INF/lib directory, as it would cause some strange runtime behavior. 
+
+Below are all changed libraries. The left column shows the old version, while the right column, the new version. 
+
+||Library||Old version||New version||
+|Commons-lang|2.1|2.3
+|DWR|1.1|Deleted
+|HSQLDB|1.8.0|1.8.0.1
+|Lucene Core|Don't have|2.2.0
+|Lucene Analyzer|Don't have|2.2.0
+|Lucene Highlighter|Don't have|2.2.0
+
+DWR is no longer used, as JForum 2.1.8 uses [JQuery|http://jquery.com] for AJAX and DOM manipulation. Also, Lucene is used for all search operations. 
+
+!! Configurations
+

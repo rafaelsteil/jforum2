@@ -1,0 +1,27 @@
+!!! Users
+User management is performed at Admin Panel -> Users, where you can do the following actions:
+
+# Search by username
+# Search by group
+# View a list of all registered users
+# Lock or unlock an user account
+# Edit his profile
+# Change the groups the user belongs to
+
+Searching for users is simple, so we won't cover it here. 
+
+!! Editing an user profile
+Administrators are allowed to change any setting - and a bit more - of a user profile, by clicking in the ''Edit'' link, which will show the same page you see when accessing the profile page from the forum. 
+
+! Extra configurations of an user
+Together will all data from the user, an Administrator is allowed to change the user's ''Username'' and force a "special" [Ranking], using the ''Define special ranking'' option. 
+
+!! Lock and Unlock users
+In JForum it is not possible to delete users, but it is possible to lock an account so that user won't be able to log in or perform any other action. This is different of [Banning] an user, as banning may not even allow the user of browsing the forum, depending of how the ban was done. 
+
+To lock an user account click in the checkbox from the "Lock" column, and then click the "Lock / Unlock" button. To unlock, click in the respective checkbox from the "Unlock" column and, again, hit the "Lock / Unlock" button. 
+
+!! Change groups
+Each user may belong to one or many groups, and, when he has two or more groups, the [Permissions] (roles) will be merged. This is specially useful when you currently have a regular user in the, say, "General" group, and want to give him some other special role that is not available to the current group.
+
+To change the relation of groups an user has, click in the "Groups" link and select there the list you want. 

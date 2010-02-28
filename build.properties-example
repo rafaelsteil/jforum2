@@ -1,0 +1,3 @@
+# Application server deployment directory. Please use forward slashes "/".
+# If you are using JBoss instead of Tomcat uncomment the next line
+deploy.dir  = C:/jboss/server/default/deploy

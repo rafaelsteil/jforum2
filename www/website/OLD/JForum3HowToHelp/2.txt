@@ -1,0 +1,18 @@
+!!! JForum 3 - How to help
+So you want to help us on JForum 3? That's really great. There are two main points where you can help: Documenting and supporting other users in the forum, and Developing. Both are very important, and there is always space for new stuff. 
+
+!! Introduce yourself
+Let us know who you are and where are you from. A short introduction is just fine, and so we can now a little better each other. Please read [Join the JForum Team|TeamJoin] page to know some more details about this subject. 
+
+!! Ask Developer role
+JForum source code is hosted at [java.net|http://jforum.dev.java.net], where we use the [CVS] repository to help the development process.
+ 
+In order to able to work on the code, you have to first [create an account|https://www.dev.java.net/servlets/Join] at java.net if you still don't have one, and then [request the Developer role|https://jforum.dev.java.net/servlets/ProjectMembershipRequest]. 
+
+Please note that the simple act of asking the role doesn't give you the right to join the project, but it is a necessary step. We'll only accepet those who had introduced themselves. 
+
+!! Talk to others
+Communication is essential in every parts of our lives. And that's the same thing when working with software development. Talk to the other guys, ask questions if you have doubts, suggest things and you think something can be improved, argue every point you consider relevant. 
+
+But, never forget, be always polite and respectful to others. If you have a suggestion, be prepared to constructive criticizes and point of views different of yours. Don't be rude and know how to listen well. 
+

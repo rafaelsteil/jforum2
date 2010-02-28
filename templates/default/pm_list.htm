@@ -1,0 +1,160 @@
+<#include "header.htm"/>
+<table cellspacing="0" cellpadding="10" width="100%" align="center" border="0">
+	<tbody>
+		<tr>
+			<td class="bodyline">
+				<script type="text/javascript">
+				function select_switch(status) 
+				{
+					for (i = 0; i < document.privmsg_list.length; i++) {
+						document.privmsg_list.elements[i].checked = status;
+					}
+				}
+				</script>
+
+				<table cellspacing="0" cellpadding="0" width="100%" align="center" border="0">
+					<tbody>
+						<tr>
+							<td valign="top" align="center" width="100%">
+								<table cellspacing="2" cellpadding="2" border="0">
+									<tbody>
+										<tr valign="middle">
+											<td>
+												<#if !inbox?default(false)>
+												<a href="${JForumContext.encodeURL("/pm/inbox")}">
+												</#if>
+												<img src="${contextPath}/templates/${templateName}/images/msg_inbox.gif" border="0" alt="[Inbox]" />
+												<#if !inbox?default(false)>
+												</a>
+												</#if>
+											</td>
+											<td>
+												<#if !inbox?default(false)>
+												<a href="${JForumContext.encodeURL("/pm/inbox")}">
+												</#if>
+												<span class="cattitle">${I18n.getMessage("PrivateMessage.inbox")} &nbsp;</span>
+												<#if !inbox?default(false)>
+												</a>
+												</#if>
+											</td>
+											<td>
+												<#if !sentbox?default(false)>
+												<a href="${JForumContext.encodeURL("/pm/sentbox")}">
+												</#if>
+												<img src="${contextPath}/templates/${templateName}/images/msg_sentbox.gif" border="0" alt="[Sentbox]" />
+												<#if !sentbox?default(false)>
+												</a>
+												</#if>
+											</td>
+											<td>
+												<#if !sentbox?default(false)>
+												<a href="${JForumContext.encodeURL("/pm/sentbox")}">
+												</#if>
+												<span class="cattitle">${I18n.getMessage("PrivateMessage.sentbox")}&nbsp;</span>
+												<#if !sentbox?default(false)>
+												</a>
+												</#if>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<br clear="all" />
+				<form action="${JForumContext.encodeURL("/jforum")}" method="post" name="privmsg_list" id="privmsg_list">
+				<input type="hidden" name="module" value="${moduleName}" />
+				<input type="hidden" name="action" value="delete" />
+					<table cellspacing="2" cellpadding="2" width="100%" align="center" border="0">
+						<tbody>
+							<tr>
+								<td valign="middle" align="left">
+									<a href="${JForumContext.encodeURL("/pm/send")}" class="icon_new_topic"><img src="${contextPath}/images/transp.gif" alt="New Topic" /></a>
+								</td>
+								<td align="left" width="100%">
+									<span class="nav">
+									 <a class="nav" href="${JForumContext.encodeURL("/forums/list")}">${I18n.getMessage("ForumListing.forumIndex")}</a>
+									 </span>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<table class="forumline" cellspacing="1" cellpadding="3" width="100%" border="0">
+						<tbody>
+							<tr>
+								<th class="thcornerl" nowrap="nowrap" width="5%" height="25">
+									&nbsp;&nbsp;
+								</th>
+								<th class="thtop" nowrap="nowrap" width="55%">
+									&nbsp;${I18n.getMessage("PrivateMessage.subject")}&nbsp;
+								</th>
+								<th class="thtop" nowrap="nowrap" width="20%">
+									<#if inbox?default(false)>
+									&nbsp;${I18n.getMessage("PrivateMessage.from")}&nbsp;
+									<#else>
+									&nbsp;${I18n.getMessage("PrivateMessage.to")}&nbsp;
+									</#if>
+								</th>
+								<th class="thtop" nowrap="nowrap" width="15%">
+									&nbsp;${I18n.getMessage("PrivateMessage.date")}&nbsp;
+								</th>
+								<th class="thcornerr" nowrap="nowrap" width="5%">
+									&nbsp;&nbsp;
+								</th>
+							</tr>
+							<#list pmList as pm>
+							<tr>
+								<td class="row1" valign="middle" align="center" width="5%">
+									<#if pm.type == NEW>
+										<img src="${contextPath}/templates/${templateName}/images/folder_new.gif" alt="New Folder" />
+									<#else>
+										<img src="${contextPath}/templates/${templateName}/images/folder.gif" alt="Folder" />
+									</#if>
+								</td>
+								<td class="row1" valign="middle" width="55%"><span class="topictitle">&nbsp;<a class="topictitle" href="${JForumContext.encodeURL("/pm/read/${pm.id}")}">${pm.post.subject?html}</a></span></td>
+								<td class="row1" valign="middle" align="center" width="20%">
+									<#if inbox?default(false)>
+									<span class="name">&nbsp;<a class="name" href="${JForumContext.encodeURL("/user/profile/${pm.fromUser.id}")}">${pm.fromUser.username}</a></span>
+									<#else>
+									<span class="name">&nbsp;<a class="name" href="${JForumContext.encodeURL("/user/profile/${pm.toUser.id}")}">${pm.toUser.username}</a></span>
+									</#if>
+								</td>
+								<td class="row1" valign="middle" align="center" width="15%"><span class="postdetails">${pm.formatedDate}</span></td>
+								<td class="row1" valign="middle" align="center" width="5%"><span class="postdetails"><input type="checkbox" value="${pm.id}" name="id" /></span></td>
+							</tr>
+							</#list>
+							<tr>
+								<td class="catbottom" align="right" colspan="5" height="28">
+									&nbsp; <input class="liteoption" type="submit" value="${I18n.getMessage("PrivateMessage.deleteSelected")}" name="delete" />
+									<!--
+									&nbsp; <input class="liteoption" type="submit" value="${I18n.getMessage("PrivateMessage.deleteAll")}" name="deleteall" />
+									-->
+								</td></tr>
+						</tbody>
+					</table>
+					<table cellspacing="2" cellpadding="2" width="100%" align="center" border="0">
+						<tbody>
+							<tr>
+								<td valign="middle" align="left">
+									<a href="${JForumContext.encodeURL("/pm/send")}" class="icon_new_topic nav"><img src="${contextPath}/images/transp.gif" alt="" /></a>
+								</td>
+								<td valign="middle" align="left" width="100%"><span class="nav"></span></td>
+								<td valign="top" nowrap="nowrap" align="right">
+									<b><span class="gensmall"><a class="gensmall" href="javascript:select_switch(true);">${I18n.getMessage("PrivateMessage.checkAll")}</a> :: 
+									<a class="gensmall" href="javascript:select_switch(false);">${I18n.getMessage("PrivateMessage.uncheckAll")}</a></span></b>
+									<br />
+									<span class="nav">
+										<br />
+									</span>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</form>
+				<div align="center"></div>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<#include "bottom.htm"/>

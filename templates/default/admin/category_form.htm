@@ -1,0 +1,59 @@
+<#setting number_format = "#"/>
+<#import "macros/group_macros.ftl" as lib>
+<style type="text/css">@import url( ${contextPath}/templates/${templateName}/styles/style.css?${startupTime} );</style>
+<form action="${contextPath}/jforum${extension}" method="post" name="form" id="form" accept-charset="${encoding}" onSubmit="return checkGroups()">
+<input type="hidden" name="action" value="${action}" />
+<input type="hidden" name="module" value="${moduleName}" />
+
+<script language="javascript">
+function checkGroups() 
+{
+	<#if !category?exists>
+		if (document.form.groups.selectedIndex == -1) {
+			alert("${I18n.getMessage("PermissionControl.atLeastOne")}");
+			return false;
+		}
+	</#if>
+
+	return true;
+}
+</script>
+
+<#if category?exists>
+	<input type="hidden" name="categories_id" value="${category.id}" />
+</#if>
+
+<table class="forumline" cellspacing="1" cellpadding="3" width="100%" border="0">
+	<tr>
+		<th class="thhead" valign="middle" colspan="2" height="25">${I18n.getMessage("Category.Form.Title")}</th>
+	</tr>
+
+	<tr>
+		<td class="row1" width="38%"><span class="gen">${I18n.getMessage("Category.Form.CategoryName")}</span></td>
+		<td class="row2"><input type="text" class="post" style="WIDTH: 200px" maxlength="150" size="25" name="category_name" value="<#if category?exists>${category.name}</#if>" /></td>
+	</tr>
+
+	<tr>
+		<td class="row1" width="38%"><span class="gen">${I18n.getMessage("Category.Form.Moderate")}</span></td>
+		<td class="row2">
+			<span class="gensmall">
+			<input class="post" type="radio" name="moderate" value="0" <#if category?exists><#if !category.isModerated()>checked</#if><#else>checked</#if>/>&nbsp;${I18n.getMessage("User.no")}&nbsp;&nbsp;
+			<input class="post" type="radio" name="moderate" value="1" <#if category?exists && category.isModerated()>checked</#if>/>&nbsp;${I18n.getMessage("User.yes")}
+			</span>
+		</td>
+	</tr>
+	
+	<#if !category?exists>
+	<tr>
+		<td class="row1"><span class="gen">${I18n.getMessage("Category.Form.ChooseGroup")}</span></td>
+		<td><@lib.selectFieldGroups "groups", groups, 0, true, selectedList/></td>
+	</tr>
+	</#if>
+	
+	<tr align="center">
+		<td class="catbottom" colspan="2" height="28">
+			<input class="mainoption" type="submit" value="${I18n.getMessage("Category.Form.ClickToUpdate")}" name="submit" />
+		</td>
+	</tr>
+</table>
+</form>

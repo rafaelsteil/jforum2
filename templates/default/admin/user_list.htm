@@ -1,0 +1,76 @@
+<#setting number_format = "#"/>
+<#import "../../macros/pagination.ftl" as pagination/>
+<#import "macros/group_macros.ftl" as lib>
+
+<style type="text/css">@import url( ${contextPath}/templates/${templateName}/styles/style.css?${startupTime} );</style>
+<table class="forumline" cellspacing="1" cellpadding="3" width="100%" border="0">
+	<tr>
+		<th class="thhead" valign="middle" colspan="6" height="25">${I18n.getMessage("User.adminTitle")}</th>
+	</tr>
+
+	<tr>
+		<td class="gen" align="center" colspan="6">
+			<form id="formusersearch" action="${JForumContext.encodeURL("/jforum")}" accept-charset="${encoding}" method="post">
+			<span class="gensmall">
+			${I18n.getMessage("User.searchByUsername")}: 
+			<input type="hidden" name="action" value="search" />
+			<input type="hidden" name="module" value="${moduleName}" />
+
+			<input type="text" name="username" value="${search?default("")}" />&nbsp;
+			${I18n.getMessage("User.searchByGroup")}: 
+			<@lib.selectFieldGroups "group_id", groups, 0, false, selectedList/>
+
+			<input type="submit" value="${I18n.getMessage("ForumBase.search")}" class="mainoption"/>
+			</form>
+		</td>
+	</tr>
+
+	<form accept-charset="${encoding}" name="form" action="${JForumContext.encodeURL("/jforum")}" method="post">
+	<input type="hidden" name="action" value="delete" />
+	<input type="hidden" name="module" value="${moduleName}" />
+	<input type="hidden" name="start" value="${start}" />
+  
+	<tr>
+		<td class="row2" width="10%" align="center"><span class="gen"><b>${I18n.getMessage("User.id")}</b></span></td>
+		<td class="row2"><span class="gen"><b>${I18n.getMessage("User.username")}</b></span></td>
+		<td class="row2" align="center"><span class="gen"><b>&nbsp;</b></span></td>
+		<td class="row2" align="center"><span class="gen"><b>&nbsp;</b></span></td>
+		<td class="row2" width="10%" align="center"><span class="gen"><b>${I18n.getMessage("Lock")}</b></span></td>
+		<td class="row2" width="10%" align="center"><span class="gen"><b>${I18n.getMessage("Unlock")}</b></span></td>
+	</tr>
+
+	<#list users as user>
+		<tr>
+			<td class="row1" align="center"><span class="gen">${user.id}</span></td>
+			<td class="row1"><span class="gen">${user.username}</span></td>
+			<td class="row1" align="center"><span class="gen"><a href="${contextPath}/jforum${extension}?module=adminUsers&amp;action=edit&amp;id=${user.id}">${I18n.getMessage("Edit")}</a></span></td>
+			<td class="row1" align="center"><span class="gen"><a href="${contextPath}/jforum${extension}?module=adminUsers&amp;action=groups&amp;id=${user.id}">${I18n.getMessage("User.Groups")}</a></span></td>
+
+			<#if user.deleted>
+				<td class="row1" align="center">&nbsp;</td>
+				<td class="row1" align="center"><input type="checkbox" name="user_id" value="${user.id}" /></td>
+			<#else>
+				<td class="row1" align="center"><input type="checkbox" name="user_id" value="${user.id}" /></td>
+				<td class="row1" align="center">&nbsp;</td>
+			</#if>
+		</tr>
+	</#list>
+
+	<tr align="center">
+		<td class="catbottom" colspan="5" height="28">
+		<!--
+			<input class="mainoption" type="button" value="${I18n.getMessage("Insert")}" onClick="document.location = '${contextPath}/jforum${extension}?module=adminUsers&action=insert';" />&nbsp;&nbsp;	
+		-->
+			<input class="mainoption" type="button" value="${I18n.getMessage("Insert")}" onClick="document.location = '${contextPath}/user/insert${extension}';" />&nbsp;&nbsp;	
+		</td>
+		<td class="catbottom">
+			<input class="mainoption" type="submit" value="${I18n.getMessage("Lock")} / ${I18n.getMessage("Unlock")}" name="submit" />
+		</td>
+	</tr>
+</table>
+</form>
+<table width="100%">
+	<tr>
+		<td align="right"><#if thisPage?exists><@pagination.doPagination searchAction, searchId/></#if></td>
+	</tr>
+</table>

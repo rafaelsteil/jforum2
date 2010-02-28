@@ -1,0 +1,47 @@
+!!! JForum 3 - Coding Conventions
+As rule of thumb, the [Coding Conventions for the Java Programming Language|http://java.sun.com/docs/codeconv/html/CodeConvTOC.doc.html] are used in JForum 3. Please take your time to read the document - it is short and direct. 
+
+!! Some details
+While the [coding conventions|http://java.sun.com/docs/codeconv/html/CodeConvTOC.doc.html] previously quoted can be used as a start point to understanding the rules, here's shown a quick resume of that document, as welll some minor modifications preffered for JForum 3. 
+
+!! Tabs, no spaces
+Use tabs (4 length) instead of spaces when identing the source code. We'll not enter on a full discussion about that here, as there are many documents available on the [Internet|http://www.google.com]. Some prefer tabs, other prefer spaces, and so in JForum 3 we prefer tabs. 
+
+!! JavaDoc all your methods
+Even the private ones. Document it in a concise fashion, as other developers will have to go through your code. Some people may argue that ''...the source code should speak for itself', but usually it's not that simple. Of course that well made code is essential, but a short overall description of the method is essential as well. 
+Don't expect everyone to read each line of code to understand what's going on.
+
+!! Document well
+Always when necessary, specially when you're doing a business logic that may not be obvious at a first sight. 
+
+!! New lines and spaces
+Blank lines and spaces won't make your code run slower, but will make reading the source code faster. Here's an example:
+
+__Wrong__
+[{Java2HtmlPlugin
+
+...
+for(int i=0;i<100;i++){
+     if(i%2==0){
+          System.out.println("X");
+     }else if(i%3==0){
+          System.out.println("Y");
+     }
+}
+...
+}]
+
+__Correct__
+[{Java2HtmlPlugin
+
+...
+for (int i = 0; i < 100; i++) {
+     if (i % 2 == 0) {
+          System.out.println("X");
+     }
+     else if(i % 3 == 0) {
+          System.out.println("Y");
+     }
+}
+...
+}]

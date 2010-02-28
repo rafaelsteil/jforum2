@@ -1,0 +1,85 @@
+2.1.7
+
+<p>Changelist from Jira</p>
+
+<ul>
+<li> http://www.jforum.net/jira/browse/JF-535 : Database update script for upgrade from 2.1.6 to SNAPSHOT is missed
+<li> http://www.jforum.net/jira/browse/JF-279 : ModerationModel.topicsByForum query - UnUnexpected: LIMIT
+<li> http://www.jforum.net/jira/browse/JF-541 : Restore binary compatible with prev version 2.1.x, which was breaks after implement JF-537 (Split web web request layer and jForum business layer ) 
+<li> http://www.jforum.net/jira/browse/JF-584 : Private messages can't be deleted 
+<li> http://www.jforum.net/jira/browse/JF-517 : Topics are not sorted by date 
+<li> http://www.jforum.net/jira/browse/JF-593 : [2.1.6] when user reply to a sticky thread, the thread will change back to normal thread (no sticky anymore)
+<li> http://www.jforum.net/jira/browse/JF-499 : rss feed and security hidden topics 
+<li> http://www.jforum.net/jira/browse/JF-556 : Error editing posts when using Oracle 9i 
+<li> http://www.jforum.net/jira/browse/JF-572 : Introduce an option to allow/disallow the use of external avatars 
+<li> http://www.jforum.net/jira/browse/JF-505 : 500 error when uploading attachment 
+<li> http://www.jforum.net/jira/browse/JF-590 : Add new zh_TW translation 
+<li> http://www.jforum.net/jira/browse/JF-530 : Add option for including database port information during installation
+<li> http://www.jforum.net/jira/browse/JF-580 : Bug in RSS-feed for "Recent Topics" 
+<li> http://www.jforum.net/jira/browse/JF-551 : CAPTCHA image word not legible due to bg color ]JF-551: CAPTCHA image word not legible due to bg color  : 
+<li> http://www.jforum.net/jira/browse/JF-276 : Cannot delete a post [SQL String can not be NULL] 
+<li> http://www.jforum.net/jira/browse/JF-533 : Cannot uploading pictures with postfix name "*.JPG" (upper cases) 
+<li> http://www.jforum.net/jira/browse/JF-514 : Changing text size does not work 
+<li> http://www.jforum.net/jira/browse/JF-487 : Cross Site Scripting (attribute names) 
+<li> http://www.jforum.net/jira/browse/JF-488 : Cross Site Scripting (scheme) 
+<li> http://www.jforum.net/jira/browse/JF-270 : Deleting a posting that is a topic leads to inconsistency 
+<li> http://www.jforum.net/jira/browse/JF-280 : Error inserting new category 
+<li> http://www.jforum.net/jira/browse/JF-582 : Error when editing a post with a poll where the label or questions contains quotes 
+<li> http://www.jforum.net/jira/browse/JF-532 : Error when uploading icon which is bigger than specified 
+<li> http://www.jforum.net/jira/browse/JF-504 : Explicit context mapping (containing subdirectory) causes JForum to fail after install 
+<li> http://www.jforum.net/jira/browse/JF-538 : If forum hasn't any posts, calc port per day failed 
+<li> http://www.jforum.net/jira/browse/JF-542 : If post was made on not-first page, mail system sent broken link to post 
+<li> http://www.jforum.net/jira/browse/JF-579 : Invalid proxy redirect code 
+<li> http://www.jforum.net/jira/browse/JF-264 : Jforum treats usernames case - sensitive 
+<li> http://www.jforum.net/jira/browse/JF-581 : Login via proxy does not build context into response URL. 
+<li> http://www.jforum.net/jira/browse/JF-550 : New member account activation page 
+<li> http://www.jforum.net/jira/browse/JF-519 : Oracle DB errors d
+<li> http://www.jforum.net/jira/browse/JF-594 : Reintroduce German translation 
+<li> http://www.jforum.net/jira/browse/JF-577 : Remove unmaintained translations from JForum 
+<li> http://www.jforum.net/jira/browse/JF-271 : Search case-sensitiv in Postgres 
+<li> http://www.jforum.net/jira/browse/JF-586 : Set all topics as read not working 
+<li> http://www.jforum.net/jira/browse/JF-509 : Switching language to Dutch disables most functionality 
+<li> http://www.jforum.net/jira/browse/JF-567 : Topic title breaks app when replying 
+<li> http://www.jforum.net/jira/browse/JF-506 : Topics are sometimes invisible until cache is cleared 
+<li> http://www.jforum.net/jira/browse/JF-272 : Urls are hardcoded 
+<li> http://www.jforum.net/jira/browse/JF-534 : Using String.replace(String, String) in net.jforum.view.install.InstallAction#handleDatabasePort break compatible with jdk1.4 
+<li> http://www.jforum.net/jira/browse/JF-185 : code tag should not interpret smilies 
+<li> http://www.jforum.net/jira/browse/JF-496 : forum cache problem 
+<li> http://www.jforum.net/jira/browse/JF-516 : forum.cache.enabled in SystemGlobals.properties not utilized 
+<li> http://www.jforum.net/jira/browse/JF-255 : insertSave() allows empty / null messages 
+<li> http://www.jforum.net/jira/browse/JF-508 : net.jforum.sso.RemoteUserSSO.isSessionValid returns false in all cases
+<li> http://www.jforum.net/jira/browse/JF-490 : start writing problem 
+<li> http://www.jforum.net/jira/browse/JF-549 : wrong style @ first admin page 
+<li> http://www.jforum.net/jira/browse/JF-513 : ATG Dynamo environment throwing errors on installation page 
+<li> http://www.jforum.net/jira/browse/JF-597 : Creating forum with Deny Access group set denies everyone access. 
+<li> http://www.jforum.net/jira/browse/JF-575 : The size of topic cache doesn't show in the list in admin 
+<li> http://www.jforum.net/jira/browse/JF-585 : [Set all topics as read] <-- not working 
+<li> http://www.jforum.net/jira/browse/JF-493 : Cannot add topic to forum 
+<li> http://www.jforum.net/jira/browse/JF-510 : Moderation action fails on Oracle 
+<li> http://www.jforum.net/jira/browse/JF-512 : Number of postings cache bug 
+<li> http://www.jforum.net/jira/browse/JF-494 : administrator can not move a message posted by anonymous user 
+<li> http://www.jforum.net/jira/browse/JF-589 : Add <optgroup> to category dropdowns 
+<li> http://www.jforum.net/jira/browse/JF-544 : After delete posts from topic, count of pages not recalculated
+<li> http://www.jforum.net/jira/browse/JF-528 : Captcha ignoreCase validation 
+<li> http://www.jforum.net/jira/browse/JF-527 : Create config parameter to allow user names to be case insensitive 
+<li> http://www.jforum.net/jira/browse/JF-578 : Email button link redirects to home page 
+<li> http://www.jforum.net/jira/browse/JF-263 : Email is sent without date 
+<li> http://www.jforum.net/jira/browse/JF-277 : Exception in Categories if Admin does not have sufficient rights 
+<li> http://www.jforum.net/jira/browse/JF-287 : Exception when trying to get profile for non-existing user 
+<li> http://www.jforum.net/jira/browse/JF-526 : Group and Subgroup indication is incorrect in Admin Panel Users->Groups
+<li> http://www.jforum.net/jira/browse/JF-286 : Missing macro in mailNewReply.txt 
+<li> http://www.jforum.net/jira/browse/JF-561 : Quote and quick reply buttons appear to read-only users 
+<li> http://www.jforum.net/jira/browse/JF-591 : Repository information does not get full user information with new posts. 
+<li> http://www.jforum.net/jira/browse/JF-537 : Split web web request layer and jForum business layer
+<li> http://www.jforum.net/jira/browse/JF-600 : TopicDAO.deleteByForum does not set forumId in topic list 
+<li> http://www.jforum.net/jira/browse/JF-241 : Topics not sorted correctly with PostgreSQL 
+<li> http://www.jforum.net/jira/browse/JF-284 : post options for anonymous user 
+<li> http://www.jforum.net/jira/browse/JF-495 : exception 
+<li> http://www.jforum.net/jira/browse/JF-248 : 2.1 dev version request rename of new_index.htm to index.htm 
+<li> http://www.jforum.net/jira/browse/JF-283 : topic closed and quick reply 
+<li> http://www.jforum.net/jira/browse/JF-491 : user IP concated 
+<li> http://www.jforum.net/jira/browse/JF-491 : Add norwegian translation
+<li> http://www.jforum.net/jira/browse/JF-491 : Add hungarian translation
+</ul>
+
+Changes that might have been done without registering an issue in our Jira are not in this list.

@@ -1,0 +1,4 @@
+!!! JForum 3 - Get the source code
+JForum3 source code is in a [Subversion|http://subversion.tigris.org/] repository. The URL is [http://svn.jforum.net:443/]
+
+In order to be able to commit your changes back to the repository, please read the section [How to help|JForum3HowToHelp], sub-section ''Ask Developer role''.

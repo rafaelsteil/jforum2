@@ -1,0 +1,27 @@
+<#setting number_format = "#"/>
+
+<style type="text/css">@import url( ${contextPath}/templates/${templateName}/styles/style.css?${startupTime} );</style>
+<table class="forumline" cellspacing="1" cellpadding="3" width="100%" border="0">
+	<tr>
+		<th class="thhead" valign="middle" colspan="2" height="25">${I18n.getMessage("Cache.topicsInfo")}</th>
+	</tr>
+
+	<tr>
+		<td align="center" colspan="2"><span class="gen"><font color="#ff0000"><b>${I18n.getMessage("Cache.danger")}</b></font></span></td>
+	</tr>
+
+	<#list categories as c>
+		<tr>
+			<td colspan="2"><h3><b>${c.name}</b></h3></td>
+		</tr>
+
+		<#list c.getForums() as f>
+			<tr>
+				<td class="row2" width="40%"><a class="gen" href="${contextPath}/forums/show/${f.id}${extension}" target="_new">${f.name}</a></td>
+				<td class="row2">
+					<a class="gen" href="${contextPath}/jforum${extension}?module=adminCache&action=topicsClear&forum_id=${f.id}">${I18n.getMessage("Cache.clear")}</a>
+				</td>
+			</tr>
+		</#list>
+	</#list>
+</table>

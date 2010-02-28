@@ -1,0 +1,72 @@
+<#assign edit = bookmark?exists/>
+<#setting number_format = "#"/>
+<#if edit>
+</#if>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<title>Bookmarks - <#if edit>${I18n.getMessage("Update")}<#else>${I18n.getMessage("Insert")}</#if></title>
+<meta http-equiv="Content-Type" content="text/html; charset=${encoding}" />
+<meta name="description" content="${metaDescription}" />
+<meta name="keywords" content="${metaKeywords}, jforum, jforum java, java jforum, java forum, forum, rafael steil, bulletin board, java bb, javabb" />
+<style type="text/css">@import url( ${contextPath}/templates/${templateName}/styles/style.css );</style>
+</head>
+
+<body>
+<form action="${contextPath}/jforum${extension}" method="post" name="search" id="search" accept-charset="${encoding}">
+<input type="hidden" name="action" value="<#if edit>updateSave<#else>insertSave</#if>" />
+<input type="hidden" name="module" value="${moduleName}" />
+<input type="hidden" name="relation_id" value="${relationId}" />
+<input type="hidden" name="relation_type" value="${relationType}" />
+
+<#if edit>
+	<input type="hidden" name="bookmark_id" value="${bookmark.id}"/>
+</#if>
+
+<table cellspacing="0" cellpadding="10" width="100%" border="0" align="center">
+	<tr>
+		<td>
+			<table class="forumline" cellspacing="1" cellpadding="4" width="100%" border="0">
+				<tr>
+					<th class="thhead" height="25" colspan="2">
+						<#if edit>
+							${I18n.getMessage("Bookmarks.edit")}
+						<#else>
+							${I18n.getMessage("Bookmarks.add")}
+						</#if>
+					</th>
+				</tr>
+
+				<tr>
+					<td width="20%"><span class="gen">${I18n.getMessage("Bookmarks.title")}</span></td>
+					<td><input type="text" name="title" size="70" maxlength="244" value="${title}"/></td>
+				</tr>
+
+				<tr>
+					<td><span class="gen">${I18n.getMessage("Bookmarks.description")}</span></td>
+					<td><input type="text" name="description" size="70" maxlength="244" value="${description?default("")}"/></td>
+				</tr>
+
+				<tr>
+					<td><span class="gen">${I18n.getMessage("Bookmarks.publicVisible")}</span></td>
+					<td>
+						<select name="visible">
+							<option value="1" <#if edit && bookmark.isPublicVisible()>selected="selected"</#if>>${I18n.getMessage("User.yes")}</option>
+							<option value="" <#if edit && !bookmark.isPublicVisible()>selected="selected"</#if>>${I18n.getMessage("User.no")}</option>
+						</select>
+					</td>
+				</tr>
+
+				<tr>
+					<td colspan="2" align="center"><input type="submit" value="${I18n.getMessage("Update")}" class="mainoption"/></td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+</table>
+
+</form>
+</body>
+</html>

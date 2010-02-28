@@ -1,0 +1,13 @@
+<html>
+<head>
+<base href="${forumLink}">
+<style type="text/css">@import url( ${forumLink}/templates/default/styles/style.css );</style>
+</head>
+<body>
+${message}
+<br>
+---------<br>
+Leia este tópico agora: ${path}<br>
+Se você deseja parar de receber notificações para este tópico, clique no link a seguir: ${unwatch}<br>
+</body>
+</html>

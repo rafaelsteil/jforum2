@@ -1,0 +1,62 @@
+!!! Configuring JForum Single Sign-On
+
+JForum provides a simple SSO facility which allows JForum to be easily integrated with existing web applications. SSO has built in support for:
+* using a login cookie
+* authentication frameworks that support the ''request.getRemoteUser()'' method 
+
+These can be simply configured via properites in the ''SystemGlobals.properties'' file.
+
+You can also [implement your own SSO class|implementSSO] to support your particular situation, which is described with an example.
+
+[{Info
+When using SSO the login,logout,register and password retreival options are removed from the JForum menus.
+}]
+
+!! How SSO works
+
+JForum uses an SSO interface which provides two methods, ''authenticateUser()'' and ''isSessionValid()''.
+* when a user visits JForum, SSO calls the authenticateUser() method, which simply returns the username or null.
+* if a username is returned JForum will check to see if there is a matching JForum userid.
+* if a matching JForum userid is not found, one is created on the fly.
+* the user is then logged in to JForum.
+* if null was returned the user will be set as 'Anonymous'.
+* if an 'Anonymous' user attempts to access a restricted area on the forum they will be redirected to your login page, with a return path parameter to send the user to the correct forum page once logged in.
+
+SSO manages various use case scenarios, such as user changeing id etc, using the ''isSessionValid()'' method.
+
+!! ''SystemGlobals.properties'' entries for configuring SSO
+||property name||Description||Default value
+|authentication.type| can be default or SSO|default
+|sso.implementation| a class that implements SSO. available classes are CookieUserSSO and RemoteUserSSO | net.jforum.sso.CookieUserSSO
+|sso.password.attribute| the name of the session attribute used for updateing jforum password during auto-registration | password
+|sso.email.attribute|the name of the session parameter used for updateing jforum email adress| email
+|sso.redirect.parameter| the name of the request parameter that contains the url encoded return path for jforum| jforum_redirect
+|sso.redirect.message| a message to display on your login page| please login to use the forum
+|sso.default.email| used when no session attribute found| sso@user.com
+|sso.default.password| ditto |sso
+|sso.redirect| a url that points to a login page| http//mysite.com/login.jsp
+|sso.cookie.name| the name of a cookie that contains the jforum username| JforumSSO
+|sso.cookie.path| the pathName of the cookie. for using when you specify your own cookie name if its not in the root path. | /
+
+* [How to enable the default SSO cookie or use existing login cookie for SSO|SSOcookies]
+
+* [How to use SSO with ''request.getRemoteUser()'', e.g. Tomcat Realms, JAAS etc.|SSOremote]
+
+SSO sets the email address in the forum profile to the value of _sso.default.email_ when registering a new user. If you would like to pass your users email address and password you should (+) [implement your own SSO class|implementSSO], the approach in the examples can be applied to both forms of SSO.
+
+
+!! Attention to the Admin User
+When you're using SSO to authenticate users on a different datasource (like LDAP), you lost the default "Admin" user of JForum. To fix that, you have to manually associate the user you want to be the Admin to the "Administrators" group, using the table ''jforum_user_groups''. 
+
+For example, the following set of SQL (MySQL schema) commands fetch a specific user id and associate it to the Administrators group. __Please note that the user should try to login first, in order to have his record on the jforum_users table__:
+
+[{Highlight
+
+mysql> SELECT user_id FROM jforum_users WHERE username = '''username_of_your_admin''';\\
+mysql> 5; ''(suppose it returned 5 here)''\\
+mysql> SELECT group_id FROM jforum_groups WHERE group_name = 'Administrators';\\
+mysql> 3; ''(suppose the id of the Administrators group is 3)''\\
+mysql> INSERT INTO jforum_user_groups (user_id, group_id) VALUES (5, 3);\\
+}]
+
+That should handle the sittuation.

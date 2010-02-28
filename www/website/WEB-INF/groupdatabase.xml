@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<groups>
+  <group name="Admin" creator="127.0.0.1" created="2006.10.22 at 22:02:14:296 GMT-03:00" modifier="127.0.0.1" lastModified="2006.10.22 at 22:02:14:296 GMT-03:00">
+    <member principal="Administrator" />
+  </group>
+</groups>

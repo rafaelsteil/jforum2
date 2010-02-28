@@ -1,0 +1,16 @@
+!!! Building JForum
+Basically, there are two ways to build JForum's source: using [Eclipse|http://www.eclipse.org], or running [Ant|http://ant.apache.org]. 
+
+!! Using Eclipse
+JForum is built using Eclipse as its primary IDE, so when you fetch the source code from the [CVS] the proper settings are already there. All you have to do is to import the project into the IDE. 
+
+!! Using Ant
+There is a ''build.xml'' script available for those who want to build JForum using [Ant|http://ant.apache.org]. It is located in the root directory, being the ''compile'' task the default one. Other available tasks are:
+
+||Task name||Description
+|''clean''|Cleans the api, build and dist directories
+|''javadocs''|Generate the JavaDoc API
+|''compile''|Compiles the source code into the build directory
+|''dist''|Generates a ''war'' file of JForum
+|''deploy''|Deploys JForum to the configured servlet container
+

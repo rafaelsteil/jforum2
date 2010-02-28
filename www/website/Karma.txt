@@ -1,0 +1,14 @@
+!!! Karma
+Karma is a note that users give each other, usually about the quality of the posts. It is represented in the forum by a set of ''stars'', which appear right together to each message and user's profile. 
+
+Karma are an optional feature in JForum, and it may or may not be enabled in all boards. It is up to the Administrator to configure that, in the [Permissions] page.
+
+!! Karma settings
+Karma settings are defined in the main configuration file, ''SystemGlobals.properties'', or in the custom configuration file, ''jforum-custom.conf''. There are two possible keys, as described in the following table:
+
+||Key name||Default value||Description
+|karma.min.points|1|The minimum number of points that it is possible to give to a message
+|karma.max.points|5|The maximum number of points that it is possible to give to a message
+
+!! Enabling or disabling Karma
+To enable or disable karma, go to the [Permissions] page, and refer to the section "Enable Karma". Set it to "true" to enable, and "false" to disable it to the respective group. 

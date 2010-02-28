@@ -1,0 +1,59 @@
+<style type="text/css">@import url( ${contextPath}/templates/${templateName}/styles/style.css?${startupTime} );</style>
+
+<form accept-charset="${encoding}" name="form" action="${contextPath}/jforum${extension}" method="post">
+<input type="hidden" name="action" value="delete" />
+<input type="hidden" name="module" value="${moduleName}" />
+
+<table class="forumline" cellSpacing="1" cellPadding="3" width="100%" border="0">
+	<tr>
+		<th class="thhead" valign="middle" colspan="5" height="25">${I18n.getMessage("Banlist.Title")}</th>
+	</tr>
+
+	<tr>
+		<td class="row2" align="center"><span class="gen"><b>${I18n.getMessage("Banlist.Type")}</b></span></td>
+		<td class="row2" align="center"><span class="gen"><b>${I18n.getMessage("Banlist.Value")}</b></span></td>
+		<td class="row2" align="center"><span class="gen"><b>${I18n.getMessage("Delete")}</b></span></td>
+	</tr>
+
+	<#list banlist as b>
+		<tr>
+			<td class="row1" align="center">
+				<span class="gen">
+					<#if b.email?exists>
+						${I18n.getMessage("Banlist.Email")}
+					<#elseif b.ip?exists>
+						${I18n.getMessage("Banlist.IP")}
+					<#elseif (b.userId > 0)>
+						${I18n.getMessage("Banlist.UserID")}
+					<#else>
+						${I18n.getMessage("Banlist.Unknown")}
+					</#if>
+				</span>
+			</td>
+			<td class="row1" align="center">
+				<span class="gen">
+					<#if b.email?exists>
+						${b.email}
+					<#elseif b.ip?exists>
+						${b.ip}
+					<#elseif (b.userId > 0)>
+						${b.userId}
+					<#else>
+						${I18n.getMessage("Banlist.Unknown")}
+					</#if>
+				</span>
+			</td>
+			<td class="row1" align="center"><input type="checkbox" name="banlist_id" value="${b.id}" /></td>
+		</tr>
+	</#list>
+
+	<tr align="center">
+		<td class="catbottom" colspan="5" height="28">
+			<input class="mainoption" type="button" value="${I18n.getMessage("Rank.List.ClickToNew")}" name="button" onclick="document.location = '${contextPath}/${moduleName}/insert${extension}';" />
+			&nbsp;&nbsp;
+			<input class="mainoption" type="submit" value="${I18n.getMessage("Rank.List.ClickToDelete")}" name="submit" />
+		</td>
+	</tr>
+</table>
+</form>
+   

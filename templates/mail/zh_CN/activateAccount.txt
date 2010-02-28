@@ -1,0 +1,12 @@
+你好 ${user.username}
+欢迎你加入我们的论坛"${forumName}",
+这是一封新用户注册激活的邮件,点击下面的链接马上成为我们的会员:
+
+${url}
+
+如果要求你手动激活用户的话,点 ${manualUrl} 并输入以下内容进行激活:
+用户ID: ${user.id}
+激活码: ${user.getActivationKey()}
+
+
+别忘了你的用户名: ${user.username}

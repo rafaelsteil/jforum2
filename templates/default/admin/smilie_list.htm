@@ -1,0 +1,32 @@
+<#setting number_format = "#"/>
+<style type="text/css">@import url( ${contextPath}/templates/${templateName}/styles/style.css?${startupTime} );</style>
+
+<form accept-charset="${encoding}" name="form" action="${contextPath}/jforum${extension}" method="post">
+<input type="hidden" name="action" value="delete" />
+<input type="hidden" name="module" value="${moduleName}" />
+
+<table class="forumline" cellspacing="1" cellpadding="3" width="100%" border="0">
+	<tr>
+		<th class="thhead" valign="middle" colspan="4" height="25">${I18n.getMessage("Smilies.List.Title")}</th>
+	</tr>
+
+	<#list smilies as smilie>
+	<tr>
+		<td class="row1" width="38%">${smilie.url}</td>
+		<td class="row2"><span class="gen">${smilie.code}</span></td>
+		<td class="row2"><span class="gen"><a
+			href="${contextPath}/jforum${extension}?module=${moduleName}&action=edit&id=${smilie.id}">${I18n.getMessage("Smilies.List.Edit")}</a></span>
+		</td>
+		<td class="row2"><input type="checkbox" name="id" value="${smilie.id}" /></td>
+	</tr>
+	</#list>
+
+	<tr align="center">
+		<td class="catbottom" colspan="4" height="28">
+		<input class="mainoption" type="button" value="${I18n.getMessage("Smilies.List.ClickToNew")}" name="button" onclick="document.location = '${contextPath}/${moduleName}/insert${extension}';" />
+		&nbsp;&nbsp; 
+		<input class="mainoption" type="submit" value="${I18n.getMessage("Smilies.List.ClickToDelete")}" name="submit" /></td>
+	</tr>
+</table>
+</form>
+   

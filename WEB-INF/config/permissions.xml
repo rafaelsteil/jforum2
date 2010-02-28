@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<sections>
+	<sql refName="categories" queryName="CategoryModel.selectAll" valueField="categories_id" captionField="title"/>
+	<sql refName="forums" queryName="ForumModel.selectAllForPermissions" valueField="forum_id" captionField="forum_name"/>
+
+	<!-- Administration -->
+	<section id="administration_section" title="Permissions.administration">
+		<permission id="perm_administration" title="Permissions.isAdministrator" type="single">
+			<option value="deny" description="No"/>
+			<option value="allow" description="Yes"/>
+		</permission>
+	</section>
+
+	<!-- Categories -->
+	<section id="categories_section" title="Permissions.categories">
+		<permission id="perm_category" title="Permissions.restrictedCategories" type="multiple">
+			<sql ref="categories"/>
+		</permission>
+	</section>
+
+	<!-- Restricted Forums -->
+	<section id="forums_section" title="Permissions.forums">
+		<permission id="perm_forum" title="Permissions.restrictedForums" type="multiple">
+			<sql ref="forums"/>
+		</permission>
+	</section>
+
+	<!-- Anonymous Posts -->
+	<section id="anonymous_posts_section" title="Permissions.anonymousPosts">
+		<permission id="perm_anonymous_post" title="Permissions.denyAnonymousPosts" type="multiple">
+			<sql ref="forums"/>
+		</permission>
+	</section>
+
+	<!-- Post Reply but not allowed to create topics -->
+	<section id="reply_only" title="Permissions.replyOnly">
+		<permission id="perm_reply_only" title="Permissions.replyOnlyDescription" type="multiple">
+			<sql ref="forums"/>
+		</permission>
+	</section>
+	
+	<!-- Create Sticky or Announcement Topics  -->
+	<section id="topics_sticky_announce" title="Permissions.sticky">
+		<permission id="perm_create_sticky_announcement_topics" title="Permissions.stickyDescription" type="single">
+			<option value="deny" description="No"/>
+			<option value="allow" description="Yes"/>
+		</permission>
+	</section>
+
+	<!-- Poll topics -->
+	<section id="topics_poll" title="Permissions.poll">
+		<permission id="perm_create_poll" title="Permissions.pollDescription" type="single">
+			<option value="deny" description="No"/>
+			<option value="allow" description="Yes"/>
+		</permission>
+	</section>
+
+	<!-- Vote on polls -->
+	<section id="topics_poll" title="Permissions.vote">
+		<permission id="perm_vote" title="Permissions.pollVote" type="single">
+			<option value="deny" description="No"/>
+			<option value="allow" description="Yes"/>
+		</permission>
+	</section>
+
+	<!-- Read-only forums -->
+	<section id="read_only_forum" title="Permissions.readOnly">
+		<permission id="perm_read_only_forums" title="Permissions.readOnlyDescription" type="multiple">
+			<sql ref="forums"/>
+		</permission>
+	</section>
+
+	<!-- New Topics are moderated, but not replies -->
+	<section id="moderate_replies" title="Permissions.moderationReplies">
+		<permission id="perm_reply_without_moderation" title="Permissions.moderationRepliesDescription" type="multiple">
+			<sql ref="forums"/>
+		</permission>
+	</section>
+
+	<!-- Html -->
+	<section id="html_disabled" title="Permissions.html">
+		<permission id="perm_html_disabled" title="Permissions.htmlDescription" type="multiple">
+			<sql ref="forums"/>
+		</permission>
+	</section>
+
+	<!-- Karma -->
+	<section id="karma_disabled" title="Permissions.karma">
+		<permission id="perm_karma_enabled" title="Permissions.karmaDescription" type="single">
+			<option value="deny" description="No"/>
+			<option value="allow" description="Yes"/>
+		</permission>
+	</section>
+
+	<!-- Bookmarks -->
+	<section id="bookmarks_disabled" title="Permissions.bookmarks">
+		<permission id="perm_bookmarks_enabled" title="Permissions.bookmarksDescription" type="single">
+			<option value="deny" description="No"/>
+			<option value="allow" description="Yes"/>
+		</permission>
+	</section>
+
+	<!-- Attachments -->
+	<section id="attachments_disabled" title="Permissions.attachments">
+		<permission id="perm_attachments_enabled" title="Permissions.attachmentsEnable" type="multiple">
+			<sql ref="forums"/>
+		</permission>
+
+		<permission id="perm_attachments_download" title="Permissions.attachmentsDownload" type="multiple">
+			<sql ref="forums"/>
+		</permission>
+	</section>
+
+	<!-- Misc -->
+	<section id="misc_section" title="Permissions.misc">
+		<!-- Activate moderation log -->
+		<permission id="perm_moderation_log" title="Permissions.activityLog" type="single">
+			<option value="deny" description="No"/>
+			<option value="allow" description="Yes"/>
+		</permission>
+	
+		<!-- Full Moderation -->
+		<permission id="perm_full_moderation_log" title="Permissions.fullActivityLog" type="single">
+			<option value="deny" description="No"/>
+			<option value="allow" description="Yes"/>
+		</permission>
+	</section>
+	
+	<!-- Moderation -->
+	<section id="moderation_section" title="Permissions.moderation">
+		<!-- Is a moderator -->
+		<permission id="perm_moderation" title="Permissions.isModerator" type="single">
+			<option value="deny" description="No"/>
+			<option value="allow" description="Yes"/>
+		</permission>
+
+		<!-- Can approve / deny messages -->
+		<permission id="perm_moderation_approve_messages" title="Permissions.moderationApprove" type="single">
+			<option value="deny" description="No"/>
+			<option value="allow" description="Yes"/>
+		</permission>
+
+		<!-- Restricted forums to moderate -->		
+		<permission id="perm_moderation_forums" title="Permissions.cannotModerate" type="multiple">
+			<sql ref="forums"/>
+		</permission>
+		
+		<!-- Post removal -->
+		<permission id="perm_moderation_post_remove" title="Permissions.canRemovePosts" type="single">
+			<option value="deny" description="No"/>
+			<option value="allow" description="Yes"/>
+		</permission>
+		
+		<!-- Post edit -->
+		<permission id="perm_moderation_post_edit" title="Permissions.canEdit" type="single">
+			<option value="deny" description="No"/>
+			<option value="allow" description="Yes"/>
+		</permission>
+		
+		<!-- topic Moving -->
+		<permission id="perm_moderation_topic_move" title="Permissions.canMove" type="single">
+			<option value="deny" description="No"/>
+			<option value="allow" description="Yes"/>
+		</permission>
+		
+		<!-- Lock and Unlock topics -->
+		<permission id="perm_moderation_topic_lockUnlock" title="Permissions.canLockUnlock" type="single">
+			<option value="deny" description="No"/>
+			<option value="allow" description="Yes"/>
+		</permission>
+	</section>
+</sections>

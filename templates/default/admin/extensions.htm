@@ -1,0 +1,105 @@
+<#setting number_format = "#"/>
+<style type="text/css">@import url( ${contextPath}/templates/${templateName}/styles/style.css?${startupTime} );</style>
+
+<table width="100%" align="center" cellpadding="4" cellspacing="1" border="0" class="forumline">
+	<tr>
+		<td class="cathead" colspan="8" align="center" height="28"><span class="cattitle">${I18n.getMessage("AdminAttachments.addNewExtension")}</span></td>
+	</tr>
+	
+	<form accept-charset="${encoding}" name="form" action="${contextPath}/jforum${extension}" method="post">
+	<input type="hidden" name="action" value="extensionsSave" />
+	<input type="hidden" name="module" value="${moduleName}" />
+	<!-- Add new -->
+	<tr>
+		<th class="thleft">&nbsp;${I18n.getMessage("AdminAttachments.extension")}&nbsp;</th>
+		<th>&nbsp;${I18n.getMessage("AdminAttachments.allowed")}&nbsp;</th>
+		<th>&nbsp;${I18n.getMessage("AdminAttachments.extensionExplanation")}&nbsp;</th>
+		<th>&nbsp;${I18n.getMessage("AdminAttachments.extensionGroup")}&nbsp;</th>
+		<th colspan="2">&nbsp;${I18n.getMessage("AdminAttachments.uploadIcon")}&nbsp;</th>
+	</tr>
+	<tr>
+		<td class="row1" align="center" valign="middle">
+			<table width="100%" align="center" cellpadding="0" cellspacing="0" border="0">
+				<tr>
+					<td class="row1" align="center" valign="middle" width="10%" wrap="nowrap">&nbsp;</td>
+					<td class="row1" align="center" valign="middle"><input type="text" size="20" maxlength="100" name="extension" value="" /></td>
+				</tr>
+			</table>
+		</td>
+
+		<td class="row1" align="center" valign="middle"><input type="checkbox" name="allow" /></td>
+		<td class="row1" align="center" valign="middle"><input type="text" size="20" maxlength="100" name="comment" value="" /></td>
+
+		<td class="row2" align="center" valign="middle">
+			<select name="extension_group">
+				<#list groups as g>
+					<option value="${g.id}">${g.name}</option>
+				</#list>
+			</select>
+		</td>
+
+		<td colspan="2" class="row1" align="center" valign="middle"><input type="text" size="30" name="upload_icon" /></td>
+	</tr>
+
+	<tr align="right">
+	  <td class="catbottom" colspan="8" height="29"><input type="submit" name="submit" class="liteoption" value="${I18n.getMessage("submit")}" /></td>
+    </tr>
+	</form>
+
+	<tr><td colspan="8">&nbsp;</td></tr>
+
+	<tr>
+		<td class="cathead" colspan="8" align="center" height="28"><span class="cattitle">${I18n.getMessage("AdminAttachments.existingExtensions")}</span></td>
+	</tr>
+
+	<!-- Edit -->
+	<#if (extensions.size() > 0)>
+		<form accept-charset="${encoding}" name="form" action="${contextPath}/jforum${extension}" method="post">
+		<input type="hidden" name="action" value="extensionsUpdate" />
+		<input type="hidden" name="module" value="${moduleName}" />
+		<input type="hidden" name="total_records" value="${extensions.size()}"/>
+
+		<tr>
+			<th class="thleft">&nbsp;${I18n.getMessage("AdminAttachments.extension")}&nbsp;</th>
+			<th>&nbsp;${I18n.getMessage("AdminAttachments.allowed")}&nbsp;</th>
+			<th>&nbsp;${I18n.getMessage("AdminAttachments.extensionExplanation")}&nbsp;</th>
+			<th>&nbsp;${I18n.getMessage("AdminAttachments.extensionGroup")}&nbsp;</th>
+			<th>&nbsp;${I18n.getMessage("AdminAttachments.uploadIcon")}&nbsp;</th>
+			<th>&nbsp;${I18n.getMessage("AdminAttachments.quotaDelete")}&nbsp;</th>
+		</tr>
+
+		<#assign counter = 0/>
+		<#list extensions as e>
+			<input type="hidden" name="id_${counter}" value="${e.id}"/>
+			<tr>
+				<td class="row1" align="center" valign="middle">
+					<table width="100%" align="center" cellpadding="0" cellspacing="0" border="0">
+						<tr>
+							<td class="row1" align="center" valign="middle" width="10%" wrap="nowrap">&nbsp;</td>
+							<td class="row1" align="center" valign="middle"><input type="text" size="20" maxlength="100" name="extension_${counter}" value="${e.extension}" /></td>
+						</tr>
+					</table>
+				</td>
+
+				<td class="row1" align="center" valign="middle"><input type="checkbox" name="allow_${counter}" <#if e.isAllow()>checked</#if>/></td>		
+				<td class="row1" align="center" valign="middle"><input type="text" size="20" maxlength="100" name="comment_${counter}" value="${e.comment?default("")}" /></td>
+				<td class="row2" align="center" valign="middle">
+					<select name="extension_group_${counter}">
+						<#list groups as g>
+							<option value="${g.id}" <#if e.extensionGroupId == g.id>selected</#if>>${g.name}</option>
+						</#list>
+					</select>
+				</td>
+
+				<td class="row1" align="center" valign="middle"><input type="text" size="30" name="upload_icon_${counter}" value="${e.uploadIcon?default("")}" /></td>
+				<td class="row1" align="center" valign="middle"><input type="checkbox" name="delete" value="${e.id}"/></td>
+			</tr>
+			<#assign counter = counter + 1/>
+		</#list>
+
+		<tr align="right">
+		  <td class="catbottom" colspan="8" height="29"><input type="submit" name="submit" class="liteoption" value="${I18n.getMessage("submit")}" /></td>
+		</tr>
+		</form>
+	</#if>
+</table>

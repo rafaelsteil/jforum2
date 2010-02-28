@@ -1,0 +1,47 @@
+<style type="text/css">@import url( ${contextPath}/templates/${templateName}/styles/style.css?${startupTime} );</style>
+
+<script type="text/javascript">
+function validateForm(f)
+{
+	if (f.type.selectedIndex == 2 && isNaN(f.value.value)) {
+		alert("${I18n.getMessage("Banlist.invalidUserId")}");
+		return false;
+	}
+
+	return true;
+}
+</script>
+
+<form accept-charset="${encoding}" name="form" action="${contextPath}/jforum${extension}" method="post" onsubmit="return validateForm(this);">
+<input type="hidden" name="action" value="insertSave" />
+<input type="hidden" name="module" value="${moduleName}" />
+
+<table class="forumline" cellspacing="1" cellpadding="3" width="100%" border="0">
+	<tr>
+		<th class="thhead" valign="middle" colspan="2" height="25">${I18n.getMessage("Banlist.Form.Title")}</th>
+	</tr>
+
+	<tr>
+		<td class="gen">${I18n.getMessage("Banlist.Type")}</td>
+		<td class="row2">
+		    <select name="type">
+			<option value="email">${I18n.getMessage("Banlist.Email")}</option>
+			<option value="ip">${I18n.getMessage("Banlist.IP")}</option>
+			<option value="user">${I18n.getMessage("Banlist.UserID")}</option>
+		    </select>
+		</td>
+	</tr>
+
+	<tr>
+		<td class="row1" width="38%"><span class="gen">${I18n.getMessage("Banlist.Value")}</span></td>
+		<td class="row2"><input name="value" type="text" /> <br />
+		<span class="gensmall">${I18n.getMessage("Banlist.Tip.IP")}</span></td>
+	</tr>
+
+	<tr align="center">
+		<td class="catbottom" colspan="2" height="28">
+		    <input class="mainoption" type="submit" value="${I18n.getMessage("Rank.Form.ClickToUpdate")}" name="submit" />
+		</td>
+	</tr>
+</table>
+</form>

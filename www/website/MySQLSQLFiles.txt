@@ -1,0 +1,9 @@
+!!! Setting up the correct .SQL file for your MySQL database
+If you're going to use [MySQL|http://www.mysql.com] as database, there are some pre-configurations you should do before starting up JForum. See the table below:
+
+||MySQL Version||Action to do
+|4.1.x or newer|*None*. The default ''mysql.sql'' file is already configured for the latest MySQL versions
+|4.0.x|*Delete* the file ''WEB-INF/config/database/mysql.sql'' and __rename__ the file ''mysql_40.sql'' to ''mysql.sql''
+|3.x|*Delete* the file ''WEB-INF/config/database/mysql.sql'' and __rename__ the file ''mysql_323.sql'' to ''mysql.sql''
+
+That's all you have to do. JForum takes care of the rest.

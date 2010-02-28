@@ -1,0 +1,13 @@
+!!! Introducing JIRA
+[JIRA|http://www.atlassian.com/software/jira/] is a bug tracking, issue tracking, and project management application developed by [Atlassian|http://www.atlassian.com/]. It is one of the most powerful and easy to use bug trackers available. [JForum|http://www.jforum.net] uses it as its primary tool for helping developers
+
+The address to access JForum's JIRA is http://www.jforum.net/jira
+
+!! How to start
+Although you can [create issues anonymously|http://www.jforum.net/jira/secure/CreateIssue!default.jspa], it is recommended that you [signup for an account|http://www.jforum.net/jira/secure/Signup!default.jspa], since it will become easier to make reports and receive notifications about work progress. 
+
+* [Register for a JIRA account|http://www.jforum.net/jira/secure/Signup!default.jspa]
+* [Report issues / suggest features|http://www.jforum.net/jira/secure/CreateIssue!default.jspa]
+
+!! Viewing open issues
+In the [browse project|http://www.jforum.net/jira/browse/JF?report=com.atlassian.jira.plugin.system.project:openissues-panel] page you will find all available reports, like [Open|http://www.jforum.net/jira/secure/IssueNavigator.jspa?reset=true&pid=10000&status=1], [In Progress|http://www.jforum.net/jira/secure/IssueNavigator.jspa?reset=true&pid=10000&status=3] and [Closed|http://www.jforum.net/jira/secure/IssueNavigator.jspa?reset=true&pid=10000&status=6] issues. 

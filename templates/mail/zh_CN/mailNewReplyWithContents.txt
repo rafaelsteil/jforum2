@@ -1,0 +1,13 @@
+<html>
+<head>
+<base href="${forumLink}">
+<style type="text/css">@import url( ${forumLink}/templates/default/styles/style.css );</style>
+</head>
+<body>
+${message}
+<br>
+---------<br>
+查询主题: ${path}<br>
+取消主题: ${unwatch}<br>
+</body>
+</html>

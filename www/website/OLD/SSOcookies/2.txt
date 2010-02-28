@@ -1,0 +1,98 @@
+!!! Using a cookie for SSO.
+[{Info
+The simplest aproach with SSO cookies is to have the expiration (setMaxAge) to -1, this will make it a session cookie. If you provide ; ''remember me on this computer'' type function set expiration to some large number e.g. 60*60*24*365.
+}]
+
+!! Using an existing login cookie
+__Use the method when you already have a login cookie with the value set to the username.__
+
+Ensure all other SSO related settings are at default values in the ''SytemGlobals.properties'' file.  The following will enable an exisiting cookie for SSO.
+
+[{Highlight
+authentication.type=sso\\
+sso.implementation=net.jforum.sso.CookieUserSSO\\
+sso.redirect=http:/mysite.blah/login.jsp # change\\
+sso.cookie.name=myAutoLogin              # change\\
+}]
+
+When a redirect is sent to your login page you can display a message (''sso.redirect.error'') using the request parameter ''error''.
+
+[{Java2HtmlPlugin
+
+...
+String redirect = request.getParameter("jforum_redirect");
+if (redirect != null) login_message = request.getParameter("error");
+...
+}]
+
+You should also check the redirect parameter in your login action, as you will want to send the user to the correct page once logged in:
+
+[{Java2HtmlPlugin
+
+...
+if (redirect != null && redirect.trim().length() > 0)
+ 		response.sendRedirect(redirect);
+...
+}]
+
+Set ''sso.cookie.path'' if your login cookie path is not set to root path, i.e. "/".
+
+!! Using the default SSO cookie
+
+__Use this method when you don't have a login cookie with value set to username.__
+
+Providing all other SSO related settings are at default values in the _SytemGlobals.properties_ file the following will enable the SSO cookie.
+
+[{Highlight
+authentication.type=sso\\
+sso.implementation=net.jforum.sso.CookieUserSSO\\
+sso.redirect=http:/mysite.blah/login.jsp # change\\
+}]
+When a redirect is sent to your login page you can display a message (''sso.redirect.error'') using the request parameter ''error''.
+
+[{Java2HtmlPlugin
+
+...
+String redirect = request.getParameter("jforum_redirect");
+if (redirect != null) login_message = request.getParameter("error");
+...
+}]
+
+You need to alter your web-site login action to set the cookie username when your user logs in:
+
+[{Java2HtmlPlugin
+
+...
+Cookie cookie = new Cookie("JforumSSO", user.getUsername());
+cookie.setMaxAge(-1) // session cookie, or set to positive number.
+response.addCookie( cookie );
+...
+}]
+
+
+You should also check for a redirect parameter as you will want to send the user to the correct page once logged in:
+
+[{Java2Html
+
+...
+if (redirect != null && redirect.trim().length() > 0)
+ 		response.sendRedirect(redirect);
+...
+}]
+
+
+Finally, update your logout action to remove the cookie.
+
+[{Java2HtmlPlugin
+
+...
+Cookie cookie = new Cookie("JforumSSO", "");
+cookie.setMaxAge(0) // delete the cookie.
+response.addCookie( cookie );
+...
+}]
+
+!! My auto login cookie contains email adress or numeric id?
+If your existing login cookie contains some other data then see the example in [implement your own SSO class|implementSSO], which deals with a case of email address in cookie. You should be able to apply the same approach for any situation.
+
+* or simply use the defaul cookie, which saves you having to rebuild JForum. 

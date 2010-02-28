@@ -1,0 +1,31 @@
+<style type="text/css">@import url( ${contextPath}/templates/${templateName}/styles/style.css?${startupTime} );</style>
+
+<form accept-charset="${encoding}" name="form" action="${contextPath}/jforum${extension}" method="post" enctype="multipart/form-data">
+<input type="hidden" name="action" value="${action}" />
+<input type="hidden" name="module" value="${moduleName}" />
+
+<#if smilie?exists>
+<input type="hidden" name="id" value="${smilie.id}" />
+</#if>
+
+<table class="forumline" cellspacing="1" cellpadding="3" width="100%" border="0">
+	<tr>
+		<th class="thhead" valign="middle" colspan="2" height="25">${I18n.getMessage("Smilies.Form.Title")}</th>
+	</tr>
+
+	<tr>
+		<td class="row1" width="38%"><span class="gen">${I18n.getMessage("Smilies.Form.Code")}</span></td>
+		<td class="row2"><input type="text" class="post" style="WIDTH: 200px" maxlength="25" size="25" name="code" value="<#if smilie?exists>${smilie.code}</#if>" /></td>
+	</tr>
+
+	<tr>
+		<td class="row1"><span class="gen">${I18n.getMessage("Smilies.Form.Url")}</span></td>
+		<td class="row2"><input type="file" class="post" style="WIDTH: 200px" maxlength="25" size="25" name="smilie_img" /></td>
+	</tr>
+
+	<tr align="center">
+		<td class="catbottom" colspan="2" height="28"><input class="mainoption" type="submit" value="${I18n.getMessage("Smilies.Form.ClickToUpdate")}" name="submit" /></td>
+	</tr>
+</table>
+</form>
+   

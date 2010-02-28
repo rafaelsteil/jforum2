@@ -1,0 +1,9 @@
+!!! Attachment Configurations
+There are some interesting settings to set at Admin Panel -> Attachments -> Configurations, as described in the following table:
+
+||Setting||Default value||Description
+|Attachment Posting Icon|images/icon_clip.gif|Relative path to an image that is displayed next to Attachment Links in individual Postings. Leave this field empty if you don't want an icon to be displayed. This Setting will be overwritten by the Settings in Extension Groups Management.
+|Create Thumbnail|Yes|With this Feature a Thumbnail will be displayed within the post when an image is sent, allowing the User to click on it to open the real Image.
+|Minimum Thumbnail dimensions|400x400|Minimum size the attached image should have in order to generate a thumb. If the original image is smaller than these values, no thumb will be created.
+|Add description box around Thumbs|Yes|If set to "Yes", the regular attachments box panel will be added around thumbnails as well, showing the image's description, as well download count and the download button. If set to "No", only the thumbnail will be shown, and then the user should click on it to download the full image.
+|Maximum Number of Attachments|3|The maximum number of attachments allowed in one post.

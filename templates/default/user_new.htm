@@ -1,0 +1,118 @@
+<#include "header.htm"/>
+<script type="text/javascript">
+function checkemail(str) {
+    var filter=/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i
+    if (filter.test(str)) return true;
+    else return false;
+}
+
+function validateRegistrationForm(f)
+{
+	if (f.username.value == "") {
+		alert("${I18n.getMessage("User.fillUsername")}");
+		f.username.focus();
+		
+		return false;
+	}
+	
+	if (f.email.value == "" || checkemail(f.email.value) != true) {
+        alert("${I18n.getMessage("User.fillEmail")}");
+        f.email.focus();
+
+        return false;
+    }
+	
+	if (f.password.value == "") {
+		alert("${I18n.getMessage("User.fillPassword")}");
+		f.password.focus();
+		
+		return false;
+	}
+	
+	if (f.password_confirm.value == "") {
+		alert("${I18n.getMessage("User.fillPasswordConfirmation")}");
+		f.password_confirm.focus();
+		
+		return false;
+	}
+	
+	if (f.password.value != f.password_confirm.value) {
+		alert("${I18n.getMessage("User.passwordNotMatch")}");
+		return false;
+	}
+	
+	return true;
+}
+
+function newCaptcha()
+{
+	document.getElementById("captcha_img").src = "${contextPath}/jforum${extension}?module=captcha&action=regenerate&timestamp=" + new Date().getTime();
+}
+</script>
+<form id="formregister" accept-charset="${encoding}" name="formregister" action="${JForumContext.encodeURL("/jforum")}" method="post" onsubmit="return validateRegistrationForm(this);">
+<input type="hidden" name="action" value="${action}" />
+<input type="hidden" name="module" value="${moduleName}" />
+
+<table cellspacing="2" cellpadding="2" width="100%" align="center" border="0">
+	<tr>
+		<td align="left">
+			<span class="nav"><a class="nav" href="${JForumContext.encodeURL("/forums/list")}">${I18n.getMessage("ForumListing.forumIndex")}</a></span>
+		</td>
+	</tr>
+</table>
+		
+<table class="forumline" cellspacing="1" cellpadding="3" width="100%" border="0">
+	<tr>
+		<th class="thhead" valign="middle" colspan="2" height="25">${I18n.getMessage("User.registerInformation")}</th>
+	</tr>
+        
+	<tr>
+		<td class="row2" colspan="2" align="center"><span class="gensmall"><font color="red">${I18n.getMessage("User.requiredFields")}</font></span></td>
+	</tr>
+        
+	<tr>
+		<td class="row1" width="38%"><span class="gen">${I18n.getMessage("User.user")}: *</span></td>
+		<td class="row2"><input class="post" type="text" style="WIDTH: 200px" maxlength="25" size="25" name="username" value="${username?default("")?html}"/></td>
+	</tr>
+        
+	<tr>
+		<td class="row1"><span class="gen">${I18n.getMessage("User.emailAddress")}: *</span></td>
+		<td class="row2"><input class="post" type="text" style="WIDTH: 200px" maxlength="255" size="25" name="email" value="${email?default("")?html}"/></td>
+	</tr>
+        
+	<tr>
+		<td class="row1"><span class="gen">${I18n.getMessage("User.password")}: *</span></td>
+		<td class="row2"><input name="password" type="password" class="post" id="password" style="WIDTH: 200px" size="25" maxlength="100" /> </td>
+	</tr>
+        
+	<tr>
+		<td class="row1"><span class="gen">${I18n.getMessage("User.confirmPassword")}: * </span></td>
+		<td class="row2"><input class="post" style="WIDTH: 200px" type="password" maxlength="100" size="25" name="password_confirm" /> </td>
+	</tr>
+
+	<#if captcha_reg?exists>
+		<tr>
+			<td class="row1" width="38%" valign="top"><span class="gen">${I18n.getMessage("User.captchaResponse")}: *</span></td>
+			<td class="row2">
+				<input class="post" type="text" style="WIDTH: 200px; font-weight: bold;" maxlength="25" size="25" name="captchaResponse" /> 
+				<p><img src="${JForumContext.encodeURL("/captcha/generate/${timestamp}")}" border="0" align="top" alt="Captcha unavailable" id="captcha_img"/></p>
+				<span class="gensmall">${I18n.getMessage("User.hardCaptchaPart1")} <a href="#newCaptcha" onClick="newCaptcha()"><b>${I18n.getMessage("User.hardCaptchaPart2")}</b></a></span>
+			</td>
+		</tr>
+	</#if>
+						
+	<#if error?exists>
+	<tr>
+		<td class="row2" colspan="2" align="center"><span class="gen"><font color="#ff0000"><b>${error}</b></font></span></td>
+	</tr>
+	</#if>
+        
+	<tr align="center">
+		<td class="catbottom" colspan="2" height="28">
+			<input class="mainoption" type="submit" value="${I18n.getMessage("User.submit")}" name="submit" />&nbsp;&nbsp;
+			<input class="liteoption" type="reset" value="${I18n.getMessage("User.reset")}" name="reset" />
+		</td>
+	</tr>
+</table>
+</form>
+<#include "bottom.htm"/>

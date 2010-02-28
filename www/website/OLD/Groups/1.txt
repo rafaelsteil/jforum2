@@ -1,0 +1,18 @@
+!!! Groups
+Every user should belong to at least one group in JForum, being possible to belong to "unlimited" groups. By default, every new user is added to the "General" group, which includes the "Anonymous" user. 
+
+!! Group administration
+Group administration is done in the Admin Panel -> Groups section, where you can Add, Edit, Delete and setup Permissions. 
+
+! Add a new Group
+Click in the "Insert new" button, and inform the ''Group Name'', its ''Parent Group' and a ''Description''. ''Parent Group'' is destined for organization purposes only, and don't have any other major functionality. 
+
+! Deleting Groups
+A group must be empty - e.g, there should not be any users associated to it - before it can be deleted. 
+
+To remove one or more groups, select them using the checkboxes available in the ''Delete'' column, and press the button ''Delete selected''. 
+
+! Permissions
+Each group has a set of permissions, which are reflected to every user who belongs to that group. You set up permissions for a group by clicking in the ''Permissions'' link. Group roles are not merged - in other words, a child group does not inherit the permissions of its parent group. 
+
+For more information about how to set up permissions in JForum, check out the [Permissions] section. 

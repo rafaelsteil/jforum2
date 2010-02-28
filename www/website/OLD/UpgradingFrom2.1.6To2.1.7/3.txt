@@ -1,0 +1,44 @@
+!!! Upgrading from version 2.1.6 to 2.17
+
+Upgrading from JForum version 2.1.6 to version 2.1.7 is very simple. All you have to do is to carefuly follow the steps here described. 
+
+!! IMPORTANT: Changes made to Permissions / Roles
+JForum 2.1.7 highly improves the efficiency of user and groups management, with a faster engine and a set of tweaks to the way multiple groups are handled by each user. 
+
+[{Note title='Changes'
+
+The database upgrade script, explained later in this page, will make some changes to the database schema, affecting the tables ''jforum_roles'' and ''jforum_role_values''. Please dont' forget to read the ''__Setting up Permissions again__'' section.
+}]
+
+!! Backup your data
+First, make a backup of the database and the current directory where JForum is installed. Backup everything (templates, images etc). The suggested approach to use is to unpack JForum 2.1.7 into some work directory, made the changes there and then, when all is finished, copy it over the directory where the previous vesrion is located.
+
+[{Tip
+You'll like to take special care for ''SystemGlobals.properties'' and ''jforum-custom.conf'', as these are the main configuration files. 
+}]
+
+!! Upgrading the database schema
+There are some changes to the database schema - a new colum here, a removed colum there... In order to get the database right, go to the directory __''upgrade/2.1.7''__, where you'll find the upgrade script for all supported dataabses - Oracle, MySQL, PostgreSQL and HSLQDB. 
+
+Using your database management console / tool, import the appropriate script. For example, if you are using MySQL, the following command should run the queries:
+
+[{Highlight
+
+mysql -u USERNAME -p DBNAME < mysql_2.1.6_to_2.1.7.sql
+}]
+
+There should not be any errors. 
+
+!! Setting up permissions again
+When logging in for the first time, you'll note that all Categories and Forums are not visible anymore. That's because the changes made to the database. 
+
+[{Tip
+* The ''Admin'' account is the only one with a role set, which is sufficient to use the ''Admin Panel'' to fix the roles for all other groups.
+}]
+
+You'll have to re-save the permissions from all groups again. The step is simple: just to ''Admin Panel -> Groups -> Permissions'', check the options and then click Save. Do these steps for all groups. 
+
+[{Note title='Be careful'
+
+Please note that you have to set all roles again. __Be careful__ when doing this, in order to not give incorrect roles to some group. 
+}]

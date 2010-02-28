@@ -1,0 +1,4 @@
+!!! Pending activations
+In boards where new users are required to validate their email addresses, the Admin Panel -> Users -> Pending Activations interface us a section where the Administrator can see all pending requests and, optionally, activate them. This is useful for situations where the user does not receive the registration email or is having problems with it.
+
+To see all pending activations, go to Admin Panel -> Users -> Pending Activations, where a list will all - if any - pending activations will be shown. You don't have to necessarily activate them, as the user himself is expected to do so, but, if you have to, the interface it's there. 

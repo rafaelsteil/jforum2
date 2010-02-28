@@ -1,0 +1,71 @@
+<#setting number_format = "#"/>
+<style type="text/css">@import url( ${contextPath}/templates/${templateName}/styles/style.css?${startupTime} );</style>
+
+<script language="JavaScript">
+<#include "js/permission_control.js"/>
+</script>
+
+<form accept-charset="${encoding}" name="form1" action="${contextPath}/jforum${extension}" method="post">
+<input type="hidden" name="action" value="permissionsSave" />
+<input type="hidden" name="module" value="${moduleName}" />
+<input type="hidden" name="id" value="${group.id}" />
+
+<table class="forumline" cellspacing="1" cellpadding="3" width="100%" border="0">
+	<tr>
+		<th class="thhead" valign="middle" colspan="3" height="25">${I18n.getMessage("PermissionControl.groupTitle")} - "<i>${group.name}</i>"</th>
+	</tr>
+
+	<tr>
+		<td colspan="3">
+			<span class="gen">
+			<font color="#ff0000"><b><center>${I18n.getMessage("PermissionControl.howTo")}:</center></b></font> <br />
+			</span>
+			<span class="gensmall">
+			<li>${I18n.getMessage("PermissionControl.areRestrictive")}. </li>
+			<li>${I18n.getMessage("PermissionControl.allowAllDescrption")}. </li>
+			<li>${I18n.getMessage("PermissionControl.notTrivial")}.</li> 
+			</span>
+		</td>
+	</tr>
+
+	<#list sections as section>
+		<tr>
+			<td class="row1" colspan="3"><span class="gen"><b>${section.sectionName}</b></span></td>
+		</tr>
+
+		<#assign permissions = section.permissions/>
+		<#list permissions as p>
+			<tr>
+				<td class="row2">&nbsp;</td>
+				<td class="row2" valign="middle" width="33%"><span class="gensmall">${p.name}</span></td>
+				<td class="row2" valign="middle" align="left">
+					<span class="gensmall">
+					<#if p.type == "single">
+						<select name="${p.id}$single">
+					<#else>
+						<select name="${p.id}" multiple size="4" onChange="return checkThisField(this)">
+						<option value="all">${I18n.getMessage("PermissionControl.allowAll")}</option>
+					</#if>
+					
+					<#assign permissionData = p.data/>
+
+					<#assign allValues = ""/>
+					<#list permissionData as pd>
+						<option value="${pd.id}" <#if pd.selected == true> selected</#if>>${pd.name}</option>
+						<#assign allValues = allValues +";"+ pd.id/>
+					</#list>
+					</select>
+					
+					<input type="hidden" name="all${p.id}" value="${allValues}" />
+				</td>
+			</tr>
+		</#list>
+	</#list>
+
+	<tr align="center">
+		<td class="catbottom" colspan="3" height="28"><input class="mainoption" type="submit" value="${I18n.getMessage("PermissionControl.save")}" name="submit" /></td>
+	</tr>
+</table>
+
+</form>
+<script language="javascript">validateSelectFields();</script>

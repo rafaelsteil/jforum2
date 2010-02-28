@@ -1,0 +1,14 @@
+<html>
+<head>
+<base href="${forumLink}">
+<style type="text/css">@import url( ${forumLink}/templates/default/styles/style.css );</style>
+<style type="text/css">@import url( ${forumLink}/templates/default/styles/zh_TW.css );</style>
+</head>
+<body>
+${message}
+<br>
+---------<br>
+線上閱讀這個主題: ${path}<br>
+取消訂閱這個主題: ${unwatch}<br>
+</body>
+</html>

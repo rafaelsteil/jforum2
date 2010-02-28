@@ -1,0 +1,229 @@
+<#setting number_format = "#"/>
+<#import "macros/group_macros.ftl" as lib>
+<#assign edit = forum?exists/>
+<style type="text/css">@import url( ${contextPath}/templates/${templateName}/styles/style.css?${startupTime} );</style>
+
+<form action="${contextPath}/jforum${extension}" method="post" name="form" id="form" accept-charset="${encoding}" onSubmit="return checkInput();" enctype="multipart/form-data">
+<input type="hidden" name="action" value="${action}" />
+<input type="hidden" name="module" value="${moduleName}" />
+
+<#if !edit>
+	<#list groups as g>
+		<input type="hidden" name="groups" value="${g.id}">
+	</#list>
+</#if>
+
+<script language="javascript">
+function checkGroups() 
+{
+	<#if !edit>
+		if (document.form.groups.selectedIndex == -1) {
+			alert("${I18n.getMessage("PermissionControl.atLeastOne")}");
+			return false;
+		}
+	</#if>
+
+	return true;
+}
+
+function checkCategory()
+{
+	if (document.form.categories_id.selectedIndex < 0) {
+		alert("${I18n.getMessage("Forums.Form.ChooseCategory")}");
+		return false;
+	}
+
+	return true;
+}
+
+function checkInput()
+{
+	return checkGroups() && checkCategory();
+	//return checkGroups() && checkCategory() && validateMailIntegration();
+}
+
+function showMailIntegration(checked)
+{
+	document.getElementById("mail_integration_tr").style.display = checked ? "" : "none";
+}
+
+function validateMailIntegration()
+{
+	var f = document.form;
+
+	if (f.mail_integration.checked) {
+		var baseMessage = "${I18n.getMessage("Forums.Form.FieldEmpty")}: ";
+		
+		if (f.forum_email.value == "") {
+			alert(baseMessage + "${I18n.getMessage("Forums.Form.ForumEmail")}");
+			f.forum_email.focus();
+			return false;
+		}
+
+		if (f.pop_host.value == "") {
+			alert(baseMessage + "${I18n.getMessage("Forums.Form.PopHost")}");
+			f.pop_host.focus();
+			return false;
+		}
+
+		if (f.pop_host.value == "") {
+			alert(baseMessage + "${I18n.getMessage("Forums.Form.PopHost")}");
+			f.pop_host.focus();
+			return false;
+		}
+
+		if (f.pop_port.value == "") {
+			alert(baseMessage + "${I18n.getMessage("Forums.Form.PopPort")}");
+			f.pop_port.focus();
+			return false;
+		}
+
+		if (f.pop_username.value == "") {
+			alert(baseMessage + "${I18n.getMessage("Forums.Form.PopUsername")}");
+			f.pop_username.focus();
+			return false;
+		}
+
+		if (f.pop_password.value == "") {
+			alert(baseMessage + "${I18n.getMessage("Forums.Form.PopPassword")}");
+			f.pop_password.focus();
+			return false;
+		}
+	}
+}
+
+function limitTextArea(field, limit)
+{
+	if (field.value.length > limit) {
+		field.value = field.value.substring(0, limit);
+	}
+}
+</script>
+
+<#if edit>
+<input type="hidden" name="forum_id" value="${forum.id}" />
+</#if>
+
+<table class="forumline" cellspacing="1" cellpadding="3" width="100%" border="0">
+	<tr>
+		<th class="thhead" valign="middle" colspan="2" height="25">${I18n.getMessage("Forums.Form.Title")}</th>
+	</tr>
+        
+	<tr>
+		<td class="row1" width="20%"><span class="gen">${I18n.getMessage("Forums.Form.ForumName")}</span></td>
+		<td class="row2"><input type="text" class="post" style="WIDTH: 200px" maxlength="200" size="25" name="forum_name" value="<#if forum?exists>${forum.name}</#if>" /></td>
+	</tr>
+
+	<tr>
+		<td class="row1" width="38%"><span class="gen">${I18n.getMessage("Forums.Form.Moderate")}</span></td>
+		<td class="row2">
+			<span class="gensmall">
+			<input class="post" type="radio" name="moderate" value="0" <#if forum?exists><#if !forum.isModerated()>checked</#if><#else>checked</#if>/>&nbsp;${I18n.getMessage("User.no")}&nbsp;&nbsp;
+			<input class="post" type="radio" name="moderate" value="1" <#if forum?exists && forum.isModerated()>checked</#if>/>&nbsp;${I18n.getMessage("User.yes")}
+			</span>
+		</td>
+	</tr>
+
+	<tr>
+		<td class="row1"><span class="gen">${I18n.getMessage("Forums.Form.Category")}</span></td>
+		<td class="row2">
+			<select name="categories_id">
+			<#list categories as c><option value="${c.id}" <#if forum?exists><#if forum.categoryId == c.id>selected</#if></#if>>${c.name}</option></#list>
+			</select>
+		</td>
+	</tr>
+
+	<tr>
+		<td class="row1"><span class="gen">${I18n.getMessage("Forums.Form.Description")}</span></td>
+		<td class="row2"><textarea name="description" cols="40" rows="10" class="post" style="width: 100%" onKeyDown="limitTextArea(this, 255);" onKeyUp="limitTextArea(this, 255);"><#if forum?exists>${forum.description?default("")}</#if></textarea></td>
+	</tr>
+	
+	<#if !edit>
+	<tr>
+		<td class="row1"><span class="gen">${I18n.getMessage("Forums.Form.Permissions")}</span></td>
+		<td class="row2">
+			<table width="100%">
+				<tr>
+					<td width="50%"><span class="gensmall"><b>${I18n.getMessage("Forums.Form.RestrictAccessToGroup")}</b></span></td>
+					<td><@lib.selectFieldGroups "groupsAccess", groups, 0, true, selectedList/></td>
+				</tr>
+
+				<tr>
+					<td><span class="gensmall"><b>${I18n.getMessage("Forums.Form.RestrictAnonymousPostToGroup")}</b></span></td>
+					<td><@lib.selectFieldGroups "groupsAnonymous", groups, 0, true, selectedList/></td>
+				</tr>
+
+				<tr>
+					<td><span class="gensmall"><b>${I18n.getMessage("Forums.Form.MarkAsReadOnlyToGroup")}</b></span></td>
+					<td><@lib.selectFieldGroups "groupsReadOnly", groups, 0, true, selectedList/></td>
+				</tr>
+
+				<tr>
+					<td><span class="gensmall"><b>${I18n.getMessage("Forums.Form.RestrictHtmlToGroup")}</b></span></td>
+					<td><@lib.selectFieldGroups "groupsHtml", groups, 0, true, selectedList/></td>
+				</td>
+			</table>
+		</td>
+	</tr>
+	</#if>
+
+	<!--
+	<tr>
+		<td class="row1"><span class="gen">${I18n.getMessage("Forums.Form.EmailIntegration")}</span></td>
+		<td class="row2">
+			<table width="100%">
+				<tr>
+					<td width="50%"><span class="gensmall"><b>${I18n.getMessage("Forums.Form.UseEmailIntegration")}</b></span></td>
+					<td><input type="checkbox" name="mail_integration" value="1" <#if mailIntegration?exists>checked</#if> onClick="showMailIntegration(this.checked);"></td>
+				</tr>
+
+				<tr id="mail_integration_tr" style="display: none;">
+					<td colspan="2">
+						<table width="100%">
+							<tr>
+							<td width="50%"><span class="gensmall"><b>${I18n.getMessage("Forums.Form.ForumEmail")}</b></span></td>
+							<td><input type="text" name="forum_email" value="<#if mailIntegration?exists>${mailIntegration.forumEmail}</#if>"></td>
+							</tr>
+
+							<tr>
+								<td width="50%"><span class="gensmall"><b>${I18n.getMessage("Forums.Form.PopHost")}</b></span></td>
+								<td><input type="text" name="pop_host" value="<#if mailIntegration?exists>${mailIntegration.popHost}</#if>"></td>
+							</tr>
+
+							<tr>
+								<td width="50%"><span class="gensmall"><b>${I18n.getMessage("Forums.Form.PopPort")}</b></span></td>
+								<td><input type="text" name="pop_port" value="<#if mailIntegration?exists>${mailIntegration.popPort}</#if>"></td>
+							</tr>
+
+							<tr>
+								<td width="50%"><span class="gensmall"><b>${I18n.getMessage("Forums.Form.PopUsername")}</b></span></td>
+								<td><input type="text" name="pop_username" value="<#if mailIntegration?exists>${mailIntegration.popUsername}</#if>"></td>
+							</tr>
+
+							<tr>
+								<td width="50%"><span class="gensmall"><b>${I18n.getMessage("Forums.Form.PopPassword")}</b></span></td>
+								<td><input type="text" name="pop_password" value="<#if mailIntegration?exists>${mailIntegration.popPassword}</#if>"></td>
+							</tr>
+
+							<tr>
+								<td width="50%"><span class="gensmall"><b>${I18n.getMessage("Forums.Form.RequiresSSL")}</b></span></td>
+								<td><input type="checkbox" name="requires_ssl" value="1" <#if mailIntegration?exists && mailIntegration.isSSL()>checked</#if>></td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	-->
+
+	<tr align="center">
+		<td class="catbottom" colspan="2" height="28"><input class="mainoption" type="submit" value="${I18n.getMessage("Forums.Form.ClickToUpdate")}" name="submit" /></td>
+	</tr>
+
+</table>
+</form>
+
+<#if false && mailIntegration?exists>
+	<script type="text/javascript">showMailIntegration(true);</script>
+</#if>

@@ -1,0 +1,15 @@
+!!! Attachment Quota Limits
+In JForum, you may assign limits to the attachments users send to the board. These limits are called "Quotas", and each [Group] may have a specific quota for it. Quota administration is performed at Admin Panel -> Attachments -> Quota Limits, where it is possible to ''Add'', ''Manage'' and ''Assign' quotas. 
+
+!! Add a new Quota
+The first section of the ''Quota Administration'' page consists of a single form with two fields, ''Description'' and ''Filesize''. The first, ''Description'', it's just an identification of such Quota, like "Big", "Default" or "Small". The field ''Filesize'' expects you to inform how big the new Quota should be, being possible to use Megabytes (MB) or Kilobytes as value. 
+
+Click ''Submit'' to create the new Quota
+
+!! Managing existing Quotas
+Just below the forum used to add a new quota, there is a listing with all currently existing quotas, there it is possible to change the name and the size of the quota, as well deleting it. 
+
+!! Quota settings per group
+To be effective, a Quota must be assigned to a Group, which is how JForum determines how much data an user can send within each message. To associate a Quota to a Group, use the "Group Permission" table. There, associate the Group to the Quota you previously created, and click "Submit". 
+
+That's all. Now, when attaching files, JForum will look at the groups the user belongs to and determine the maximum size of all files he's sending. If an [User] belongs to more than one group, the biggest Quota limit will be used. 

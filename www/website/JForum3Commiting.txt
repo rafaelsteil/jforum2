@@ -1,0 +1,5 @@
+!!! JForum 3 - Commiting process
+* Always comment your changes
+* Commit code that compiles
+* Provide test cases (unit testing, functional testing, acceptance tests etc...)
+

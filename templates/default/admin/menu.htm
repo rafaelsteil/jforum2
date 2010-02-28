@@ -1,0 +1,126 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style type="text/css">@import url( ${contextPath}/templates/${templateName}/styles/style.css?${startupTime} );</style>
+</head>
+<body text="#000000" vlink="#5493b4" link="#006699" bgcolor="#e5e5e5">
+<table cellspacing="0" cellpadding="4" width="100%" align="center" border="0">
+	<tr>
+		<td align="center">
+			<table class="forumline" cellspacing="1" cellpadding="4" width="100%" border="0">
+				<tr>
+					<th class="thhead" height="25"><b>${I18n.getMessage("Admin.administration")}</b></th>
+				</tr>
+
+				<tr><td class="row1"><a id="forumIndex" class="genmed" target="_top" href="${contextPath}/forums/list${extension}">${I18n.getMessage("Admin.forumIndex")}</a></td></tr>
+				<tr><td class="row1"><a id="forumIndex" class="genmed" target="main" href="${contextPath}/jforum${extension}?module=admBase&action=main">${I18n.getMessage("Admin.adminIndex")}</a></td>
+				<tr>
+					<td class="catsides" height="28"><span class="cattitle">${I18n.getMessage("Admin.forumAdmin")}</span></td>
+				</tr>
+				<tr>
+					<td class="row1"><a id="groups" class="genmed" href="${contextPath}/adminGroups/list${extension}" target="main">${I18n.getMessage("Admin.groups")}</a></td>
+				</tr>
+				
+				<tr>
+					<td class="row1"><a id="users" class="genmed" href="${contextPath}/adminUsers/list${extension}" target="main">${I18n.getMessage("Admin.users")}</a></td>
+				</tr>
+				
+				<tr>
+					<td class="row1">
+						<table width="100%" cellspacing="0" cellpadding="0">
+							<tr>
+								<td width="20px">&nbsp;</td>
+								<td>
+									<a id="pendingRegistrations" class="gensmall" href="${contextPath}/adminUsers/pendingActivations${extension}" target="main">${I18n.getMessage("Admin.pendingActivations")}</a>
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+
+				<tr>
+					<td class="row1"><a id="categories" class="genmed" href="${contextPath}/adminCategories/list${extension}" target="main">${I18n.getMessage("Admin.categories")}</a></td>
+				</tr>
+				<tr>
+					<td class="row1"><a id="forums" class="genmed" href="${contextPath}/adminForums/list${extension}" target="main">${I18n.getMessage("Admin.forums")}</a></td>
+				</tr>
+				<tr>
+					<td class="row1"><a id="forums" class="genmed" href="${contextPath}/adminModeration/list${extension}" target="main">${I18n.getMessage("Admin.approving")}</a></td>
+				</tr>
+				<tr>
+					<td class="row1">
+						<p><a id="rankings" class="genmed" href="${contextPath}/adminRankings/list${extension}" target="main">${I18n.getMessage("Admin.rankings")}</a></p>
+					</td>
+				</tr>
+
+				<tr>
+					<td class="row1">
+						<p><a id="rankings" class="genmed" href="${contextPath}/adminBanning/list${extension}" target="main">${I18n.getMessage("Admin.banning")}</a></p>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="row1"><p><a id="configurations" class="genmed" href="${contextPath}/adminConfig/list${extension}" target="main">${I18n.getMessage("Admin.configurations")}</a></p></td>
+				</tr>
+			
+				<tr>
+					<td class="row1"><p><a id="smilies" class="genmed" href="${contextPath}/adminSmilies/list${extension}" target="main">${I18n.getMessage("Admin.smilies")}</a></p></td>
+				</tr>
+
+				<tr>
+					<td class="row1"><p><a id="smilies" class="genmed" href="${contextPath}/adminSearchStats/list${extension}" target="main">${I18n.getMessage("Admin.search")}</a></p></td>
+				</tr>
+
+				<tr>
+					<td class="row1">
+						<table width="100%" cellspacing="0" cellpadding="0">
+							<tr>
+								<td colspan="2" class="genmed">
+									${I18n.getMessage("Admin.attachments")}
+								</td>
+							</tr>
+							<tr>
+								<td width="20px">&nbsp;</td>
+								<td>
+									<a id="attachments" class="gensmall" href="${contextPath}/adminAttachments/configurations${extension}" target="main">${I18n.getMessage("Admin.attachConfigurations")}</a>
+								</td>
+							</tr>
+
+							<tr>
+								<td width="20px">&nbsp;</td>
+								<td>
+									<a id="attachments" class="gensmall" href="${contextPath}/adminAttachments/quotaLimit${extension}" target="main">${I18n.getMessage("Admin.attachQuota")}</a>
+								</td>
+							</tr>
+
+							<tr>
+								<td width="20px">&nbsp;</td>
+								<td>
+									<a id="attachments" class="gensmall" href="${contextPath}/adminAttachments/extensionGroups${extension}" target="main">${I18n.getMessage("Admin.attachExtensionGroups")}</a>
+								</td>
+							</tr>
+
+							<tr>
+								<td width="20px">&nbsp;</td>
+								<td>
+									<a id="attachments" class="gensmall" href="${contextPath}/adminAttachments/extensions${extension}" target="main">${I18n.getMessage("Admin.attachExtensions")}</a>
+								</td>
+							</tr>
+						</table>
+						
+					</td>
+				</tr>
+
+				<tr>
+					<td class="row1"><p><a id="configurations" class="genmed" href="${contextPath}/adminCache/list${extension}" target="main">${I18n.getMessage("Admin.cache")}</a></p></td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+</table>
+
+<div align="center"><span class="copyright">Powered by <a class="copyright" href="http://www.jforum.net/" target="_blank">JForum</a></div>
+<br />
+
+</body>
+</html>

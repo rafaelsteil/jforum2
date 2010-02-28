@@ -1,0 +1,24 @@
+!!! Categories
+Categories are the top most entity in JForum. Each [forum|Forums] belong to one Category, each topic belongs to one forum, each message belongs to one topic, and each user has one or many messages. Categories are administered at Admin Panel -> Categories, where it is possible to:
+
+# Create a Category
+# Edit a Category
+# Delete one or more categories
+
+Also, the listing shows all forums that belong to that category, although forum administration is performed in the [Forums] section. 
+
+!! Create a Category
+To create a new category click in the "Insert new" button. In the "Category Management" form, will the "Category Name", select the [Groups] that will have access to this new category, and choose if the category should be moderated (Defaults to "No"). For more information about Category Moderation, check the "Moderation" section later in this page. 
+
+!! Edit a Category
+To edit a Category click in the "Edit" link, where you will be able to change the Category's name and its moderation status. Note that the the "Groups" option is no longer available. 
+
+To change permissions of Category after it was created, please refer to the [Permissions] section of the manual. 
+
+# Delete one or more Categories
+Before you can delete a Category, you must delete or move to another category all [Forums] that belong to that category. JForum will not allow you to remove the Category if there are any forums associated to it. 
+
+To remove the record, click in the checkbox near to the "Click to Edit" link, and hit the button "Delete Selected". 
+
+!! Moderation
+When creating or editing a Category it is possible to opt for "Moderation". This means that, unless otherwise specified, all messages from all forums from that Category will be passible of message moderation - e.g, it will only show up to all users after a Moderator review and approve it. 

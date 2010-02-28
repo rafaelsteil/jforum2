@@ -1,0 +1,28 @@
+<#setting number_format = "#"/>
+
+<style type="text/css">@import url( ${contextPath}/templates/${templateName}/styles/style.css?${startupTime} );</style>
+<table class="forumline" cellspacing="1" cellpadding="3" width="100%" border="0">
+	<tr>
+		<th class="thhead" valign="middle" colspan="7" height="25">${I18n.getMessage("Cache.postsInfo")}</th>
+	</tr>
+
+	<tr>
+		<td align="center" colspan="3"><span class="gen"><font color="#ff0000"><b>${I18n.getMessage("Cache.danger")}</b></font></span></td>
+	</tr>
+
+	<tr>
+		<td class="gen"><b>${I18n.getMessage("Cache.topicTitle")}</b></td>
+		<td class="gen"><b>${I18n.getMessage("Cache.numberOfPosts")}</b></td>
+		<td class="gen"><b>${I18n.getMessage("Cache.action")}</b></td>
+	</tr>
+
+	<#list topics as t>
+		<tr>
+			<td class="row2"><a class="gen" href="${contextPath}/posts/list/${t.get("id")}${extension}" target="_new">${t.get("title")}</a></td>
+			<td class="row2"><span class="gen">${repository.size(t.get("id"))}</span></td>
+			<td class="row2">
+				<a class="gen" href="${contextPath}/jforum${extension}?module=adminCache&action=postsClear&topic_id=${t.get("id")}">${I18n.getMessage("Cache.clear")}</a>
+			</td>
+		</tr>
+	</#list>
+</table>

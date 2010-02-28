@@ -1,0 +1,36 @@
+!!! Permissions
+Permissions in JForum - also called ''Roles'' - are defined for [Groups], at Admin Panel -> Groups -> Permissions. The following table describes the permissions available in JForum. Every time you add a new [group|Groups] you must properly set its permissions. 
+
+!! How permissions work
+JForum uses a restrictive security model, which means that "If it is not there, then it is not accessible". This ensures more security, with the drawback of being a bit more complex to understand and configure the roles. 
+
+Some considerations:
+
+# Most roles are restrictive, which means that selecting a category or forum from the list will make the resource unavailable to the user or group being edited.
+# Choosing "Allow All" will turn the resource available for all categories or forums. Exceptions to the case will be written in the permission box, when applicable.
+
+!! Listing of existing permissions
+||Permission name||Description
+|Is Administrator|If ''Yes'', users from this group will have access to the Admin Panel
+|Restricted categories|Choose the categories you want to ''restrict'' access, or ''Allow all'' to allow this group to access all currently existing categories
+|Restricted forums|Choose the forums you want to ''restrict'' access, or ''Allow all'' to allow this group to access all currently existing forums
+|Deny anonymous posts|Choose the forums you don't want to allow posting from anonymous users. If selecting ''Allow all'', anonymous posting will be allowed for all forums
+|Reply only|Choose the forums where you don't want to allow the creation of new topics. In this case, only replying to existing topics will be allowed. Useful for announcements forums
+|Can create sticky or announcement topics|If ''Yes'', users from this group will be allowed to create Sticky or Announce topics
+|Can create poll topics|If ''Yes'', users from this group will be allowed to create polls
+|Can vote on polls|If ''Yes'', users from this group will be allowed to vote on existing polls. Choosing ''No'' will deny voting.
+|Read-only forums|Choose the forums where you don't want to allow any new topics of replies. Choosing ''Allow all'' will disable this role, being possible to create and reply to topics on all forums. Please note that the ''Reply only'' role is still valid.
+|Moderation of replies|To moderate or not replies to moderated Forums. Choosing ''Allow all'' will disable moderation of replies, while selecting some forum will force replies to wait for moderation
+|HTML Messages|Choose the forums you don't want to allow HTML in the messages. If selecting ''Allow all'', HTML will be widely available for all users in the group. 
+|Enable karma|If karma should be allowed or not
+|Enable bookmarks|If bookmarks should be allowed or not
+|Enable attachments|Choose the forums where you want to allow users to attach files to their messages. ''Allow all'' will enable all forums to have attachments
+|Allow download of existing attachments|This is useful when you disable attachments, but still want to allow users to download existing attachments. if selecting ''No'', it will not be possible to download the files. Also, please note that if the previous role is allowed for the same forum, then downloads will automatically be allowed, no matter what is chosen here.
+|Can see Moderation Activity Log|Set it to ''Yes'' if you want users from the group to access the page which tracks the moderation activity from Moderators
+|Can see full Moderation Activity Log|If ''Yes'', users from the group will be allowed to view all data from the moderation logs, like the Moderator who performed the action and the original message (in case of editing of removing one)
+|Is a moderator|If users from the group should be considered a Moderator or not. Note that being a Moderator does not mean being allowed to perform all moderation tasks. 
+|can approve / deny messages in moderated forums|Set to ''Yes'' if you want to allow the group to control the approval of messages pending for moderation
+|Can remove posts|If ''Yes'', users from this group will be allowed to remove messages from all other users
+|Can edit messages|If ''Yes'', users from this group will be allowed to edit messages from all other users
+|can move messages between forums|If ''Yes'', users from this group will be allowed to move topics from one forum to another
+|Can lock and unlock topics|If ''Yes'', users from this group will be allowed to lock and unlock any topic. 

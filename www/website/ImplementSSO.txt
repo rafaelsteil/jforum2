@@ -1,0 +1,112 @@
+!!! Implementing your own SSO class
+The default SSO mechanisms may not always be appropriate for your situation. Fortunately it is a simple matter to write your own class. Make sure you have read the SSO docs. These instructions assume full understanding of the SSO mechanism.
+ 
+[{Note
+Your class __must__ implement the ''net.forum.sso.SSO'' interface.
+}]
+
+The automatic registration process will work fine without the email and password session attributes, but the users email address and password will be set to defualt values. I wanted my users email and password set correctly in their forum profile.
+
+I also had an additional problem that my login cookie contained an encrypted email address and not the username.
+
+Whatever authentication you use, the example below should make things a bit clearer if you decied to implement your own SSO handler.
+
+In order to access my users database (I do a lookup on my user database to retreive the username) I had to JAR up the required classes from my app and placed it in the JForum WEB-INF/lib folder.
+
+[{Info
+For performance reasons I 'shadow' my apps login-cookie with JFourmSSO to hold the username. You could repeat your ''authenticateUser()'' logic in ''isSessionValid()'' and use your exisiting auto login cookie.
+}]
+
+I chose the to use the default name JforumSSO for my cookie, but you can use anything you like - the cookie will only be recerenced within this class.
+
+[{Java2HtmlPlugin 
+
+ package net.jforum.sso;
+ 
+ import javax.servlet.http.HttpServletRequest;
+ import javax.servlet.http.HttpSession;
+ import javax.servlet.http.Cookie;
+ 
+ import net.jforum.ActionServletRequest;
+ import net.jforum.ControllerUtils;
+ import net.jforum.entities.UserSession;
+ import net.jforum.util.preferences.ConfigKeys;
+ import net.jforum.util.preferences.SystemGlobals;
+ import net.jforum.JForum;
+ 
+ // Import any other class you may need
+ 
+ import org.apache.log4j.Logger;    // I use log4j
+ 
+ public class MyUserSSO implements SSO {          // you must implement met.jforum.sso.SSO
+
+     static final Logger  logger       = Logger.getLogger(MyUserSSO.class.getName()); // init logging
+     
+     public String authenticateUser(ActionServletRequest request) { //  required method
+         UserVO      user        = new UserVO();
+         Cookie myCookie = ControllerUtils.getCookie("auto-login"); // my app login cookie
+         
+         if (myCookie != null) {
+             DAOManager  manager     = new JndiDAOManager();        // my apps database  
+             UserDAO     userDAO     = manager.getUserDAO(manager.getConnection());
+             user  = userDAO.getUser(HexTool.hexToString(myCookie.getValue()));
+             manager.close();
+         } else 
+             return null; // no cookie found
+         
+         if (user.isDisabled()) {
+             logger.warn("***DISABLED_ATTEMPT on Forum: "+user.getUsername()); // log disabled attempt.
+             return null;
+         }
+         
+         HttpSession session = JForum.getRequest().getSession();
+         session.setAttribute("password", user.getPassword()); // set correct password
+         session.setAttribute("email", user.getUsername());    // and email address (my username)
+         ControllerUtils.addCookie("JforumSSO",user.getScreenName(), myCookie.getMaxAge()); //refresh
+         
+         return user.getScreenName(); // jforum username
+     }
+     
+     public boolean isSessionValid(UserSession userSession, HttpServletRequest request) {
+         String      remoteUser  = null;
+         Cookie SSOCookie = ControllerUtils.getCookie("JforumSSO");
+         if (SSOCookie != null) remoteUser = SSOCookie.getValue(); //  jforum username
+         
+         // user has since logged out
+         if(remoteUser == null && 
+                 userSession.getUserId() != SystemGlobals.getIntValue(ConfigKeys.ANONYMOUS_USER_ID)) {
+             return false;
+             
+          // user has since logged in
+         } else if(remoteUser != null && 
+                 userSession.getUserId() == SystemGlobals.getIntValue(ConfigKeys.ANONYMOUS_USER_ID)) {
+             return false;
+             
+         // user has changed user
+         } else if(remoteUser != null && !remoteUser.equals(userSession.getUsername())) {
+             return false;
+         }
+         return true; // myapp user and forum user the same
+     }
+ }
+ 
+}]
+
+
+make sure the following ''SystemGlobals.properties'' are set correctly, all other SSO related properties are assumed to have default values:
+
+[{Highlight
+
+authentication.type=sso\\
+sso.implementation = net.jforum.sso.MyUserSSO // your classname\\
+sso.redirect = http:/mysite.com/login.jsp //  I use full url, you may not need to.\\
+}]
+
+now rebuild, deploy and login to your app, visit forum as a new user and look in your profile to check things are working as expected.
+
+
+!! handy other things
+
+* after registration confirmation myapp sends the user to a welcome post on the forum. This creates the forum account automatically with correct date/time and also makes the user immediatelly availble for receiving Private Messages.
+
+* if you provide a simple method for getting the Jforum user's userid from the jforum database, you can present the correct 'my profile' and 'my bookmarks' urls in your main-site menus (the others will work already.

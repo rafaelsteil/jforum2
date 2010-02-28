@@ -1,0 +1,8 @@
+Hello, 
+
+Azért kaptad ezt az e-mailt, mert valaki új témát indított a fórumunkban. Az új téma címe:  "${topic.title}",
+és a következõ címen érheted el: 
+
+${path}
+
+Ha nem akarsz több értesítést kapni errõl a fórumról, akkor kattints ide: ${unwatch}

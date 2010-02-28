@@ -1,0 +1,343 @@
+<style type="text/css">@import url( ${contextPath}/templates/${templateName}/styles/style.css?${startupTime} );</style>
+<script type="text/javascript" src="${contextPath}/templates/${templateName}/js/jquery.js?${startupTime}"></script>
+
+<style type="text/css">
+.bottomLine {
+	border-bottom: 1px solid #000;
+}
+
+.leftLine {
+	border-left: 1px solid #000;
+}
+</style>
+
+<script type="text/javascript">
+function writeOptions(fieldName, from, to) 
+{
+	document.write("<select name='" + fieldName + "' onChange='chooseByDate(this.form);'>");
+	document.write("<option value=''>--</option>");
+
+	for (var i = from; i <= to; i++) {
+		document.write("<option value='" + i + "'>" + i + "</option>");
+	}
+
+	document.write("</select>&nbsp;&nbsp;");
+}
+
+function writeTimeGroup(fieldNamePrefix)
+{
+	document.write("<input type='text' style='width: 35px;' maxlength='2' name='" + fieldNamePrefix + "Hour'> : ");
+	document.write("<input type='text' style='width: 35px;' maxlength='2' name='" + fieldNamePrefix + "Minutes'>");
+}
+
+function chooseByDate(f)
+{
+	f.firstPostId.value = "";
+	f.lastPostId.value = "";
+	f.type[0].checked = true;
+}
+
+function confirmCancel(f)
+{
+	if (confirm("${I18n.getMessage("SearchStats.confirmCancel")}")) {
+		f.submit();
+	}
+}
+
+function validateReindexForm(f)
+{
+	if (f.type[0].checked) {
+		return validateDateRange(f);
+	}
+	else {
+		return validatePostIdRange(f);
+	}
+}
+
+function validatePostIdRange(f)
+{
+	if (f.firstPostId.value.length == 0
+		|| isNaN(f.firstPostId.value * 1)
+		|| f.lastPostId.value.length == 0
+		|| isNaN(f.lastPostId.value * 1)) {
+		alert("${I18n.getMessage("SearchStats.invalidPostIdRange")}");
+		return false;
+	}
+
+	return true;
+}
+
+function validateDateRange(f)
+{
+	var fromHour = f.fromHour.value * 1;
+	var fromMinutes = f.fromMinutes.value * 1
+	var toHour = f.toHour.value * 1;
+	var toMinutes = f.toMinutes.value * 1
+
+	if (f.fromDay.selectedIndex == 0 
+		|| f.fromMonth.selectedIndex == 0
+		|| f.fromYear.selectedIndex == 0
+		|| f.fromHour.value.length == 0
+		|| f.fromMinutes.value.length == 0
+		|| isNaN(fromHour)
+		|| isNaN(fromMinutes)
+		|| fromHour < 0 || fromHour > 59
+		|| fromMinutes < 0 || fromMinutes > 59
+		|| f.toDay.selectedIndex == 0 
+		|| f.toMonth.selectedIndex == 0
+		|| f.toYear.selectedIndex == 0
+		|| f.toHour.value.length == 0
+		|| f.toMinutes.value.length == 0
+		|| isNaN(toHour)
+		|| isNaN(toMinutes)
+		|| toHour < 0 || toHour > 59
+		|| toMinutes < 0 || toMinutes > 59) {
+		alert("${I18n.getMessage("SearchStats.invalidDateRange")}");
+		return false;
+	}
+
+	return true;
+}
+
+function chooseByPostId(field)
+{
+	var value = field.value;
+	
+	if (value.length > 0) {
+		if (isNaN(value * 1)) {
+			alert("${I18n.getMessage("SearchStats.invalidPostId")}");
+			field.value = "";
+		}
+		else {
+			var f = field.form;
+
+			f.fromDay.selectedIndex = 0;
+			f.fromMonth.selectedIndex = 0;
+			f.fromYear.selectedIndex = 0;
+			f.fromHour.value = "";
+			f.fromMinutes.value = "";
+
+			f.toDay.selectedIndex = 0;
+			f.toMonth.selectedIndex = 0;
+			f.toYear.selectedIndex = 0;
+			f.toHour.value = "";
+			f.toMinutes.value = "";
+
+			f.type[1].checked = true;
+		}
+	}
+}
+
+function checkIfPostExists()
+{
+	var postId = document.getElementById("checkPostId").value;
+
+	if (postId.length > 0 && !isNaN(postId * 1)) {
+		$.ajax({
+			type:"POST",
+			url:"${contextPath}/jforum${extension}?module=ajax&action=isPostIndexed",
+			data:{post_id:postId},
+			dataType:"script",
+			global:false
+		});
+	}
+}
+</script>
+
+<table border="0" class="forumline gen" width="100%">
+	<tr>
+		<th colspan="2">${I18n.getMessage("SearchStats.title")}</th>
+	</tr>
+
+	<#if !isInformationAvailable>
+		<tr>
+			<td width="200" colspan="2"><strong>${I18n.getMessage("SearchStats.informationUnavailable")}</td>
+		</tr>
+	<#else>
+		<tr>
+			<td width="200"><strong>${I18n.getMessage("SearchStats.totalPostsInDatabase")}:</strong> </td>
+			<td><i>${totalMessages}</i></td>
+		</tr>
+
+		<tr>
+			<td class="row3"><strong>${I18n.getMessage("SearchStats.indexLocation")}:</strong></td>
+			<td class="row3"><i>${indexLocation}</i></td>
+		</tr>
+
+		<tr>
+			<td><strong>${I18n.getMessage("SearchStats.indexExists")}:</strong></td>
+			<td>
+				<#if !indexExists>
+					<i>${I18n.getMessage("No")}</i> <a href="${contextPath}/jforum${extension}?module=${moduleName}&action=createIndexDirectory">>${I18n.getMessage("SearchStats.CreateIndexNow")}</a>
+				<#else>
+					<i>${I18n.getMessage("Yes")}</i> 
+				</#if>
+			</td>
+		</tr>
+	
+		<#if indexExists>
+			<tr>
+				<td class="row3"><strong>${I18n.getMessage("SearchStats.lastModified")}:</strong></td>
+				<td class="row3"><i>${lastModified?datetime}</i></td>
+			</tr>
+
+			<tr>
+				<td><strong>${I18n.getMessage("SearchStats.numberOfDocs")}:</strong> </td>
+				<td><i>${numberOfDocs}</i></td>
+			</tr>
+
+			<tr>
+				<td class="row3"><strong>${I18n.getMessage("SearchStats.indexVersion")}:</strong> </td>
+				<td class="row3"><i>${indexVersion}</i></td>
+			</tr>
+
+			<tr>
+				<td><strong>${I18n.getMessage("SearchStats.isLocked")}</strong> </td>
+				<td>
+					<i>
+						<#if isLocked>
+							${I18n.getMessage("Yes")}
+						<#else>
+							${I18n.getMessage("No")}
+						</#if>
+					</i>
+				</td>
+			</tr>
+
+			<tr>
+				<td class="row3"><strong>${I18n.getMessage("SearchStats.isPostIndexed")}</strong> </td>
+				<td class="gensmall row3">
+					${I18n.getMessage("SearchStats.enterPostId")}: 
+					<input type="text" id="checkPostId">
+					<input type="button" value="${I18n.getMessage("SearchStats.check")}" onClick="checkIfPostExists();">
+				</td>
+			</tr>
+		</#if>
+	</#if>
+</table>
+
+<br />
+
+<#if indexExists>
+	<form action="${contextPath}/jforum${extension}" onSubmit="return validateReindexForm(this);">
+	<input type="hidden" name="module" value="${moduleName}" />
+
+	<#if !currentlyIndexing>
+		<input type="hidden" name="action" value="reconstructIndexFromScratch" />
+	<#else>
+		<input type="hidden" name="action" value="cancelIndexing" />
+	</#if>
+
+	<table border="0" class="forumline gen" width="100%">
+		<tr>
+			<th colspan="2">${I18n.getMessage("SearchStats.reIndex")}</th>
+		</tr>
+
+		<#if currentlyIndexing>
+			<tr>
+				<td colspan="2">
+					<p>
+						<li><strong>${I18n.getMessage("SearchStats.currentlyIndexing")}</strong></li>
+					</p>
+
+					<p>
+						<li>${I18n.getMessage("SearchStats.wishToCancel")} <input type="button" onclick="confirmCancel(this.form);" value="${I18n.getMessage("SearchStats.cancelIndexing")}" style="font-weight: bold; color: red;" /></li>
+					</p>
+				</td>
+			</tr>
+			
+			<script type="text/javascript">
+			window.setTimeout(function() { document.location = "${JForumContext.encodeURL("/adminSearchStats/list")}"; }, 5000);
+			</script>
+		<#else>
+			<tr>
+				<td width="200">
+					<input type="radio" id="reindexByDate" name="type" value="1" checked="checked" /><label for="reindexByDate">${I18n.getMessage("SearchStats.byDate")}</label>
+				</td>
+				<td valign="top">
+					<table border="0" class="gen">
+						<tr>
+							<td>${I18n.getMessage("SearchStats.from")}:</td>
+							<td>
+								<span class="gensmall">(dd/mm/yyyy hh:mm)</span>
+
+								<script type="text/javascript">
+									writeOptions("fromDay", 1, 31);
+									writeOptions("fromMonth", 1, 12);
+									writeOptions("fromYear", 1995, new Date().getFullYear());
+									writeTimeGroup("from");
+								</script>
+							</td>
+						</tr>
+
+						<tr>
+							<td>${I18n.getMessage("SearchStats.to")}:</td>
+							<td>
+								<span class="gensmall">(dd/mm/yyyy hh:mm)</span>
+
+								<script type="text/javascript">
+									writeOptions("toDay", 1, 31);
+									writeOptions("toMonth", 1, 12);
+									writeOptions("toYear", 1995, new Date().getFullYear());
+									writeTimeGroup("to");
+								</script>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+
+			<tr>
+				<td class="row3">
+					<input type="radio" id="reindexByMessage" name="type" value="2"><label for="reindexByMessage">${I18n.getMessage("SearchStats.byMessageId")}</label>
+				</td>
+				<td valign="top" class="row3">
+					<table border="0" class="gen">
+						<tr>
+							<td>${I18n.getMessage("SearchStats.from")}:</td>
+							<td><input type="text" name="firstPostId" onblur="chooseByPostId(this);" />
+						</tr>
+
+						<tr>
+							<td>${I18n.getMessage("SearchStats.to")}:</td>
+							<td><input type="text" name="lastPostId" onBlur="chooseByPostId(this);" />
+						</tr>
+					</table>
+				</td>
+			</tr>
+
+			<tr>
+				<td><strong>${I18n.getMessage("SearchStats.options")}:</strong></td>
+				<td>
+					<table class="gen" cellspacing="0" cellpadding="4">
+						<tr>
+							<td class="bottomLine">
+								<input type="checkbox" id="avoidDuplicated" name="avoidDuplicatedRecords" value="yes" checked="checked" /><label for="avoidDuplicated">${I18n.getMessage("SearchStats.checkMessageExists")}</label>
+							</td>
+							<td class="bottomLine leftLine gensmall">${I18n.getMessage("SearchStats.warning")}</td>
+						</tr>
+
+						<tr>
+							<td class="bottomLine"><input type="radio" name="indexOperationType" checked="checked" id="operationTypeAppend" value="append" /><label for="operationTypeAppend">${I18n.getMessage("SearchStats.appendToIndex")}</label></td>
+							<td class="bottomLine leftLine gensmall">${I18n.getMessage("SearchStats.appendToIndexDesc")}</td>
+						</tr>
+
+						<tr>
+							<td><input type="radio" name="indexOperationType" id="operationTypeRecreate" value="recreate" /><label for="operationTypeRecreate">${I18n.getMessage("SearchStats.recreateIndex")}<label></td>
+							<td class="leftLine gensmall">${I18n.getMessage("SearchStats.recreateIndexDesc")}</td>
+						</tr>
+					</table>
+					
+				</td>
+			</tr>
+
+			<tr>
+				<td colspan="2" align="right" class="cat">
+					<input type="submit" value="${I18n.getMessage("SearchStats.start")}" style="width: 100px; font-weight: bold;" />
+				</td>
+			</tr>
+		</#if>
+	</table>
+
+	</form>
+</#if>

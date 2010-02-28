@@ -1,0 +1,64 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="${encoding}"/>
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<title>${pageTitle}</title>
+<style type="text/css">@import url( ${contextPath}/templates/${templateName}/styles/style.css?${startupTime} );</style>
+
+<#if hasCodeBlock?default(false)>
+	<style type="text/css">@import url( ${contextPath}/templates/${templateName}/styles/SyntaxHighlighter.css?${startupTime} );</style>
+</#if>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000" link="#01336B" vlink="#01336B">
+<span class="gen"><a name="top"></a></span>
+
+<table cellspacing="0" cellpadding="10" width="100%" align="center" border="0">
+	<tbody>
+		<tr>
+			<td class="bodyline">
+				<table class="forumline" cellspacing="1" cellpadding="4" width="100%" border="0">
+					<tbody>
+						<tr>
+							<th class="thhead" nowrap="nowrap" colspan="3">${I18n.getMessage("PrivateMessage.inboxMessage")}</th>
+						</tr>
+						<tr>
+							<td class="row2"><span class="genmed">${I18n.getMessage("PrivateMessage.from")}:</span></td>
+							<td class="row2" width="100%" colspan="2"><span class="genmed"><a class="nav" href="${JForumContext.encodeURL("/user/profile/${pm.fromUser.id}")}">${pm.fromUser.username}</a></span></td>
+						</tr>
+						<tr>
+							<td class="row2"><span class="genmed">${I18n.getMessage("PrivateMessage.to")}:</span></td>
+							<td class="row2" width="100%" colspan="2"><span class="genmed"><a class="nav" href="${JForumContext.encodeURL("/user/profile/${pm.toUser.id}")}">${pm.toUser.username}</a></span></td>
+						</tr>
+						<tr>
+							<td class="row2"><span class="genmed">${I18n.getMessage("PrivateMessage.date")}:</span></td>
+							<td class="row2" width="100%" colspan="2"><span class="genmed">${pm.formatedDate}</span></td>
+						</tr>
+						<tr>
+							<td class="row2"><span class="genmed">${I18n.getMessage("PrivateMessage.subject")}:</span></td>
+							<td class="row2" width="100%"><span class="genmed">${pm.post.subject?html}</span></td>
+							<td class="row2" nowrap="nowrap" align="right">&nbsp;</td>
+						</tr>
+						<tr>
+							<td class="row1" valign="top" colspan="3">
+								<span class="postbody">${pm.post.text}
+								<#if (pm.fromUser.attachSignatureEnabled && pm.fromUser.signature?exists && pm.post.isSignatureEnabled())>
+								<hr/>
+								${pm.fromUser.signature}
+								</#if>
+								</span>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+		  </td>
+		</tr>
+	</tbody>
+</table>
+
+<#if hasCodeBlock?default(false)>
+	<#include "highligther_js.htm"/>
+</#if>
+
+</body>
+</html>

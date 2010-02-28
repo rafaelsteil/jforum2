@@ -1,0 +1,56 @@
+<#include "header.htm"/>
+<#setting datetime_format = "dd/MM/yyyy"/>
+<#import "../macros/pagination.ftl" as pagination/>
+
+<#include "karma_search.inc.htm"> 
+<#if (users.size() > 0) >	
+<table class="forumline" cellspacing="1" cellpadding="3" width="100%" border="0">
+	<tr>
+	  <th class="thcornerl" nowrap="nowrap">${I18n.getMessage("User.id")}</th>
+	  <th class="thtop" nowrap="nowrap">&nbsp;${I18n.getMessage("User.username")}&nbsp;</th>
+	  <th class="thtop" nowrap="nowrap" width="59px">&nbsp;${I18n.getMessage("UserProfile.privateMessage")}&nbsp;</th>	  
+	  <th class="thtop" nowrap="nowrap">&nbsp;${I18n.getMessage("Karma.totalReceived")}&nbsp;</th>
+	  <th class="thtop" nowrap="nowrap">&nbsp;${I18n.getMessage("Karma.votesReceived")}&nbsp;</th>
+	  <th class="thtop" nowrap="nowrap">&nbsp;${I18n.getMessage("Karma.votesGiven")}&nbsp;</th>
+	  <th class="thcornerr" nowrap="nowrap">&nbsp;${I18n.getMessage("Karma.karma")}&nbsp;</th>
+	</tr>
+
+	<#list users as user>
+		<tr align="center">		  
+			<td class="row2"><span class="gen">${user.id} </span></td>			
+			<td class="row2"><span class="gen"><a href="${JForumContext.encodeURL("/user/profile/${user.id}")}">${user.username}</a></span></td>
+			<td class="row2"><span class="gen"><#if user.id != 1><a href="${JForumContext.encodeURL("/pm/sendTo/${user.id}")}" class="icon_pm"><img src="${contextPath}/images/transp.gif" alt="" /></a><#else>&nbsp;</#if></span></td>
+			<td class="row2"><span class="gen">${user.karma.totalPoints}</span></td>
+			<td class="row2"><span class="gen">${user.karma.votesReceived}</span></td>
+			<td class="row2"><span class="gen">${user.karma.votesGiven}</span></td>
+			<td class="row2"><span class="gen">${user.karma.karmaPoints}</span></td>
+		</tr>
+	</#list>
+	<tr align="center">
+		<td class="catbottom" colspan="11" height="28">&nbsp;
+		</td>
+	</tr>
+</table>
+<#else>
+<table cellspacing="0" cellpadding="10" width="100%" align="center" border="0">
+  <tr>
+    <td class="bodyline" valign="top">
+      <table cellspacing="2" cellpadding="2" width="100%" align="center" border="0">
+        <tr>
+          <td valign="bottom" align="left">
+		  <span class="maintitle">${I18n.getMessage("Generic.recordsNotFound")}</span>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>   
+</#if>
+
+
+<table width="100%">
+	<tr>
+		<td align="right"><#if thisPage?exists><@pagination.doPagination "list", -1/></#if></td>
+	</tr>
+</table>
+<#include "bottom.htm"/>

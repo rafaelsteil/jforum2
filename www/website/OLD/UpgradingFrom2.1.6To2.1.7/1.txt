@@ -1,0 +1,22 @@
+!!! Upgrading from version 2.1.6 to 2.17
+
+Upgrading from JForum version 2.1.6 to version 2.1.7 is very simple. All you have to do is to carefuly follow the steps here described. 
+
+!! Backup your data
+First, make a backup of the database and the current directory where JForum is installed. Backup everything (templates, images etc). The suggested approach to use is to unpack JForum 2.1.7 into some work directory, made the changes there and then, when all is finished, copy it over the directory where the previous vesrion is located.
+
+[{Tip
+You'll like to take special care for ''SystemGlobals.properties'' and ''jforum-custom.conf'', as these are the main configuration files. 
+}]
+
+!! Upgrading the database schema
+There are some changes to the database schema - a new colum here, a removed colum there... In order to get the database right, go to the directory __''upgrade/2.1.7''__, where you'll find the upgrade script for all supported dataabses - Oracle, MySQL, PostgreSQL and HSLQDB. 
+
+Using your database management console / tool, import the appropriate script. For example, if you are using MySQL, the following command should run the queries:
+
+[{Highlight
+
+mysql -u USERNAME -p DBNAME < mysql_2.1.6_to_2.1.7.sql
+}]
+
+There should not be any errors. 

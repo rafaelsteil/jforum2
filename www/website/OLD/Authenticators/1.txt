@@ -1,0 +1,68 @@
+!!! Authentication type
+First, we must define ''authentication.type'' to ''default'': 
+
+[{Highlight
+
+ # Defines the authentication method to default\\
+authentication.type = default
+}]
+
+!! LoginAuthenticator implementation
+then, it makes necessary to set which class should handle the authentication procedure. The class must implements the interface ''net.jforum.sso.LoginAuthenticator''. The default implementatin, that uses the table ''jforum_users'', is ''net.jforum.sso.DefaultLoginAuthenticator'':
+
+[{Highlight
+
+login.authenticator = net.jforum.sso.DefaultLoginAuthenticator
+}]
+
+!! LDAP
+To use LDAP as authentication engine, set the value to ''net.jforum.sso.LDAPAuthenticator'':
+
+[{Highlight
+
+login.authenticator = net.jforum.sso.LDAPAuthenticator
+}]
+
+[{Note title='Be careful'
+
+The implementation __must__ implement the interface __''net.jforum.sso.LoginAuthenticator''__, otherwise you'll get runtime errors when trying to use JForum
+}]
+
+!! Enable / disable automatic login
+By default, users are allowed to choose for automatic logins when they back to the forum. This is done by setting a Cookie in the user's computer. Optionally, the board's administrator may choose to not allow users to use this functionality. This is done by configuring the key ''auto.login.enabled'', as shown below:
+
+[{Highlight
+
+ # Let users to choose "Log me on automatically on each visit"\\
+auto.login.enabled = true
+}]
+
+LPDA in JForum is fairly easy to setup. First, make sure you have read the [LoginAuthenticator] section. 
+All LDAP configuration is also set in the file ''SystemGlobals.properties''. 
+
+!! LDAP configuration options
+||Property name			||Description	||Default value
+|ldap.security.protocol		|Security protocol to use, like "ssl"|Empty. Leave it empty to let the provider figure out which mechanism to use
+|ldap.authentication		|Security authentication to use.|Empty. Possible values: "none", "simple", "strong". Leave it empty (the default) to let the provider figure it out
+|ldap.factory			|Which factory to use. Implementations are dependant of VM vendor|_com.sun.jndi.ldap.LdapCtxFactory_, used for Sun Microsystem's VMs
+|ldap.login.prefix		|The prefix your LDAP server requires for the user portion. The username supplied gets inserted just after the prefix - e.g: 'uid=<username>' so adjust the prefix properly|_uid=_
+|ldap.login.suffix		|The suffix your LDAP server requires.|_ou=Users,dc=department,dc=company,dc=com_
+|ldap.server.url		|The url of your LDAP server. Notice that if your LDAP server uses SSL you will need to configure your server certificate so that Java Secure Sockets Extension (JSSE) will accept it. Read http://java.sun.com/products/jndi/tutorial/ldap/security/ssl.html |_ldap://localhost_
+|ldap.field.email		|Field that holds the user's email|_mail_
+
+!! Active Directory
+To configure ''LDAPAuthenticator'' integrating with Microsoft Active Directory. The following two keys should be necessary.
+They are similar to ''ldap.login.prefix'' and ''ldap.login.suffix'', but it's used when looking up user infomation rather than authentication. It's used when the login Distinguished Name (''DN'') is formatted differently from the lookup DN on some LDAP servers, for example, Microsoft Active Directory. 
+
+If it's the case, you should add these keys in additional to ''ldap.login.prefix'' and ''ldap.login.suffix''.
+
+[{Tip title='The following example is for configuring on Microsoft Active Directory'
+
+ldap.login.prefix=CN=\\
+ldap.login.suffix=CN=Users,DC=jform,DC=net\\
+ldap.lookup.suffix=CN=Users\\
+}]
+
+''Special thanks to Francisco Javier Arosemena''
+
+
