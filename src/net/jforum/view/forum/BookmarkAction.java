@@ -56,6 +56,7 @@ import net.jforum.repository.ForumRepository;
 import net.jforum.repository.SecurityRepository;
 import net.jforum.security.SecurityConstants;
 import net.jforum.util.I18n;
+import net.jforum.util.SafeHtml;
 import net.jforum.util.preferences.ConfigKeys;
 import net.jforum.util.preferences.SystemGlobals;
 import net.jforum.util.preferences.TemplateKeys;
@@ -161,9 +162,11 @@ public class BookmarkAction extends Command
 	
 	public void insertSave()
 	{
+		SafeHtml safeHtml = new SafeHtml();
+		
 		Bookmark b = new Bookmark();
-		b.setDescription(this.request.getParameter("description"));
-		b.setTitle(this.request.getParameter("title"));
+		b.setDescription(safeHtml.makeSafe(this.request.getParameter("description")));
+		b.setTitle(safeHtml.makeSafe(this.request.getParameter("title")));
 		
 		String publicVisible = this.request.getParameter("visible");
 		b.setPublicVisible(publicVisible != null && publicVisible.length() > 0);

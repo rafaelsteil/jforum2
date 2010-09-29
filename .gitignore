@@ -1,3 +1,5 @@
 *.class
 upload/
 tmp/
+.tomcatplugin
+WEB-INF/jforumLuceneIndex/*

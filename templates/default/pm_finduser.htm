@@ -38,7 +38,7 @@ function refreshUsername()
 					<tr>
 						<td class="row1" valign="top">
 							<span class="genmed"><br />
-							<input type="text" class="post" name="username" value="${username?default("")}"/>&nbsp; 
+						<input type="text" class="post" name="username" value="${username?default("")?html}"/>&nbsp; 
 							<input class="liteoption" type="submit" value="${I18n.getMessage("ForumBase.search")}" name="search" />
 							</span><br />
 							<span class="gensmall">${I18n.getMessage("PrivateMessage.searchTip")}</span><br />
