@@ -1,0 +1,16 @@
+<#assign hasMessageContents = message?exists/>
+<#if hasMessageContents>
+	<#assign hasMessageContents = user?exists && user.notifyText()/>
+</#if>
+<#if !hasMessageContents>
+Здравствуйте! 
+
+Вы получили этот e-mail, потому что на форуме была создана новая тема. Название темы: "${topic.title}",
+Чтобы просмотреть тему, используйте ссылку ниже: 
+
+${path}
+
+Если Вы больше не хотите получать уведомления по этой теме, пожалуйста, перейдите по ссылке ${unwatch}
+<#else>
+<#include "mailNewReplyWithContents.txt"/>
+</#if>

@@ -107,6 +107,7 @@ public class ControllerUtils
 		context.put("canAccessModerationLog", SecurityRepository.canAccess(SecurityConstants.PERM_MODERATION_LOG));
 		context.put("JForumContext", jforumContext);
 		context.put("timestamp", new Long(System.currentTimeMillis()));
+		context.put("NoSpamURL", SystemGlobals.getValue("forum.nospam.url")); //Obfuscated Javascript URL
 	}
 
 	/**

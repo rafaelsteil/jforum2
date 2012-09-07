@@ -1,0 +1,20 @@
+<#assign hasMessageContents = message?exists/>
+<#if hasMessageContents>
+	<#assign hasMessageContents = user?exists && user.notifyText()/>
+</#if>
+<#if !hasMessageContents>
+Sveiki, 
+
+Jūs saņēmāt šo e-pastu jo kopš Jūsu iepriekšējā apmeklējuma tēmā "${topic.title}" ir ievietots jauns ziņojums. 
+Lai izlasītu pievienotos ziņojumus, atveriet sekojošo hipersaiti:
+
+${path}
+
+Kamēr neizlasīsiet šo ziņojumu, jaunus e-pastus Jūs nesaņemsiet. 
+
+Ja vairs nevēlaties novērot šo tēmu, lūdzu atveriet sekojošo hipersaiti:
+
+${unwatch}
+<#else>
+<#include "mailNewReplyWithContents.txt"/>
+</#if>

@@ -1050,8 +1050,12 @@ public class PostAction extends Command
 			p.setSubject(t.getTitle());
 		}
 		
-		boolean needCaptcha = SystemGlobals.getBoolValue(ConfigKeys.CAPTCHA_POSTS)
-			&& request.getSessionContext().getAttribute(ConfigKeys.REQUEST_IGNORE_CAPTCHA) == null;
+		boolean needCaptcha = SystemGlobals.getBoolValue(ConfigKeys.CAPTCHA_POSTS);
+		/*	&& request.getSessionContext().getAttribute(ConfigKeys.REQUEST_IGNORE_CAPTCHA) == null;
+			if user sees "CAPTCHA is not ready", he need to request new one.
+			Otherwise lucky spammers happily post without CAPTCHA
+			at all
+		*/
 		
 		if (needCaptcha) {
 			if (!us.validateCaptchaResponse(this.request.getParameter("captcha_anwser"))) {

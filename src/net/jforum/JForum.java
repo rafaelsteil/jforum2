@@ -176,6 +176,14 @@ public class JForum extends JForumBaseServlet
 				response.sendError(HttpServletResponse.SC_NOT_FOUND);
 			}
 			else {
+                String nospam=SystemGlobals.getValue("forum.nospam.url");
+				// If nospam value is set, do not handle default URL. 
+				if (nospam!="") {
+					if (!req.getRequestURI().contains(nospam) && request.getAction().equals("insertSave") && (module.matches("(posts|user)"))) {
+						response.sendRedirect(req.getContextPath() + "/templates/default/error.htm");
+						return;
+					}
+			    }
 				boolean shouldBan = this.shouldBan(request.getRemoteAddr());
 				
 				if (!shouldBan) {

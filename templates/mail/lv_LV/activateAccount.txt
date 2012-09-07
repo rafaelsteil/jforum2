@@ -1,0 +1,15 @@
+Sveiki, ${user.username}
+
+Iespējams, Jūs reģistrējāties ${forumName} vietnē.
+Ja vēlaties aktivizēt reģistrēto identifikatoru, lūdzu atveriet sekojošo hipersaiti:
+
+${url}
+
+Ja vēlaties ievadīt nepieciešamo informāciju manuāli, atveriet saiti: ${manualUrl}
+un atvērtajā tīmekļa lapā ievadiet sekojošu informāciju:
+
+Lietotāja ID: ${user.id}
+Autorizācijas kods: ${user.getActivationKey()}
+
+Atcerieties.
+Jūsu lietotāja vārds ir : ${user.username}

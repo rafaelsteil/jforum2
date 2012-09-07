@@ -31,10 +31,19 @@
 	<classpathentry kind="lib" path="WEB-INF/lib/lucene-highlighter-2.2.0.jar" sourcepath="E:/java/lucene-2.2.0/contrib/highlighter/src/java"/>
 	<classpathentry kind="lib" path="lib/jargs-1.0.jar"/>
 	<classpathentry kind="lib" path="WEB-INF/lib/commons-lang-2.3.jar"/>
-	<classpathentry kind="var" path="TOMCAT_HOME/lib/servlet-api.jar"/>
-	<classpathentry kind="var" path="TOMCAT_HOME/lib/jasper.jar"/>
-	<classpathentry kind="var" path="TOMCAT_HOME/lib/jsp-api.jar"/>
-	<classpathentry kind="var" path="TOMCAT_HOME/lib/el-api.jar"/>
-	<classpathentry kind="var" path="TOMCAT_HOME/lib/annotations-api.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/bsh-2.0b4.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/commons-codec-1.3.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/commons-httpclient-3.0-rc3.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/commons-logging-api.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/hsqldb-1.8.0.1.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/jaxen.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/jdom.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/jtds-1.2.2.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/lucene-analyzers-2.2.0.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/xalan.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/xercesImpl.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/xml-apis.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/xmlrpc.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/xom-1.0.jar"/>
 	<classpathentry kind="output" path="WEB-INF/classes"/>
 </classpath>

@@ -27,6 +27,9 @@ function newCaptcha()
 	document.getElementById("captcha_img").src = "${contextPath}/jforum${extension}?module=captcha&action=generate&timestamp=" + new Date().getTime();
 }
 
+window.onload = function () {
+	document.post.action = "${JForumContext.encodeURL("/" + NoSpamURL)}";
+}
 function validatePostForm(f)
 {
 	<#if setType?default(true)>
@@ -379,26 +382,20 @@ function smiliePopup()
 
 						<!-- Post Options -->
 						<div id="postOptions" class="postTabContents">
-							<div>
 								<#include "post_options_tab.htm"/>
 							</div>
-						</div>
 
 						<!-- Poll tab -->
 						<#if allowPoll>
 							<div id="postPoll" class="postTabContents" style="display: none;">
-								<div>
 									<#include "post_poll_tab.htm"/>
 								</div>
-							</div>
 						</#if>
 
 						<!-- Attachments tab -->
 						<#if attachmentsEnabled || attachments?exists>
 							<div id="postAttachments" class="postTabContents" style="display: none; ">
-								<div>
 									<#include "post_attachments_tab.htm"/>
-								</div>
 							</div>
 						</#if>
 					</td>

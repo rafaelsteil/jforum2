@@ -17,7 +17,7 @@
 	<property name="project.title" value="JForum API" />
 	<property name="author" value="JForum Team - http://www.jforum.net/team.jsp" />
 	<property name="copyright" value="(c) JForum Team" />
-	<property name="version" value="2.1.8" />
+	<property name="version" value="2.1.9" />
 	<property name="filename" value="jforum-${version}" />
 	<property name="warfile" value="${filename}.war" />
 	<property name="srcfile" value="${filename}-src.zip"/>
@@ -31,7 +31,7 @@
 	<property name="custom.libs" location="lib" />
 	<property name="src.dir" value="src" />
 	<property name="classes.dir" value="${build.dir}/classes" />
-	<property name="tomcat.home" value="/java/Tomcat5.5.9" />
+	<property name="tomcat.home" value="/home/valdis/tomcat" />
 	<property name="deploy.dir" value="${tomcat.home}/webapps" />
 	<property name="deploy.dev.dir" value="${dist.dir}/jforum-test" />
 	<property name="web.dir" value="." />

@@ -1,0 +1,12 @@
+Sveiki, šis ir foruma nedēļas apkopojums.
+
+<#list posts as post>
+
+Temats: ${post.subject}
+Saite: ${url}posts/list/${post.topicId}${extension}
+Autors: ${post.postUsername}
+Teksts:
+${post.text}
+-------------
+
+</#list>
