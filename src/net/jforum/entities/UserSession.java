@@ -397,8 +397,12 @@ public class UserSession implements Serializable
 	public boolean validateCaptchaResponse(String userResponse)
 	{
 		if ((SystemGlobals.getBoolValue(ConfigKeys.CAPTCHA_REGISTRATION) 
-				|| SystemGlobals.getBoolValue(ConfigKeys.CAPTCHA_POSTS))
-				&& this.imageCaptcha != null) {
+				|| SystemGlobals.getBoolValue(ConfigKeys.CAPTCHA_POSTS))) {
+				/* && this.imageCaptcha != null) {
+					if user sees "CAPTCHA is not ready", he need to request new one.
+					Otherwise lucky spammers happily post without CAPTCHA
+					at all
+				*/
 			
 			if (SystemGlobals.getBoolValue(ConfigKeys.CAPTCHA_IGNORE_CASE)) {
 				userResponse = userResponse.toLowerCase();

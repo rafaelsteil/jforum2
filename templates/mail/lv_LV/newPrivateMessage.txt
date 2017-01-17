@@ -1,0 +1,6 @@
+<#setting number_format = "#"/>
+Sveiki, ${user.username}, 
+
+Jums forumā ${forumName} ir nosūtīts privāts ziņojums. Jūs to varat izlasīt, atverot hipersaiti:
+
+${path}

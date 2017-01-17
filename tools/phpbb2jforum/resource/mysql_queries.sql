@@ -80,12 +80,7 @@ query.banlist = INSERT INTO jforum_banlist (user_id, banlist_ip, banlist_email) 
 
 query.posts = INSERT INTO jforum_posts ( post_id, topic_id, forum_id, user_id, post_time, poster_ip, enable_bbcode, \
 	enable_html, enable_smilies, enable_sig ) \
-	SELECT post_id, topic_id, forum_id, poster_id, FROM_UNIXTIME(post_time), \
-	concat( \
-		conv(substr(poster_ip, 1, 2), 16, 10), '.', \
-		conv(substr(poster_ip, 3, 2), 16, 10), '.', \
-		conv(substr(poster_ip, 5, 2), 16, 10), '.', \
-		conv(substr(poster_ip, 7, 2), 16, 10)), \
+	SELECT post_id, topic_id, forum_id, poster_id, FROM_UNIXTIME(post_time), poster_ip, \
 	enable_bbcode, enable_html, enable_smilies, enable_sig \
 	FROM ${phpbb}.${table.prefix}posts
 	

@@ -51,8 +51,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.StringTokenizer;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 
@@ -481,34 +479,12 @@ public class WebRequestContext extends HttpServletRequestWrapper implements Requ
 	 * @see javax.servlet.ServletRequestWrapper#getRemoteAddr()
 	 */
 	public String getRemoteAddr()
-	{
-		// We look if the request is forwarded
-		// If it is not call the older function.
-        String ip = super.getHeader("x-forwarded-for");
+	{   // set IP address as concatenation of all forwarded and actual IP addres
+		String ip = super.getRemoteAddr();
+        String forwardip = super.getHeader("x-forwarded-for");
         
-        if (ip == null) {
-        	ip = super.getRemoteAddr();
-        }
-        else {
-        	// Process the IP to keep the last IP (real ip of the computer on the net)
-            StringTokenizer tokenizer = new StringTokenizer(ip, ",");
-
-            // Ignore all tokens, except the last one
-            for (int i = 0; i < tokenizer.countTokens() -1 ; i++) {
-            	tokenizer.nextElement();
-            }
-            
-            ip = tokenizer.nextToken().trim();
-            
-            if (ip.equals("")) {
-            	ip = null;
-            }
-        }
-        
-        // If the ip is still null, we put 0.0.0.0 to avoid null values
-        if (ip == null) {
-        	ip = "0.0.0.0";
-        }
+        if (forwardip != null) ip = forwardip + ", " + ip;
+        if (ip == null) ip = "0.0.0.0";
         
         return ip;
 	}

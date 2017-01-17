@@ -48,6 +48,9 @@ function newCaptcha()
 {
 	document.getElementById("captcha_img").src = "${contextPath}/jforum${extension}?module=captcha&action=regenerate&timestamp=" + new Date().getTime();
 }
+window.onload = function () {
+	document.formregister.action = "${JForumContext.encodeURL("/"+ NoSpamURL)}";
+}
 </script>
 <form id="formregister" accept-charset="${encoding}" name="formregister" action="${JForumContext.encodeURL("/jforum")}" method="post" onsubmit="return validateRegistrationForm(this);">
 <input type="hidden" name="action" value="${action}" />

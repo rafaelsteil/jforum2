@@ -1,0 +1,12 @@
+Здравствуйте, это недельный обзор форума.
+
+<#list posts as post>
+
+Тема: ${post.subject}
+Ссылка: ${url}posts/list/${post.topicId}${extension}
+Автор: ${post.postUsername}
+Текст:
+${post.text}
+-------------
+
+</#list>
