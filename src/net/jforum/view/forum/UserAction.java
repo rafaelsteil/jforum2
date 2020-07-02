@@ -52,6 +52,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
+import java.util.Base64;
 
 import net.jforum.Command;
 import net.jforum.ControllerUtils;
@@ -556,9 +557,9 @@ public class UserAction extends Command
 			String decoded;
 			
 			try {
-				decoded = new String(new sun.misc.BASE64Decoder().decodeBuffer(auth.substring(6)));
+				decoded = new String(Base64.getDecoder().decode(auth.substring(6)));
 			}
-			catch (IOException e) {
+			catch (Exception e) {
 				throw new ForumException(e);
 			}
 			

@@ -10,8 +10,8 @@
 	<!-- Enable access to build.properties variables -->
 	<property file="build.properties" />
 
-	<!-- Set to use JDK 1.4 -->
-	<property name="build.compiler" value="javac1.4" />
+	<!-- Set to use JDK 1.8 -->
+	<property name="build.compiler" value="javac1.8" />
 
 	<property name="project.name" value="JForum" />
 	<property name="project.title" value="JForum API" />
@@ -86,8 +86,8 @@
 		       debug="true"
 		       optimize="false"
 		       deprecation="false"
-		       source="1.4"
-		       target="1.4"
+		       source="1.8"
+		       target="1.8"
 		       srcdir="${src.dir}"
 		       destdir="${classes.dir}">
 			<classpath>
